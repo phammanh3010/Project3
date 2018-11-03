@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title></title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!-- bootstrap theme -->
+  <!-- <link href="../bootstrap/css/bootstrap-theme.css" rel="stylesheet"> -->
+  <script src="../../bootstrap/js/jquery.min.js"></script>
+  <script src="../../bootstrap/js/bootstrap.min.js"></script>
+  <link href="../style1.css" rel="stylesheet" type="text/css" />
+  <link href="../../bootstrap/css/elegant-icons-style.css" rel="stylesheet" />
+  <link href="../../bootstrap/css/font-awesome.min.css" rel="stylesheet" />
+</head>
+
+<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
+  <nav class="navbar navbar-default navbar-fixed-top navbar-light">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+          aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <div class="row">
+          <div class="col-lg-3 navbar-left" id="contact">
+            <p></p>
+            <p><span class="glyphicon glyphicon-map-marker"></span> P603_604 B1 &nbsp;
+              <span class="glyphicon glyphicon-earphone"></span> (84-4) 3 8696124</p>
+          </div>
+          <div class="col-lg-3">
+            <form class="navbar-form navbar-right">
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="Search">
+              </div>
+              <button type="submit" class="btn btn-outline-primary"><span class="glyphicon glyphicon-search"></button>
+            </form>
+          </div>
+          <div class="col-lg-6 navbar-right">
+            <ul class="nav navbar-nav">
+              <li><a href="homepage.html">TRANG CHỦ</a></li>
+              <li><a href="list_teacher.html">GIẢNG VIÊN</a></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                  aria-expanded="false">ĐỒ ÁN<span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="list_project.html">PROJECT 1</a></li>
+                  <li><a href="list_project.html">PROJECT 2</a></li>
+                  <li><a href="list_project.html">PROJECT 3</a></li>
+                  <li><a href="list_project.html">IT4421</a></li>
+                </ul>
+              </li>
+              <li class="dropdown nav-item">
+                <a href="#note" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                  aria-expanded="false">
+                  <i class="fa fa-bell">
+                    <span class="badge badge-danger">1</span>
+                  </i>
+                </a>
+                <ul class="dropdown-menu notifications">
+                  <div class="notification-heading">
+                    <h3 class="menu-title">Thông báo</h3>
+                  </div>
+                  <li class="divider"></li>
+                  <div class="notifications-wrapper">
+                    <a class="content" href="#">
+                      <div class="notification-item">
+                        <p class="item-infor">Deadline:21/10/2018: Nộp tài liệu SRS</p>
+                      </div>
+                    </a>
+                    <a class="content" href="#">
+                      <div class="notification-item">
+                        <p class="item-infor">Deadline:21/10/2018: Nộp tài liệu SRS</p>
+                      </div>
+                    </a>
+                  </div>
+                </ul>
+              </li>
+              <li><a href="profile_student.html">TRANG CÁ NHÂN</a></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                  aria-expanded="false"> <i class="icon_profile""></i><span class=" caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="homepage.html">ĐĂNG XUẤT</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <section class="container bg_container" style="margin-top: 80px;">
+    <div id="main_text">
+      <img src="../register48x48.png" />&nbsp; Project 3
+    </div>
+    <div id="hr">
+    </div>
+    <form>
+      <lable>Học kỳ</lable>
+      <select>
+        <option>20182</option>
+        <option>20181</option>
+        <option>20172</option>
+        <option>20171</option>
+        <option>20162</option>
+        <option>20161</option>
+      </select>
+    </form>
+    <div class="title_project">
+      <h3 class="text-center">Danh sách đồ án</h3>
+    </div>
+    <table class="table" id="table_project">
+      <thead id="thead">
+        <tr>
+          <th scope="col" class="col-sm-1">STT</th>
+          <th scope="col" class="col-sm-3">Giảng viên</th>
+          <th scope="col" class="col-sm-4">Đề tài</th>
+          <th scope="col" class="col-sm-2">Đã hoàn thành</th>
+          <th scope="col" class="col-sm-1">Thao tác</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td scope="row">1</td>
+          <td>Trần Đình Khang</td>
+          <td>Web quản lí đồ án</td>
+          <td>Đã hoàn thành</td>
+          <td><a href="project_detail.html" class="btn btn-primary text-center">Chi tiết</a></td>
+        </tr>
+        <tr>
+          <td scope="row">1</td>
+          <td>Trần Đình Khang</td>
+          <td>Web quản lí đồ án</td>
+          <td>Đã hoàn thành</td>
+          <td><a href="project_detail.html" class="btn btn-primary text-center">Chi tiết</a></td>
+        </tr>
+        <tr>
+          <td scope="row">1</td>
+          <td>Trần Đình Khang</td>
+          <td>Web quản lí đồ án</td>
+          <td>Đã hoàn thành</td>
+          <td><a href="project_detail.html" class="btn btn-primary text-center">Chi tiết</a></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="text-center">
+      <a href="create_project.html" class="btn btn-primary text-center">Tạo Mới</a>
+    </div>
+  </section>
+  <!-- Container (Contact Section) -->
+  <footer>
+    <div id="contact" class="container-fluid bg-success text-center">
+      <h2 class="text-center">LIÊN HỆ </h2>
+      <p><b>Bộ Môn Hệ Thống Thông tin - Viện Công nghệ Thông tin & Truyền thông Đại học Bách Khoa Hà </b></p>
+      <p><span class="glyphicon glyphicon-map-marker"></span><b> Địa chỉ: P603_604 Nhà B1</b></p>
+      <p><span class="glyphicon glyphicon-earphone"></span><b> Điện thoại: (84-4) 3 8696124</b></p>
+    </div>
+  </footer>
+</body>
+
+</html>
