@@ -3,7 +3,7 @@
 @section("content")
 <section class="container bg_container" style="margin-top: 80px;">
     <div id="main_text">
-      <img src="../register48x48.png" />&nbsp; Project 3
+      <img src="../register48x48.png" />&nbsp; Dự án của bạn
     </div>
     <div id="hr">
     </div>
@@ -25,7 +25,8 @@
       <thead id="thead">
         <tr>
           <th scope="col" class="col-sm-1">STT</th>
-          <th scope="col" class="col-sm-3">Giảng viên</th>
+          <th scope="col" class="col-sm-2">Giảng viên</th>
+          <th scope="col" class="col-sm-2">Tên nhóm</th>
           <th scope="col" class="col-sm-4">Đề tài</th>
           <th scope="col" class="col-sm-2">Đã hoàn thành</th>
           <th scope="col" class="col-sm-1">Thao tác</th>
@@ -34,21 +35,32 @@
       <tbody>
         <tr>
           <td scope="row">1</td>
-          <td>Trần Đình Khang</td>
+          <td>PGS.TS Trần Đình Khang</td>
+          <td>Project3</td>
           <td>Web quản lí đồ án</td>
           <td>Đã hoàn thành</td>
           <td><a href="project_detail.html" class="btn btn-primary text-center">Chi tiết</a></td>
         </tr>
         <tr>
           <td scope="row">1</td>
-          <td>Trần Đình Khang</td>
+          <td>PGS.TS Trần Đình Khang</td>
+          <td>Project3</td>
           <td>Web quản lí đồ án</td>
           <td>Đã hoàn thành</td>
           <td><a href="project_detail.html" class="btn btn-primary text-center">Chi tiết</a></td>
         </tr>
         <tr>
           <td scope="row">1</td>
-          <td>Trần Đình Khang</td>
+          <td>PGS.TS Trần Đình Khang</td>
+          <td>Project3</td>
+          <td>Web quản lí đồ án</td>
+          <td>Đã hoàn thành</td>
+          <td><a href="project_detail.html" class="btn btn-primary text-center">Chi tiết</a></td>
+        </tr>
+        <tr>
+          <td scope="row">1</td>
+          <td>PGS.TS Trần Đình Khang</td>
+          <td>Project3</td>
           <td>Web quản lí đồ án</td>
           <td>Đã hoàn thành</td>
           <td><a href="project_detail.html" class="btn btn-primary text-center">Chi tiết</a></td>
@@ -56,7 +68,7 @@
       </tbody>
     </table>
     <div class="text-center">
-      <a href="create_project.html" class="btn btn-primary text-center">Tạo Mới</a>
+      <a href="create_project.html" class="btn btn-primary text-center">Tạo Đồ Án</a>
     </div>
   </section>
 @endsection
