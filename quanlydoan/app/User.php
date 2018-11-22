@@ -2,29 +2,24 @@
 
 namespace App;
 
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Model;
 
-class User extends Authenticatable
+class User extends Model
 {
-    use Notifiable;
+    //
+    protected $table = 'user';
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'name', 'email', 'password',
-    ];
+    protected $fillable = ['username', 'fullname', 'position', 'email', 'phone'];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
+    protected $primaryKey = 'username';
+
+    public $timestamps = false;
+
+    public function teacher(){
+        return $this->belongsTo('App\Teacher', 'username', 'username');
+    }
+
+    public function student(){
+        return $this->belongsTo('App\Student', 'username', 'username');
+    }
 }

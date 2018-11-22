@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDocumentsTable extends Migration
+class CreateDocumentTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,14 @@ class CreateDocumentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('documents', function (Blueprint $table) {
+        Schema::create('document', function (Blueprint $table) {
             $table->increments('id_document');
             $table->integer('id_group')->unsigned();
-            $table->string('path');
-            $table->string('evaluate');
-            $table->string('user_created');
-            $table->foreign('id_group')->references('id_group')->on('groups');
-            $table->timestamps();
+            $table->foreign('id_group')->references('id_group')->on('group');
+            $table->string('path',200);
+            $table->float('evaluate')->nullable();
+            $table->string('user_upload', 45);
+            $table->dateTime('created_at');
         });
     }
 
@@ -31,6 +31,6 @@ class CreateDocumentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('documents');
+        Schema::dropIfExists('document');
     }
 }
