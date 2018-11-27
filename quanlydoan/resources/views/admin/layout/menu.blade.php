@@ -15,9 +15,9 @@
                             <span class="menu-arrow arrow_carrot-right"></span>
                         </a>
                         <ul class="sub">
-                            <li><a class="" href="teacher.html">Quản lí giảng viên</a></li>
-                            <li><a class="" href="student.html">Quản lí sinh viên</a></li>
-                            <li><a class="" href="admin.html">Admin</a></li>
+                            <li><a class="" href="admin/user/listTeacher">Quản lí giảng viên</a></li>
+                            <li><a class="" href="admin/user/listStudent">Quản lí sinh viên</a></li>
+                            <li><a class="" href="admin/user/listAdmin">Admin</a></li>
                         </ul>
                     </li>
                     <li class="sub-menu">

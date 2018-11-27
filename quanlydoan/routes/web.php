@@ -12,39 +12,39 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+	return view('welcome');
 });
 
 Route::get('/home', function () {
-    return view('pages.home');
+	return view('pages.home');
 });
 
 Route::get('/listTeacher', function () {
-    return view('pages.listTeacher');
+	return view('pages.listTeacher');
 });
 
 Route::get('/listProject', function () {
-    return view('pages.listProject');
+	return view('pages.listProject');
 });
 
 Route::get('/createProject', function () {
-    return view('pages.createProject');
+	return view('pages.createProject');
 });
 
 Route::get('/projectDetail', function () {
-    return view('pages.projectDetail');
+	return view('pages.projectDetail');
 });
 
 Route::get('/profileStudent', function () {
-    return view('pages.profileStudent');
+	return view('pages.profileStudent');
 });
 
 Route::get('/profileTeacher', function () {
-    return view('pages.profileTeacher');
+	return view('pages.profileTeacher');
 });
 
 Route::get('/teacherDetail', function () {
-    return view('pages.teacherDetail');
+	return view('pages.teacherDetail');
 });
 
 Route::group(['prefix'=>'admin'], function(){
@@ -63,33 +63,31 @@ Route::group(['prefix'=>'admin'], function(){
 	Route::group(['prefix'=>'user'], function(){
 		// danh sach user
 		Route::get('listAdmin', 'AdUserController@getListAdmin');
-		Route::get('listTeacher', 'AdUserController@getListTeacher');
-		Route::get('listStudent', 'AdUserController@getListStudent');
+		Route::get('listTeacher', 'AdTeacherController@getListTeacher');
+		Route::get('listStudent', 'AdStudentController@getListStudent');
 
 		//sua thong tin user
 		Route::get('updateAdmin/{username}', 'AdUserController@getUpdateAdmin');
 		Route::post('updateAdmin/{username}', 'AdUserController@postUpdateAdmin');
-		Route::get('updateTeacher/{id}', 'AdUserController@getUpdateTeacher');
-		Route::get('updateStudent/{id}', 'AdUserController@getUpdateStudent');
+		Route::get('updateTeacher/{id}', 'AdTeacherController@getUpdateTeacher');
+		Route::get('updateStudent/{id}', 'AdStudentController@getUpdateStudent');
 
 		// them user
 		// Route::get('addAdmin', 'AdUserController@getAddAdmin');
 		//dang can sua cho search de xuong duoi form, dung ajax de search
-		Route::post('addOrSearch', 'AdUserController@postAddOrSearch');
-		Route::get('addTeacher', 'AdUserController@getAddTeacher');
-		Route::post('addTeacher', 'AdUserController@postAddTeacher');
-		Route::get('addStudent', 'AdUserController@getAddStudent');
-		Route::post('addStudent', 'AdUserController@postAddStudent');
+		Route::post('addAdmin', 'AdUserController@postAddAdmin');
+		Route::post('addTeacher', 'AdTeacherController@postAddTeacher');
+		Route::post('addStudent', 'AdStudentController@postAddStudent');
 
 		//tim kiem user
 		Route::get('searchAdmin', 'AdUserController@getSearchAdmin');
-		Route::get('searchTeacher', 'AdUserController@getSearchTeacher');
-		Route::get('searchStudent', 'AdUserController@getSearchStudent');
+		Route::get('searchTeacher', 'AdTeacherController@getSearchTeacher');
+		Route::get('searchStudent', 'AdStudentController@getSearchStudent');
 
 		//xoa user
 		Route::get('deleteAdmin/{username}', 'AdUserController@getDeleteAdmin');
-		Route::get('deleteTeacher', 'AdUserController@getDeleteTeacher');
-		Route::get('deleteStudent', 'AdUserController@getDeleteStudent');
+		Route::get('deleteTeacher/{id}', 'AdTeacherController@getDeleteTeacher');
+		Route::get('deleteStudent/{id}', 'AdStudentController@getDeleteStudent');
 
 	});
 });

@@ -30,7 +30,7 @@
                                         </div>
                                     @endif
 
-                                    <form class="form-validate form-horizontal" id="feedback_form" method="POST" action="admin/user/addOrSearch">
+                                    <form class="form-validate form-horizontal" id="feedback_form" method="POST" action="admin/user/addAdmin">
                                         <input type="hidden" name="_token" value="{{csrf_token()}}" />
                                         <div class="form-group ">
                                             <label class="control-label col-lg-2">Username</label>
