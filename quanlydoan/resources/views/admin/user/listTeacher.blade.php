@@ -64,7 +64,7 @@
                     <div class="col-lg-12">
                         <section class="panel">
                             <header class="panel-heading">
-                                Danh sách người dùng
+                                Danh sách người dùng Giảng Viên
                             </header>
                             <div class="table-responsive">
                                 <table class="table">
@@ -81,16 +81,18 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>lamnguyen</td>
-                                            <td>nguyenquoclam</td>
-                                            <td>lamnguyen@gmail.com</td>
-                                            <td>0123456789</td>
-                                            <td>503-B1</td>
-                                            <td><button class="btn btn-default" name="add" onclick="">Sửa</button></td>
-                                            <td><button class="btn btn-default" name="add" onclick="">Xóa</button></td>
-                                        </tr>
+                                        @foreach($teacher as $tc)
+                                            <tr>
+                                                <td>{{$tc->id_teacher}}</td>
+                                                <td>{{$tc->username}}</td>
+                                                <td>{{$tc->full_name}}</td>
+                                                <td>{{$tc->email}}</td>
+                                                <td>{{$tc->phone}}</td>
+                                                <td>{{$tc->workplace}}</td>
+                                                <td><button class="btn btn-default" name="add" onclick="">Sửa</button></td>
+                                                <td><button class="btn btn-default" name="add" onclick="">Xóa</button></td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>

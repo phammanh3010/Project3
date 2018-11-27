@@ -24,7 +24,7 @@
         <!-- container section start -->
         <section id="container" class="">
           @include("admin.layout.header")
-          @include('admin.layout.menu")
+          @include("admin.layout.menu")
           @yield("content")
         </section>
           @include("admin.layout.footer")

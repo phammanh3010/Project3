@@ -16,37 +16,52 @@
                         <section class="panel">
                             <div class="panel-body">
                                 <div class="form">
-                                    <form class="form-validate form-horizontal" id="feedback_form" method="POST" action="">
+                                    @if(count($errors) > 0)
+                                        <div class="alert alert-danger">
+                                            @foreach($errors->all() as $err)
+                                                {{$err}}<br>
+                                            @endforeach
+                                        </div>
+                                    @endif
+
+                                    @if(session('thongbao'))
+                                        <div class="alert alert-success">
+                                            {{session('thongbao')}}
+                                        </div>
+                                    @endif
+
+                                    <form class="form-validate form-horizontal" id="feedback_form" method="POST" action="admin/user/addOrSearch">
+                                        <input type="hidden" name="_token" value="{{csrf_token()}}" />
                                         <div class="form-group ">
                                             <label class="control-label col-lg-2">Username</label>
                                             <div class="col-lg-3">
-                                                <input class="form-control" type="text"/>
+                                                <input class="form-control" type="text" name="username" />
                                             </div>
                                             <label class="control-label col-lg-2">Password</label>
                                             <div class="col-lg-3">
-                                                <input class="form-control" type="text"/>
+                                                <input class="form-control" type="text" name="password" />
                                             </div>
                                         </div>
                                         <div class="form-group ">
                                             <label class="control-label col-lg-2">Họ tên</label>
                                             <div class="col-lg-3">
-                                                <input class="form-control" type="text"/>
+                                                <input class="form-control" type="text" name="full_name" />
                                             </div>
                                             <label class="control-label col-lg-2">Email</label>
                                             <div class="col-lg-3">
-                                                <input class="form-control" type="text"/>
+                                                <input class="form-control" type="text" name="email" />
                                             </div>
                                         </div>
                                         <div class="form-group ">
                                             <label class="control-label col-lg-2">Số điện thoại</label>
                                             <div class="col-lg-3">
-                                                <input class="form-control" type="text"/>
+                                                <input class="form-control" type="text" name="phone" />
                                             </div>
                                         </div>
                                         <div class="control-label col-lg-6">
                                             <div>
-                                                <input class="btn btn-default" type="submit"  value ="Thêm" name="add" onclick="Confirm()">
-                                                <input class="btn btn-default" type="submit"  value ="Tìm kiếm" name="test">
+                                                <button class="btn btn-default" type="submit" name="action" value="add">Thêm</button>
+                                                <button class="btn btn-default" type="submit" name="action" value="search">Tìm kiếm Theo Tên</button>
                                             </div>
                                         </div>
                                     </form>    
@@ -59,13 +74,12 @@
                     <div class="col-lg-12">
                         <section class="panel">
                             <header class="panel-heading">
-                                Danh sách người dùng
+                                Danh sách người dùng Admin
                             </header>
                             <div class="table-responsive">
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <th class ="col-lg-1">ID</th>
                                             <th class ="col-lg-3">Username</th>
                                             <th class ="col-lg-3">Họ tên</th>
                                             <th class ="col-lg-2">Email</th>
@@ -75,15 +89,16 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>lamnguyen</td>
-                                            <td>nguyenquoclam</td>
-                                            <td>lamnguyen@gmail.com</td>
-                                            <td>0123456789</td>
-                                            <td><button class="btn btn-default" name="add" onclick="">Sửa</button></td>
-                                            <td><button class="btn btn-default" name="add" onclick="">Xóa</button></td>
-                                        </tr>
+                                        @foreach($admin as $ad)
+                                            <tr>
+                                                <td>{{$ad->username}}</td>
+                                                <td>{{$ad->full_name}}</td>
+                                                <td>{{$ad->email}}</td>
+                                                <td>{{$ad->phone}}</td>
+                                                <td><button class="btn btn-default" name="add" onclick="location.href='admin/user/updateAdmin/{{$ad->username}}'">Sửa</button></td>
+                                                <td><button class="btn btn-default" name="delete" onclick="location.href='admin/user/deleteAdmin/{{$ad->username}}'">Xóa</button></td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>

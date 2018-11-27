@@ -46,3 +46,50 @@ Route::get('/profileTeacher', function () {
 Route::get('/teacherDetail', function () {
     return view('pages.teacherDetail');
 });
+
+Route::group(['prefix'=>'admin'], function(){
+	Route::group(['prefix'=>'project'], function(){
+		Route::get('listProject', 'ListProjectController@getListProject');
+
+	});
+
+	Route::group(['prefix'=>'scheduel'], function(){
+		// chua co
+		Route::get('create', 'SubjectScheduelController@getCreate');
+
+		Route::get('update', 'SubjectScheduelController@getUpdate');
+	});
+
+	Route::group(['prefix'=>'user'], function(){
+		// danh sach user
+		Route::get('listAdmin', 'AdUserController@getListAdmin');
+		Route::get('listTeacher', 'AdUserController@getListTeacher');
+		Route::get('listStudent', 'AdUserController@getListStudent');
+
+		//sua thong tin user
+		Route::get('updateAdmin/{username}', 'AdUserController@getUpdateAdmin');
+		Route::post('updateAdmin/{username}', 'AdUserController@postUpdateAdmin');
+		Route::get('updateTeacher/{id}', 'AdUserController@getUpdateTeacher');
+		Route::get('updateStudent/{id}', 'AdUserController@getUpdateStudent');
+
+		// them user
+		// Route::get('addAdmin', 'AdUserController@getAddAdmin');
+		//dang can sua cho search de xuong duoi form, dung ajax de search
+		Route::post('addOrSearch', 'AdUserController@postAddOrSearch');
+		Route::get('addTeacher', 'AdUserController@getAddTeacher');
+		Route::post('addTeacher', 'AdUserController@postAddTeacher');
+		Route::get('addStudent', 'AdUserController@getAddStudent');
+		Route::post('addStudent', 'AdUserController@postAddStudent');
+
+		//tim kiem user
+		Route::get('searchAdmin', 'AdUserController@getSearchAdmin');
+		Route::get('searchTeacher', 'AdUserController@getSearchTeacher');
+		Route::get('searchStudent', 'AdUserController@getSearchStudent');
+
+		//xoa user
+		Route::get('deleteAdmin/{username}', 'AdUserController@getDeleteAdmin');
+		Route::get('deleteTeacher', 'AdUserController@getDeleteTeacher');
+		Route::get('deleteStudent', 'AdUserController@getDeleteStudent');
+
+	});
+});

@@ -13,6 +13,8 @@ class User extends Model
 
     protected $primaryKey = 'username';
 
+    public $incrementing = false;
+
     public $timestamps = false;
 
     public function teacher(){
