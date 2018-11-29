@@ -63,14 +63,19 @@ Route::group(['prefix'=>'admin'], function(){
 	Route::group(['prefix'=>'user'], function(){
 		// danh sach user
 		Route::get('listAdmin', 'AdUserController@getListAdmin');
+		Route::post('listAdmin/search', 'AdUserController@postSearch');
 		Route::get('listTeacher', 'AdTeacherController@getListTeacher');
+		Route::post('listTeacher/search', 'AdTeacherController@postSearch');
 		Route::get('listStudent', 'AdStudentController@getListStudent');
+		Route::post('listStudent/search', 'AdStudentController@postSearch');
 
 		//sua thong tin user
 		Route::get('updateAdmin/{username}', 'AdUserController@getUpdateAdmin');
 		Route::post('updateAdmin/{username}', 'AdUserController@postUpdateAdmin');
-		Route::get('updateTeacher/{id}', 'AdTeacherController@getUpdateTeacher');
-		Route::get('updateStudent/{id}', 'AdStudentController@getUpdateStudent');
+		Route::get('updateTeacher/{id_teacher}', 'AdTeacherController@getUpdateTeacher');
+		Route::post('updateTeacher/{id_teacher}', 'AdTeacherController@postUpdateTeacher');
+		Route::get('updateStudent/{id_student}', 'AdStudentController@getUpdateStudent');
+		Route::post('updateStudent/{id_student}', 'AdStudentController@postUpdateStudent');
 
 		// them user
 		// Route::get('addAdmin', 'AdUserController@getAddAdmin');
@@ -86,8 +91,8 @@ Route::group(['prefix'=>'admin'], function(){
 
 		//xoa user
 		Route::get('deleteAdmin/{username}', 'AdUserController@getDeleteAdmin');
-		Route::get('deleteTeacher/{id}', 'AdTeacherController@getDeleteTeacher');
-		Route::get('deleteStudent/{id}', 'AdStudentController@getDeleteStudent');
+		Route::get('deleteTeacher/{id_teacher}', 'AdTeacherController@getDeleteTeacher');
+		Route::get('deleteStudent/{id_student}', 'AdStudentController@getDeleteStudent');
 
 	});
 });

@@ -79,7 +79,7 @@
                     <form class="form-inline">
                         <input type="hidden" name="_token" value="{{csrf_token()}}" />
                         <div class="form-group mx-sm-3 mb-2">
-                            <input type="" class="form-control">
+                            <input type="" class="form-control" id="search" name="search">
                         </div>
                         <button type="submit" class="btn btn-primary mb-2">Tìm kiếm</button>
                     </form>
@@ -103,25 +103,48 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($teacher as $tc)
-                                <tr>
-                                    <td>{{$tc->id_teacher}}</td>
-                                    <td>{{$tc->username}}</td>
-                                    <td>{{$tc->full_name}}</td>
-                                    <td>{{$tc->email}}</td>
-                                    <td>{{$tc->phone}}</td>
-                                    <td>{{$tc->workplace}}</td>
-                                    <td><button class="btn btn-default" name="add" onclick="location.href='admin/user/updateTeacher/{{$tc->id_teacher}}'">Sửa</button></td>
-                                    <td><button class="btn btn-default" name="delete" onclick="location.href='admin/user/deleteTeacher/{{$tc->id_teacher}}'">Xóa</button></td>
-                                </tr>
-                                @endforeach
+
                             </tbody>
                         </table>
                     </div>
+                    <script>
+                        $(document).ready(function(){
 
-                </section>
-            </div>
+                            fetch_customer_data('');
+
+                            function fetch_customer_data(query)
+                            {
+                                $.ajax({
+                                    url:"admin/user/listTeacher/search",
+                                    method:'post',
+                                    data:{query:query, _token: '{{csrf_token()}}'},
+                                    dataType:'json',
+                                    success:function(data)
+                                    {
+                                        $('tbody').html(data.table_data);
+                                    },
+                                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                                       console.log(errorThrown);
+                                   }
+                               })
+                            }
+
+                            $(document).on('keyup','#search',function(){
+                             var query = $(this).val();
+                             fetch_customer_data(query);
+                         });
+                        });
+                    </script>
+                    <script>
+                        $.ajaxSetup({
+                          headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+                </script>
+            </section>
         </div>
-    </section>
+    </div>
+</section>
 </section>
 @endsection

@@ -11,8 +11,8 @@
                     <li><i class="fa fa-home"></i><a href="#">Trang chủ/Cập nhật thông tin giảng viên</a></li>
                 </ol>
                 <h4 class="page-header"><i class="fa fa fa-bars"></i>Teacher: 
-                        <small>{{$teacher->id_teacher}}</small>
-                    </h4>
+                        <small>{{$teacher->username}}</small>
+                </h4>
             </div>
         </div>  
         <div class="row">
@@ -34,7 +34,7 @@
                             </div>
                             @endif
 
-                            <form class="form-validate form-horizontal" method="POST" action="admin/user/updateAdmin/{{$teacher->id_teacher}}">
+                            <form class="form-validate form-horizontal" method="POST" action="admin/user/updateTeacher/{{$teacher->id_teacher}}">
                                 <input type="hidden" name="_token" value="{{csrf_token()}}" />
                                 <div class="form-group ">
                                     <label class="control-label col-lg-2">Username</label>
@@ -59,7 +59,7 @@
                                 <div class="form-group ">
                                     <label class="control-label col-lg-2">Phòng Làm Việc</label>
                                     <div class="col-lg-3">
-                                        <input class="form-control" type="text" name="workplace" value="{{$teacher->phone}}" />
+                                        <input class="form-control" type="text" name="workplace" value="{{$teacher->workplace}}" />
                                     </div>
                                     <label class="control-label col-lg-2">Số điện thoại</label>
                                     <div class="col-lg-3">
