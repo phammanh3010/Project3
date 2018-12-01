@@ -20,7 +20,7 @@
                             </span>
                             <b class="caret"></b>
                         </a>
-                        <ul class="dropdown-menu logout">
+                        <ul class="dropdown-menu extended logout">
                             <div class="log-arrow-up"></div>
                             <li class="eborder-top">
                                 <a href="../personal/update_pass.html"><i class="icon_profile"></i>Đổi mật khẩu</a>
