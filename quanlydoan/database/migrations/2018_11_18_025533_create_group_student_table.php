@@ -16,9 +16,9 @@ class CreateGroupStudentTable extends Migration
         Schema::create('group_student', function (Blueprint $table) {
             $table->increments('id_group_student');
             $table->integer('id_group')->unsigned();
-            $table->foreign('id_group')->references('id_group')->on('group');
+            $table->foreign('id_group')->references('id_group')->on('group')->onDelete('cascade');
             $table->integer('id_student')->unsigned();
-            $table->foreign('id_student')->references('id_student')->on('student');
+            $table->foreign('id_student')->references('id_student')->on('student')->onDelete('cascade');
             $table->timestamps();
         });
     }

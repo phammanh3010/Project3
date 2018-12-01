@@ -16,7 +16,7 @@ class CreateSubjectScheduelTable extends Migration
         Schema::create('subject_scheduel', function (Blueprint $table) {
             $table->increments('id_subject_scheduel');
             $table->integer('id_subject')->unsigned();
-            $table->foreign('id_subject')->references('id_subject')->on('subject');
+            $table->foreign('id_subject')->references('id_subject')->on('subject')->onDelete('cascade');
             $table->string('semester', 45);
             $table->timestamps();
         });

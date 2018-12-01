@@ -16,7 +16,7 @@ class CreateContentSubScheduelTable extends Migration
         Schema::create('content_sub_scheduel', function (Blueprint $table) {
             $table->increments('id_content_scheduel');
             $table->integer('id_subject_scheduel')->unsigned();
-            $table->foreign('id_subject_scheduel')->references('id_subject_scheduel')->on('subject_scheduel');
+            $table->foreign('id_subject_scheduel')->references('id_subject_scheduel')->on('subject_scheduel')->onDelete('cascade');
             $table->dateTime('time_deadline');
             $table->string('require', 200);
             $table->float('penalty');

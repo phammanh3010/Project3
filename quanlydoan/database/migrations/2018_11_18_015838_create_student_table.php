@@ -16,7 +16,7 @@ class CreateStudentTable extends Migration
         Schema::create('student', function (Blueprint $table) {
             $table->increments('id_student');
             $table->string('username', 45);
-            $table->foreign('username')->references('username')->on('user');
+            $table->foreign('username')->references('username')->on('user')->onDelete('cascade');
             $table->string('class', 45)->nullable();
             $table->timestamps();
         });
