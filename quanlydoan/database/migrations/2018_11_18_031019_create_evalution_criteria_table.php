@@ -16,7 +16,7 @@ class CreateEvalutionCriteriaTable extends Migration
         Schema::create('evalution_criteria', function (Blueprint $table) {
             $table->increments('id_evalution_criteria');
             $table->integer('id_group')->unsigned();
-            $table->foreign('id_group')->references('id_group')->on('group');
+            $table->foreign('id_group')->references('id_group')->on('group')->onDelete('cascade');
             $table->string('content', 100);
             $table->float('bonus');
             $table->timestamps();

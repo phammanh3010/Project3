@@ -55,7 +55,7 @@ Route::group(['prefix'=>'admin'], function(){
 
 	Route::group(['prefix'=>'scheduel'], function(){
 		// chua co
-		Route::get('create', 'SubjectScheduelController@getCreate');
+		Route::get('show', 'AdScheduelController@getScheduel');
 
 		Route::get('update', 'SubjectScheduelController@getUpdate');
 	});

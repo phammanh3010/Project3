@@ -16,7 +16,7 @@ class CreateGroupScheduelTable extends Migration
         Schema::create('group_scheduel', function (Blueprint $table) {
             $table->increments('id_scheduel');
             $table->integer('id_group')->unsigned();
-            $table->foreign('id_group')->references('id_group')->on('group');
+            $table->foreign('id_group')->references('id_group')->on('group')->onDelete('cascade');
             $table->timestamps();
         });
     }

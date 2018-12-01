@@ -69,7 +69,6 @@ class AdTeacherController extends Controller
 		$teacher = Teacher::find($id);
 		$user = User::find($teacher->username);
 
-		$teacher->delete();
 		$user->delete();
 
 		return redirect('admin/user/listTeacher')->with('thongbao','Bạn đã xóa thành công');

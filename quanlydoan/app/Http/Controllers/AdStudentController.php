@@ -69,7 +69,7 @@ class AdStudentController extends Controller
 		$student = Student::find($id);
 		$user = User::find($student->username);
 
-		$student->delete();
+		
 		$user->delete();
 
 		return redirect('admin/user/listStudent')->with('thongbao','Bạn đã xóa thành công');

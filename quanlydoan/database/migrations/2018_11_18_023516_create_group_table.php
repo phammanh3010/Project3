@@ -16,9 +16,9 @@ class CreateGroupTable extends Migration
         Schema::create('group', function (Blueprint $table) {
             $table->increments('id_group');
             $table->integer('id_subject')->unsigned();
-            $table->foreign('id_subject')->references('id_subject')->on('subject');
+            $table->foreign('id_subject')->references('id_subject')->on('subject')->onDelete('cascade');
             $table->integer('id_teacher')->unsigned();
-            $table->foreign('id_teacher')->references('id_teacher')->on('teacher');
+            $table->foreign('id_teacher')->references('id_teacher')->on('teacher')->onDelete('cascade');
             $table->string('group_name',100);
             $table->string('project_name', 200);
             $table->string('semester', 45);
