@@ -13,14 +13,14 @@
                     <li class="dropdown">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <span class="profile-ava">
-                                <img alt="" src="../profile.png" width="40px" height="40px">
+                                <img alt="" src="img/profile.png" width="40px" height="40px">
                             </span>
                             <span class="username">
                                 
                             </span>
                             <b class="caret"></b>
                         </a>
-                        <ul class="dropdown-menu extended logout">
+                        <ul class="dropdown-menu logout">
                             <div class="log-arrow-up"></div>
                             <li class="eborder-top">
                                 <a href="../personal/update_pass.html"><i class="icon_profile"></i>Đổi mật khẩu</a>

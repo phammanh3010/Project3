@@ -61,7 +61,6 @@
                                         <div class="control-label col-lg-6">
                                             <div>
                                                 <button class="btn btn-default" type="submit" name="action" value="add">Thêm</button>
-                                                <button class="btn btn-default" type="submit" name="action" value="search">Tìm kiếm Theo Tên</button>
                                             </div>
                                         </div>
                                     </form>    
@@ -72,6 +71,15 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-12">
+                        <div class="form ">
+                            <form class="form-inline">
+                                <input type="hidden" name="_token" value="{{csrf_token()}}" />
+                                <div class="form-group mx-sm-3 mb-2">
+                                    <input type="" class="form-control">
+                                </div>
+                                <button type="submit" class="btn btn-primary mb-2">Tìm kiếm</button>
+                            </form>
+                        </div>
                         <section class="panel">
                             <header class="panel-heading">
                                 Danh sách người dùng Admin
