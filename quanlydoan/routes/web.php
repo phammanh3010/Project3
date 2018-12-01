@@ -47,6 +47,36 @@ Route::get('/teacherDetail', function () {
 	return view('pages.teacherDetail');
 });
 
+
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
+	Route::get('/', function() {
+		return view('admin.home');
+	});
+});
+
+Route::group(['prefix' => 'student', 'namespace' => 'Student'], function() {
+	Route::get('/', function() {
+		return view('student.home');
+	});
+});
+Route::group(['prefix' => 'teacher', 'namespace' => 'Student'], function() {
+	Route::get('/', function() {
+		return view('teacher.home');
+	});
+});
+// Authentication Routes...
+Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::post('login', 'Auth\LoginController@login');
+Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+
+// Password Reset Routes...
+Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
+
+
+
 Route::group(['prefix'=>'admin'], function(){
 	Route::group(['prefix'=>'project'], function(){
 		Route::get('listProject', 'ListProjectController@getListProject');
