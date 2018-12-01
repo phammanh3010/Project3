@@ -66,7 +66,12 @@
                                             TIN CÁ NHÂN</a></li>
                                     <li><a href="update_password.html"><i class="glyphicon glyphicon-lock"></i> ĐỔI MẬT
                                             KHẨU</a></li>
-                                    <li><a href="homepage.html"><i class="glyphicon glyphicon-off"></i> ĐĂNG XUẤT</a></li>
+                                    <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('frm-logout').submit();">
+                            
+                                       <i class="glyphicon glyphicon-off"></i> ĐĂNG XUẤT     </a>    
+                                        <form id="frm-logout" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            {{ csrf_field() }}
+                                        </form></li>
                                 </ul>
                             </li>
                         </ul>
