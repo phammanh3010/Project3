@@ -27,12 +27,21 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
 // });
 
 Route::group(['prefix' => 'student'], function() {
-	Route::get('listProject', 'ProjectController@getListProject');
+	Route::get('/', function() {
+		return view('student.listProject');
+	});
+
+	Route::post('/', 'ProjectController@getListProject');
+	Route::get('/project/{id_group}', 'ProjectController@getProjectDetail');
+
 });
 Route::group(['prefix' => 'teacher', 'namespace' => 'Teacher'], function() {
 	Route::get('/', function() {
-		return view('pages.listProject');
+		return view('teacher.listProject');
 	});
+
+	Route::get('/project/{id_group}/scheduel', 'ScheduelController@getScheduel');
+	Route::post('/project/{id_group}/scheduel', 'ScheduelController@addScheduelContent');
 });
 // Authentication Routes...
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');

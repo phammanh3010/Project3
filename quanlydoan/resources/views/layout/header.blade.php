@@ -60,7 +60,7 @@
                             <li><a href="profile_student.html"></a></li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                                    aria-expanded="false"> <span><i class="icon_profile"></i> Lâm Nguyễn</span></a>
+                                    aria-expanded="false"> <span><i class="icon_profile"></i>Lam nguyen</span></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="profile_student.html"><i class="glyphicon glyphicon-user"></i> THÔNG
                                             TIN CÁ NHÂN</a></li>
