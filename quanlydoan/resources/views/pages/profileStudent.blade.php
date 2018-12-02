@@ -4,7 +4,7 @@
 
 <section class="container bg_container" style="margin-top: 80px;">
     <div id="main_text">
-      <img src="../register48x48.png" />&nbsp;Sinh viên
+      <img src="img/register48x48.png" />&nbsp;Sinh viên
     </div>
     <div id="hr">
     </div>

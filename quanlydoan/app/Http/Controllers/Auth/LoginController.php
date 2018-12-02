@@ -80,26 +80,4 @@ class LoginController extends Controller
         Session::flush();
         return redirect(property_exists($this, 'redirectAfterLogout') ? $this->redirectAfterLogout : '/');
     }
-
-    // public function login(Request $request) {
-    //     $this->validate($request,
-    //         [
-    //             'username' => 'required',
-    //             'password' => 'required|min:6|max:32'
-    //         ],
-    //         [
-    //             'username.required' => 'Bạn chưa nhập Username!',
-    //             'password.required' => 'Bạn chưa nhập Mật khẩu!',
-    //             'password.min' => 'Mật Khẩu gồm tối thiểu 6 ký tự!',
-    //             'password.max' => 'Mật Khẩu gồm tối đa 32 ký tự!'
-    //         ]);
-    //     $username = $request->input('username');
-    //     $password = $request->input('password');
-    //     if(Auth::attempt(['username' => $username , 'password' => $password])) 
-    //         // $user = Auth::user();
-    //         // $this->authenticated($user);
-    //         return redirect('/teacher');
-    //     else
-    //         return redirect('/')->with('message','Đăng Nhập không thành công!');
-    // }
 }

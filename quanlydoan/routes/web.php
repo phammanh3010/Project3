@@ -26,14 +26,12 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
 // 	Route::get('listProject', 'StudentController@getListProject');
 // });
 
-Route::group(['prefix' => 'student', 'namespace' => 'Student'], function() {
-	Route::get('/', function() {
-		return view('pages.listProject');
-	});
+Route::group(['prefix' => 'student'], function() {
+	Route::get('listProject', 'ProjectController@getListProject');
 });
 Route::group(['prefix' => 'teacher', 'namespace' => 'Teacher'], function() {
 	Route::get('/', function() {
-		return view('teacher.home');
+		return view('pages.listProject');
 	});
 });
 // Authentication Routes...
@@ -101,38 +99,38 @@ Route::group(['prefix'=>'admin'], function(){
 
 
 
-Route::get('/home', function () {
-	return view('pages.home');
-});
+// Route::get('/home', function () {
+// 	return view('pages.home');
+// });
 
-Route::get('/listTeacher', function () {
-	return view('pages.listTeacher');
-});
+// Route::get('/listTeacher', function () {
+// 	return view('pages.listTeacher');
+// });
 
-Route::get('/listProject', function () {
-	return view('pages.listProject');
-});
+// Route::get('/listProject', function () {
+// 	return view('pages.listProject');
+// });
 
-Route::get('/createProject', function () {
-	return view('pages.createProject');
-});
+// Route::get('/createProject', function () {
+// 	return view('pages.createProject');
+// });
 
-Route::get('/projectDetail', function () {
-	return view('pages.projectDetail');
-});
+// Route::get('/projectDetail', function () {
+// 	return view('pages.projectDetail');
+// });
 
-Route::get('/projectDetail/document', function () {
-	return view('pages.document');
-});
+// Route::get('/projectDetail/document', function () {
+// 	return view('pages.document');
+// });
 
-Route::get('/profileStudent', function () {
-	return view('pages.profileStudent');
-});
+// Route::get('/profileStudent', function () {
+// 	return view('pages.profileStudent');
+// });
 
-Route::get('/profileTeacher', function () {
-	return view('pages.profileTeacher');
-});
+// Route::get('/profileTeacher', function () {
+// 	return view('pages.profileTeacher');
+// });
 
-Route::get('/teacherDetail', function () {
-	return view('pages.teacherDetail');
-});
+// Route::get('/teacherDetail', function () {
+// 	return view('pages.teacherDetail');
+// });

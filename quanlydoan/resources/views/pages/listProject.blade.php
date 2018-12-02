@@ -3,12 +3,12 @@
 @section("content")
 <section class="container bg_container" style="margin-top: 80px;">
     <div id="main_text">
-      <img src="../register48x48.png" />&nbsp; Dự án của bạn
+      <img src="img/register48x48.png" />&nbsp; Dự án của bạn
     </div>
     <div id="hr">
     </div>
     <form>
-      <lable>Học kỳ</lable>
+      <label>Học kỳ</label>
       <select name="semester">
         <option>20182</option>
         <option>20181</option>
