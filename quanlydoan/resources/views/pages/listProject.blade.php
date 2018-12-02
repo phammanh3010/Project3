@@ -9,7 +9,7 @@
     </div>
     <form>
       <lable>Học kỳ</lable>
-      <select>
+      <select name="semester">
         <option>20182</option>
         <option>20181</option>
         <option>20172</option>
@@ -33,30 +33,6 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td scope="row">1</td>
-          <td>PGS.TS Trần Đình Khang</td>
-          <td>Project3</td>
-          <td>Web quản lí đồ án</td>
-          <td>Đã hoàn thành</td>
-          <td><a href="project_detail.html" class="btn btn-primary text-center">Chi tiết</a></td>
-        </tr>
-        <tr>
-          <td scope="row">1</td>
-          <td>PGS.TS Trần Đình Khang</td>
-          <td>Project3</td>
-          <td>Web quản lí đồ án</td>
-          <td>Đã hoàn thành</td>
-          <td><a href="project_detail.html" class="btn btn-primary text-center">Chi tiết</a></td>
-        </tr>
-        <tr>
-          <td scope="row">1</td>
-          <td>PGS.TS Trần Đình Khang</td>
-          <td>Project3</td>
-          <td>Web quản lí đồ án</td>
-          <td>Đã hoàn thành</td>
-          <td><a href="project_detail.html" class="btn btn-primary text-center">Chi tiết</a></td>
-        </tr>
         <tr>
           <td scope="row">1</td>
           <td>PGS.TS Trần Đình Khang</td>

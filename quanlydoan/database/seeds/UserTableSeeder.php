@@ -12,9 +12,6 @@ class UserTableSeeder extends Seeder
     public function run()
     {
         //
-
-    
-
         DB::table('user')->insert([
             array('username'=>'20152023','password'=>bcrypt('20152023'),'position'=>'1','full_name'=>'Ha Dinh Khoe','email'=>'hadinhkhoe@gmail.com','phone'=>'0388446430'),
             array('username'=>'20152408','password'=>bcrypt('20152408'),'position'=>'1','full_name'=>'Pham Cong Manh','email'=>'hadinhkhoe@gmail.com','phone'=>'0388446430'),
@@ -51,8 +48,5 @@ class UserTableSeeder extends Seeder
             array('id_group'=>'1','id_student'=>'3'),
             array('id_group'=>'1','id_student'=>'4')
         ]);
-
-
-
     }
 }

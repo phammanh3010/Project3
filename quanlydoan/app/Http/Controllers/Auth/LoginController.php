@@ -29,16 +29,16 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected function authenticated($request, $user)
+    protected function authenticated($Request, $user)
     {
-    if($user->position ==1){
-    return redirect('/student');
-    }elseif ($user->position ==2) {
-    return redirect('/teacher');
-    }elseif ($user->position ==3) {
-    return redirect('/admin');
+    if($user->position == 1){
+        return redirect('/student');
+    }elseif ($user->position == 2) {
+        return redirect('/teacher');
+    }elseif ($user->position == 3) {
+        return redirect('/admin');
     }else {
-    return redirect('/');
+        return redirect('/');
     }
     }
     # $redirectTo = '/home';
@@ -55,8 +55,9 @@ class LoginController extends Controller
 
     public function username()
     {
-    return 'username';
+        return 'username';
     }
+
     protected function credentials(Request $request)
     {
         $field = filter_var($request->get($this->username()), FILTER_VALIDATE_EMAIL)
@@ -80,5 +81,25 @@ class LoginController extends Controller
         return redirect(property_exists($this, 'redirectAfterLogout') ? $this->redirectAfterLogout : '/');
     }
 
-
+    // public function login(Request $request) {
+    //     $this->validate($request,
+    //         [
+    //             'username' => 'required',
+    //             'password' => 'required|min:6|max:32'
+    //         ],
+    //         [
+    //             'username.required' => 'Bạn chưa nhập Username!',
+    //             'password.required' => 'Bạn chưa nhập Mật khẩu!',
+    //             'password.min' => 'Mật Khẩu gồm tối thiểu 6 ký tự!',
+    //             'password.max' => 'Mật Khẩu gồm tối đa 32 ký tự!'
+    //         ]);
+    //     $username = $request->input('username');
+    //     $password = $request->input('password');
+    //     if(Auth::attempt(['username' => $username , 'password' => $password])) 
+    //         // $user = Auth::user();
+    //         // $this->authenticated($user);
+    //         return redirect('/teacher');
+    //     else
+    //         return redirect('/')->with('message','Đăng Nhập không thành công!');
+    // }
 }

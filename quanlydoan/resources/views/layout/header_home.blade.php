@@ -43,7 +43,7 @@
                       <div class="container-fluid" id="login_container">
                         <div class="card card-container">
                           <img id="profile-img" class="profile-img-card"
-                            src="../profile.png" />
+                            src="img/profile.png" />
                           <form class="form-signin" method="POST" action="{{ route('login') }}">
                             {{ csrf_field() }}
                           <div class="form-group{{ $errors->has('email')||$errors->has('username') ? ' has-error' : '' }}">
