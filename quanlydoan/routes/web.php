@@ -1,5 +1,15 @@
 <?php
-
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
+use App\User;
+use App\GroupScheduel;
+use App\ContentGroupScheduel;
+use App\Group;
+use App\Student;
+use App\GroupStudent;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,6 +24,7 @@
 Route::get('/', function () {
 	return view('welcome');
 });
+
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
 	Route::get('/', function() {
@@ -30,18 +41,53 @@ Route::group(['prefix' => 'student'], function() {
 	Route::get('/', function() {
 		return view('student.listProject');
 	});
+	Route::get('document', function() {
+		return view('student.evaluate');
+	});
 
 	Route::post('/', 'ProjectController@getListProject');
 	Route::get('/project/{id_group}', 'ProjectController@getProjectDetail');
 
 });
-Route::group(['prefix' => 'teacher', 'namespace' => 'Teacher'], function() {
+
+
+
+// Route for teacher
+Route::group(['prefix' => 'teacher'], function() {
+
 	Route::get('/', function() {
 		return view('teacher.listProject');
 	});
 
-	Route::get('/project/{id_group}/scheduel', 'ScheduelController@getScheduel');
-	Route::post('/project/{id_group}/scheduel', 'ScheduelController@addScheduelContent');
+	Route::group(['prefix' => 'project'], function() {
+		Route::get('/{id_group}', 'ProjectController@getProjectDetail');
+
+		// Route for scheduel
+		Route::get('/{id_group}/scheduel', 'ScheduelController@getScheduel');
+		Route::post('/{id_group}/scheduel', 'ScheduelController@addScheduelContent');
+		// Route::get('/{id_group}/scheduel/delete/{id_content}', 'ScheduelController@delScheduelContent');
+		Route::post('/{id_group}/scheduel/delete', 'ScheduelController@delScheduelContent');
+		Route::get('/{id_group}/scheduel/update/{id_content}', 'ScheduelController@getUpdateScheduelContent');
+		Route::post('/{id_group}/scheduel/update/{id_content}', 'ScheduelController@postUpdateScheduelContent');
+	
+		// Route for evaluation
+		Route::get('/{id_group}/evaluation', 'EvaluationController@getEvaluation');
+		Route::post('/{id_group}/evaluation', 'EvaluationController@addEvaluation');
+		// Route::get('/{id_group}/evaluation/delete/{id}', 'EvaluationController@delEvaluation');
+		Route::post('/{id_group}/evaluation/delete', 'EvaluationController@delEvaluation');
+		Route::get('/{id_group}/evaluation/update/{id}', 'EvaluationController@getUpdateEvaluation');
+		Route::post('/{id_group}/evaluation/update/{id}', 'EvaluationController@postUpdateEvaluation');
+
+		// Route for listStudent
+		Route::get('/{id_group}/listStudent', 'StudentOfGroupController@getListStudent');
+		Route::post('/{id_group}/listStudent', 'StudentOfGroupController@addStudentOfGroup');
+		// Route::get('/{id_group}/listStudent/delete/{id}', 'StudentOfGroupController@delStudentOfGroup');
+		Route::post('/{id_group}/listStudent/delete', 'StudentOfGroupController@delStudentOfGroup');
+
+	});
+
+
+
 });
 // Authentication Routes...
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
@@ -107,39 +153,22 @@ Route::group(['prefix'=>'admin'], function(){
 });
 
 
-
-// Route::get('/home', function () {
-// 	return view('pages.home');
-// });
-
-// Route::get('/listTeacher', function () {
-// 	return view('pages.listTeacher');
-// });
-
-// Route::get('/listProject', function () {
-// 	return view('pages.listProject');
-// });
-
-// Route::get('/createProject', function () {
-// 	return view('pages.createProject');
-// });
-
-// Route::get('/projectDetail', function () {
-// 	return view('pages.projectDetail');
-// });
-
-// Route::get('/projectDetail/document', function () {
-// 	return view('pages.document');
-// });
-
-// Route::get('/profileStudent', function () {
-// 	return view('pages.profileStudent');
-// });
-
-// Route::get('/profileTeacher', function () {
-// 	return view('pages.profileTeacher');
-// });
-
-// Route::get('/teacherDetail', function () {
-// 	return view('pages.teacherDetail');
+// Route::get('/a', function () {
+// 	$student = DB::table('student')->join('user', 'user.username', '=', 'student.username')
+//                             ->select( 'student.id_student')
+//                             ->where('student.username', '=', 20152023)
+// 							->get();
+// 	// var_dump($student);
+// 	// $data = array(
+// 	// 	'student' => $student
+// 	// );
+// 	// echo($data['student']);
+// 	foreach ($student as $a) {
+// 		echo($a->id_student);
+// 		# code...
+// 	}
+// 		// $student_group = new GroupStudent();
+// 		// $student_group->id_group = 2;
+//         // $student_group->id_student = 1;
+//         // $student_group->save();
 // });

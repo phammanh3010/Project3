@@ -28,7 +28,7 @@ class ProjectController extends Controller
                 ->join('teacher', 'group.id_teacher', '=', 'teacher.id_teacher')
                 ->join('user', 'user.username', '=', 'teacher.username')
                 ->select('user.full_name', 'group.group_name', 'group.project_name', 'group.finish_project', 'group.id_group')
-                ->where('student.id_student', '=',  3)
+                ->where('student.id_student', '=',  $user_id)
                 ->where('group.semester', '=', $semester)->get();
 
             $total_row = $listProject->count();
@@ -54,29 +54,18 @@ class ProjectController extends Controller
             }
             $data = array(
              'table_data'  => $output
-           );
+            );
         
             echo json_encode($data);
         }
     }
 
-    public function getProjectDetail(Request $request) {
-        $id_group = $request->get('id_group');
+    public function getProjectDetail($id_group) {
         
         $project = DB::table('group')->join('teacher', 'group.id_teacher', '=', 'teacher.id_teacher')
             ->join('user', 'user.username', '=', 'teacher.username')
             ->select('group.group_name', 'group.project_name', 'user.full_name', 'group.semester')
-            ->where('group.id_group', '=', 1)->get();
+            ->where('group.id_group', '=', $id_group)->get();
         return view('pages.projectDetail', ['projects'=> $project]);
     }
-
-    public function getDocument() {
-        $id_group = $request->get('id_group');
-
-        $document = DB::table('group')->join('document', 'group.id', '=', 'document.id_group')
-                        ->select("document.path, document.evaluate, document.user_upload, document.created_at")
-                        ->where('group.id', '=', $group_id)->get();
-        return view('student.document', ['ducuments'=> $document]);
-    } 
-
 }

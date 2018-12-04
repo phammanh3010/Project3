@@ -17,8 +17,9 @@ class CreateContentSubScheduelTable extends Migration
             $table->increments('id_content_scheduel');
             $table->integer('id_subject_scheduel')->unsigned();
             $table->foreign('id_subject_scheduel')->references('id_subject_scheduel')->on('subject_scheduel')->onDelete('cascade');
-            $table->dateTime('time_deadline');
-            $table->string('require', 200);
+            $table->string('require', 50);
+            $table->date('time_deadline');
+            $table->text('descript', 500);
             $table->float('penalty');
             $table->timestamps();
         });

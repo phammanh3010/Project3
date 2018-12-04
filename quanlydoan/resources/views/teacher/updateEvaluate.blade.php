@@ -61,19 +61,20 @@
                                             <div class="panel-body tab-content tab-pane">
                                                 <div class="form">
                                                     <form class="form-validate form-horizontal" id="feedback_form" method="POST"
-                                                        action="">
+                                                        action="{{url()->current()}}">
+                                                        <input type="hidden" name="_token" value="{{csrf_token()}}" />
                                                         <div class="form-group">
                                                             <label class="control-label col-sm-1">Tiêu chí</label>
                                                             <div class="col-sm-4">
-                                                                <input type="text" class="form-control" />
+                                                                <input type="text" class="form-control" name="content" value="{{$content->content}}"/>
                                                             </div>
                                                             <label class="control-label col-sm-4">Điểm cộng/trừ</label>
                                                             <div class="col-sm-1">
-                                                                <input class="form-control"/>
+                                                                <input type="text" class="form-control" name="bonus" value ="{{$content->bonus}}"/>
                                                             </div>
                                                         </div>
                                                         <div class="control-label col-sm-6 text-center">
-                                                            <button class="btn btn-default" name="add" onclick="">Cập nhật</button>
+                                                            <button type="submit" class="btn btn-default">Cập nhật</button>
                                                         </div>
                                                     </form>
                                                 </div>

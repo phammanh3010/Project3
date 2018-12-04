@@ -37,16 +37,16 @@
                 <section class="panel">
                     <header class="panel-heading text-center">
                         <div class="col-sm-3">
-                            <a class="list-group-item-success btn btn-default" href="document.html">Tài liệu đồ án</a>
+                            <a class="list-group-item-success btn btn-default" href="#">Tài liệu đồ án</a>
                         </div>
                         <div class="col-sm-3">
-                            <a class="list-group-item-success btn btn-default" href="scheduel.html">Quản lí lịch trình</a>
+                            <a class="list-group-item-success btn btn-default" href="">Quản lí lịch trình</a>
                         </div>
                         <div class="col-sm-3">
                             <a class="btn btn-primary" href="evaluate.html">Đánh giá nhóm</a>
                         </div>
                         <div class="col-sm-3">
-                            <a class="list-group-item-success btn btn-default" href="list_student.html">Danh sách sinh viên</a>
+                            <a class="list-group-item-success btn btn-default" href="">Danh sách sinh viên</a>
                         </div>
                     </header>
                     <div class="panel-body">
@@ -57,77 +57,55 @@
                                     <div>
                                         <h3><i class="glyphicon glyphicon-forward" style="padding:10px 0;"></i> Tiêu chí đánh giá đồ án</h3>
                                     </div>
+                                    @if(session('thongbao'))
+                                    <div id="message_update" class="alert alert-success col-sm-6">
+                                        {{session('thongbao')}}
+                                    </div>
+                                    @endif
+                                    <!-- <div id="message_delete"></div> -->
                                     <div class="row">
-                                        <table class="table">
+                                        <table class="table" id="result">
                                             <tr>
-                                                <td class="col-sm-9"><b>Tiêu chí</b></td>
-                                                <td class="col-sm-2"><b>Điểm cộng/trừ</b></td>
-                                                <td><b>Sửa</b></td>
-                                                <td><b>Xóa</b></td>
+                                                <td class="col-sm-9 text-center"><b>Tiêu chí</b></td>
+                                                <td class="col-sm-2 text-center"><b>Điểm cộng/trừ</b></td>
+                                                <td class="text-center"><b>Sửa</b></td>
+                                                <td class="text-center"><b>Xóa</b></td>
                                             </tr>
-                                            <tr>
-                                                <td>
-                                                    <p>Tieu chí a
-                                                    </p>
-                                                </td>
-                                                <td>
-                                                    <p>0.5</p>
-                                                </td>
-                                                <td><button type="button" class="btn btn-default" id="update" value="">Sửa</button></td>
-                                                <td><button type="button" class="btn btn-default" id="xuli" value="">Xóa</button></td>
-                                            </tr>
+                                            @foreach($evaluations as $evaluation)   
                                             <tr>
                                                 <td>
-                                                    <p>Tiêu chí b</p>
+                                                    <p>{{$evaluation->content}}</p>
                                                 </td>
-                                                <td>
-                                                    <p>0.5</p>
+                                                <td class="text-center">
+                                                    <p>{{$evaluation->bonus}}</p>
                                                 </td>
-                                                <td><button type="button" class="btn btn-default" id="update" value="">Sửa</button></td>
-                                                <td><button type="button" class="btn btn-default" id="xuli" value="">Xóa</button></td>
+                                                <td class="text-center"><a href="{{url()->current()}}/update/{{$evaluation->id_evalution_criteria}}" class="btn btn-default" id="update">Sửa</a></td>
+                                                <td class="text-center"><button type="button" class="delete btn btn-default" id="{{$evaluation->id_evalution_criteria}}">Xóa</button></td>
                                             </tr>
-                                            <tr>
-                                                <td>
-                                                    <p>Tiêu chí c</p>
-                                                </td>
-                                                <td>
-                                                    <p>0.25</p>
-                                                </td>
-                                                <td><button type="button" class="btn btn-default" id="update" value="">Sửa</button></td>
-                                                <td><button type="button" class="btn btn-default" id="xuli" value="">Xóa</button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <p>Tiêu chí d</p>
-                                                </td>
-                                                <td>
-                                                    <p>0.25</p>
-                                                </td>
-                                                <td><button type="button" class="btn btn-default" id="update" value="">Sửa</button></td>
-                                                <td><button type="button" class="btn btn-default" id="xuli" value="">Xóa</button></td>
-                                            </tr>
+                                            @endforeach
                                         </table>
                                     </div>
+                                    <div id="message"></div>
                                     <div class="row panel-body">
                                         <div>
                                             <h3><i class="glyphicon glyphicon-forward" style="padding:10px 0;"></i> Thêm tiêu chi</h3>
                                         </div>
+                                        <div id="error"></div>
                                         <div class="panel-body tab-content tab-pane">
                                             <div class="form">
-                                                <form class="form-validate form-horizontal" id="feedback_form" method="POST"
-                                                    action="">
+                                                <form class="form-validate form-horizontal" action="">
                                                     <div class="form-group">
-                                                        <label class="control-label col-sm-1">Tiêu chí</label>
-                                                        <div class="col-sm-4">
-                                                            <input type="text" class="form-control" />
+                                                        <label class="control-label col-sm-1" >Tiêu chí</label>
+                                                        <div class="col-sm-6">
+                                                            <textarea type="text" class="form-control" id="content"></textarea>
                                                         </div>
-                                                        <label class="control-label col-sm-4">Điểm cộng/trừ</label>
+                                                        <label class="control-label col-sm-3">Điểm cộng/trừ</label>
                                                         <div class="col-sm-1">
-                                                            <input class="form-control"/>
+                                                            <input type="number" class="form-control" id="bonus" step="0.25" min="0" max="10"/>
                                                         </div>
                                                     </div>
                                                     <div class="control-label col-sm-6 text-center">
-                                                        <button class="btn btn-default" name="add" onclick="">Thêm</button>
+                                                        <button type="button" class="btn btn-default" id="add">Thêm</button>
                                                     </div>
                                                 </form>
                                             </div>
@@ -148,4 +126,86 @@
             </div>
         </div>
     </section>
+    <script>
+        $(document).ready(function(){
+            function add() {
+                $.ajax({
+                    url:'{{url()->current()}}',
+                    type:'post',
+                    dataType: 'json',
+                    data: {
+                        content: $("#content").val(),
+                        bonus: $("#bonus").val(),
+                        _token: '{{csrf_token()}}'
+                    },
+                    success:function(data)
+                    {
+                        if(data.error) {
+                            if($('#message_update')) {
+                                $('#message_update').remove();
+                            }
+                            $('#message').children().remove();
+                            jQuery.each(data.error, function(key, value){
+                                $('#message').append("<p class='alert alert-danger'>"+value+"</p>");
+                  		    });
+                        }
+                        else {
+                            noidung = "<tr><td>" + $("#content").val() + "<p></p></td>";
+                            noidung+= "<td class='text-center'><p>" + $("#bonus").val() + "</p></td>";
+                            noidung+= "<td class='text-center'><a href='{{url()->current()}}/update/" + data.output + "' class='btn btn-default'>Sửa</a></td>";
+                            noidung+= "<td class='text-center'><button type='button' id='" + data.output + "' class='delete btn btn-default'>Xoá</button></td></tr>";
+                            $('#result').append(noidung);
+                            message = "<div class='alert alert-success'>Bạn đã thêm thành công!</div>";
+                            $('#message').html(message);
+                            $("#content").val("");
+                            $("#bonus").val("");
+                        }
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                        console.log(errorThrown);
+                        
+                    }
+                })
+            }
+            $("#add").click(function() {
+                add();
+            });
+        });
+        </script>
+        <script>
+            $(document).on('click', 'button.delete', function() {
+                var id = $(this).attr('id');
+                bootbox.confirm("Bạn chắc chắn muốn xóa?", function(result) {
+                    if(result) {
+                        $.ajax({
+                            url: '{{url()->current()}}/delete',
+                            type: 'POST',
+                            dataType: 'json',
+                            data: {
+                                id: id,
+                                _token: '{{csrf_token()}}'
+                            },
+                            success:function(data)
+                            {
+                                if(data.message) {
+                                    $('#message').html(data.message);
+                                    $('#'+data.id).parent().parent().remove();
+                                }      
+                            },
+                            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                                console.log(errorThrown);
+                            }
+                        });
+                    }
+                });
+            });	
+        // });	
+ 	</script>
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    </script>
 @endsection

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class ContentGroupScheduel extends Model
 {
     //
-    protected $table = 'content_group_scheduels';
+    protected $table = 'content_group_scheduel';
 
     protected $fillable = ['id_content', 'id_scheduel', 'time_deadline', 'require', 'penalty'];
 

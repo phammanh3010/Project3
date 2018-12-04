@@ -17,8 +17,9 @@ class CreateContentGroupScheduelTable extends Migration
             $table->increments('id_content');
             $table->integer('id_scheduel')->unsigned();
             $table->foreign('id_scheduel')->references('id_scheduel')->on('group_scheduel')->onDelete('cascade');
-            $table->dateTime('time_deadline');
-            $table->string('require', 200);
+            $table->date('time_deadline');
+            $table->string('require', 50);
+            $table->text('descript');
             $table->float('penalty');
             $table->timestamps();
         });

@@ -2,7 +2,6 @@
 
 @section("content")
 <section class="container bg_container" style="margin-top: 80px;">
-    @foreach($documents as $document)
     <div id="main_text">
       <img src="img/register48x48.png" />&nbsp; Nhóm project 3
     </div>

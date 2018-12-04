@@ -39,14 +39,15 @@ class UserTableSeeder extends Seeder
         ]);
 
         DB::table('group')->insert([
-            array('id_subject'=>'1','id_teacher'=>'1','group_name'=>'Do an','project_name'=>'QLDA','semester'=>'20181','finish_project'=>'0')
+            array('id_subject'=>'1','id_teacher'=>'1','group_name'=>'Do an','project_name'=>'QLDA','semester'=>'20181','finish_project'=>'0'),
+            
         ]);
 
         DB::table('group_student')->insert([
             array('id_group'=>'1','id_student'=>'1'),
             array('id_group'=>'1','id_student'=>'2'),
             array('id_group'=>'1','id_student'=>'3'),
-            array('id_group'=>'1','id_student'=>'4')
+            array('id_group'=>'1','id_student'=>'4'),
         ]);
     }
 }

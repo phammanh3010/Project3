@@ -61,119 +61,89 @@
                                             hoạch thực hiện
                                             đồ án</h3>
                                     </div>
+                                    @if(session('thongbao'))
+                                    <div class="alert alert-success" id="message_update">
+                                        {{session('thongbao')}}
+                                    </div>
+                                    @endif
                                     <div class="row">
-                                        <table class="table">
+                                        <table class="table" id="result">
                                             <tr>
-                                                <td class="col-sm-3"><b>Nhiệm vụ</b></td>
-                                                <td class="col-sm-7"><b>Mô tả yêu cầu</b></td>
-                                                <td class="col-sm-1"><b>Deadline</b></td>
-                                                <td><b>Sửa</b></td>
-                                                <td><b>Xóa</b></td>
+                                                <td class="col-sm-1 text-center"><b>Nhiệm vụ</b></td>
+                                                <td class="col-sm-7 text-center"><b>Mô tả yêu cầu</b></td>
+                                                <td class="col-sm-2 text-center"><b>Deadline</b></td>
+                                                <td class="col-sm-1 text-center"><b>Điểm trừ</b></td>
+                                                <td class="text-center"><b>Sửa</b></td>
+                                                <td class="text-center"><b>Xóa</b></td>
                                             </tr>
-                                            <tr>
-                                                <td>
-                                                    <p>1. Đề xuất đề tài</p>
-                                                </td>
-                                                <td>
-                                                    <p>Các nhóm xác định đề tài và thông qua sự
-                                                        xác nhận của giáo viên hướng dẫn, tài liệu
-                                                        yêu cầu:
-                                                        báo cáo đề xuất đề tài
-                                                    </p>
-                                                </td>
-                                                <td>
-                                                    <p>21/09/2018</p>
-                                                </td>
-                                                <td><button type="button" class="btn btn-default" id="update" value="">Sửa</button></td>
-                                                <td><button type="button" class="btn btn-default" id="delete" value="">Xóa</button></td>
-                                            </tr>
+                                            @foreach($scheduel_contents as $scheduel_content)
                                             <tr>
                                                 <td>
-                                                    <p>2. Phân tích yêu cầu phần mềm</p>
+                                                    <p>{{$scheduel_content->require}}</p>
                                                 </td>
                                                 <td>
-                                                    <p>Các nhóm tiến hành phân tích yêu cầu phần
-                                                        mềm, hoàn thành tài liệu phân tích yêu cầu
-                                                        phần mềm</p>
+                                                    <p>{{$scheduel_content->require}}</p>
                                                 </td>
-                                                <td>
-                                                    <p>20/10/2018</p>
+                                                <td class="text-center">
+                                                    <p>{{$scheduel_content->time_deadline}}</p>
                                                 </td>
-                                                <td><button type="button" class="btn btn-default" id="update" value="">Sửa</button></td>
-                                                <td><button type="button" class="btn btn-default" id="delete" value="">Xóa</button></td>
+                                                <td class="text-center">
+                                                    <p>{{$scheduel_content->penalty}}</p>
+                                                </td>
+                                                <td><a href="{{url()->current()}}/update/{{$scheduel_content->id_content}}" class="delete btn btn-default">Sửa</a></td>
+                                                <td><button type="button" id="{{$scheduel_content->id_content}}" class="delete btn btn-default">Xóa</button></td>
                                             </tr>
-                                            <tr>
-                                                <td>
-                                                    <p>3. Thiết kê hệ thống</p>
-                                                </td>
-                                                <td>
-                                                    <p>Các nhóm tiến hành thiết kế hệ thống phần
-                                                        mềm, hoàn thành tài liệu thiết kế phần mềm</p>
-                                                </td>
-                                                <td>
-                                                    <p>20/10/2018</p>
-                                                </td>
-                                                <td><button type="button" class="btn btn-default" id="update" value="">Sửa</button></td>
-                                                <td><button type="button" class="btn btn-default" id="delete" value="">Xóa</button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <p>4. Kiểm thử hệ thống</p>
-                                                </td>
-                                                <td>
-                                                    <p>Các nhóm tiến hành kiểm thử hệ thống phần
-                                                        mềm, hoàn thành tài liệu kiểm thử phần mềm</p>
-                                                </td>
-                                                <td>
-                                                    <p>20/11/2018</p>
-                                                </td>
-                                                <td><button type="button" class="btn btn-default" id="update" value="">Sửa</button></td>
-                                                <td><button type="button" class="btn btn-default" id="delete" value="">Xóa</button></td>
-                                            </tr>
+                                            @endforeach
                                         </table>
-                                    </div <div class="row panel-body">
+                                    </div>
+                                    <div id="message"></div>
                                     <div>
                                         <h3><i class="glyphicon glyphicon-forward" style="padding:10px 0;"></i> Thêm
                                             nội dung kế hoạch</h3>
                                     </div>
+                                    <!-- @if(count($errors) > 0)
+                                    <div class="alert alert-danger">
+                                        @foreach($errors->all() as $err)
+                                        {{$err}}<br>
+                                        @endforeach
+                                    </div>
+                                    @endif -->
                                     <div class="panel-body tab-content tab-pane">
                                         <div class="form">
-                                            <form class="form-validate form-horizontal" id="feedback_form" method="POST"
-                                                action="">
+                                            <form class="form-validate form-horizontal" id="feedback_form" action="">
                                                 <div class="col-sm-2"></div>
                                                 <div class="col-sm-10"></div>
                                                 <div class="form-group">
                                                     <label class="control-label col-sm-2">Yêu
                                                         cầu</label>
                                                     <div class="col-sm-8">
-                                                        <textarea class="form-control" name="require"></textarea>
+                                                        <textarea class="form-control" id="require"></textarea>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="control-label col-sm-2">Mô tả</label>
                                                     <div class="col-sm-8">
-                                                        <textarea class="form-control" name="description"></textarea>
+                                                        <textarea class="form-control" id="descript"></textarea>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="control-label col-sm-2">Thời
                                                         hạn</label>
                                                     <div class="col-sm-3">
-                                                        <input class="form-control" type="date" name="time"/>
+                                                        <input class="form-control" type="date" id="deadline"/>
                                                     </div>
                                                     <label class="control-label col-sm-4">Trừ</label>
                                                     <div class="col-sm-1">
-                                                        <input class="form-control" name="penalty"/>
+                                                        <input class="form-control" id="penalty"/>
                                                     </div>
                                                 </div>
                                                 <div class="control-label col-sm-6
                                           text-center">
-                                                    <button class="btn btn-default" name="add" onclick="">Thêm</button>
+                                                    <button type="button" class="btn btn-default" id="add">Thêm</button>
                                                 </div>
                                             </form>
                                         </div>
                                     </div>
-                                </div>
                                 <div>
                                     <h3><i class="glyphicon glyphicon-forward" style="padding:10px 0;"></i> Kế
                                         hoạch thực hiện
@@ -182,62 +152,27 @@
                                 <div class="row">
                                     <table class="table">
                                         <tr>
-                                            <td class="col-sm-3"><b>Nhiệm vụ</b></td>
-                                            <td class="col-sm-7"><b>Mô tả yêu cầu</b></td>
-                                            <td class="col-sm-1"><b>Deadline</b></td>
+                                            <td class="col-sm-2 text-center"><b>Nhiệm vụ</b></td>
+                                            <td class="col-sm-7 text-center"><b>Mô tả yêu cầu</b></td>
+                                            <td class="col-sm-2 text-center"><b>Deadline</b></td>
+                                            <td class="col-sm-1 text-center"><b>Điểm trừ</b></td>
                                         </tr>
+                                        @foreach($scheduel_subject_contents as $scheduel_subject_content)
                                         <tr>
                                             <td>
-                                                <p>1. Đề xuất đề tài</p>
+                                                <p>{{$scheduel_subject_content->require}}</p>
                                             </td>
                                             <td>
-                                                <p>Các nhóm xác định đề tài và thông qua sự
-                                                    xác nhận của giáo viên hướng dẫn, tài liệu
-                                                    yêu cầu:
-                                                    báo cáo đề xuất đề tài
-                                                </p>
+                                                <p>{{$scheduel_subject_content->require}}</p>
                                             </td>
-                                            <td>
-                                                <p>21/09/2018</p>
+                                            <td class="col-sm-2 text-center">
+                                                <p>{{$scheduel_subject_content->time_deadline}}</p>
+                                            </td>
+                                            <td class="col-sm-2 text-center">
+                                                <p>{{$scheduel_subject_content->penalty}}</p>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td>
-                                                <p>2. Phân tích yêu cầu phần mềm</p>
-                                            </td>
-                                            <td>
-                                                <p>Các nhóm tiến hành phân tích yêu cầu phần
-                                                    mềm, hoàn thành tài liệu phân tích yêu cầu
-                                                    phần mềm</p>
-                                            </td>
-                                            <td>
-                                                <p>20/10/2018</p>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <p>3. Thiết kê hệ thống</p>
-                                            </td>
-                                            <td>
-                                                <p>Các nhóm tiến hành thiết kế hệ thống phần
-                                                    mềm, hoàn thành tài liệu thiết kế phần mềm</p>
-                                            </td>
-                                            <td>
-                                                <p>20/10/2018</p>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <p>4. Kiểm thử hệ thống</p>
-                                            </td>
-                                            <td>
-                                                <p>Các nhóm tiến hành kiểm thử hệ thống phần
-                                                    mềm, hoàn thành tài liệu kiểm thử phần mềm</p>
-                                            </td>
-                                            <td>
-                                                <p>20/11/2018</p>
-                                            </td>
-                                        </tr>
+                                        @endforeach
                                     </table>
                                 </div>
                             </div>
@@ -249,46 +184,89 @@
     </div>
 </section>
 <script>
-        $("#add").click(function(event) {
- 			$.ajax({
- 			url: '../nhansu/add_ajax',
- 			type: 'POST',
- 			dataType: 'json',
- 			data: {
- 				ten: $("#ten").val(), // ten phai giong voi gia tri name o trong form
- 				tuoi: $("#tuoi").val(),
- 				anh:tenfile,
- 				fb: $("#fb").val(),
- 				sdt: $("#sdt").val()
- 			},
- 		})
- 		.done(function() {
- 			console.log("success");
- 		})
- 		.fail(function() {
- 			console.log("error");
- 		})
- 		.always(function() {
- 			console.log("complete");
- 			noidung = "<div class='col-sm-4'>";
- 			noidung += "<img class='card-img-top img-fluid' src='" + tenfile + "' alt='Card image cap'><div class='card-block'><h4 class='card-title'></h4>";
-			noidung += "<p class='card-text'><b>Tên:</b>" + $('#ten').val() + "</p>";
-			noidung += '<p class="card-text"><b>Tuổi:</b>' + $("#tuoi").val() + "</p>";
-			noidung += '<p class="card-text"><b>Số điện thoại:</b>' + $("#sdt").val() + "</p>";
-			noidung += '<p class="card-text"><a href="' + $("#fb").val() + '"' + "class='btn 			btn-xs btn-secondary'>FaceBook</a></p>";
-			noidung += '<p class="card-text"><a href="sua_nhansu/<?= $list['id'] ?>" class="btn btn-xs btn-warning">Sửa</a></p>';
-			noidung +=	'<p class="card-text"><a href="xoa_nhansu/<?= $list['id'] ?>" class="btn btn-xs btn-danger">Xóa<i class="fa fa-angle-right"></i></a></p>';
-			noidung += "</div>";
-			noidung += "</div>";
-
-			$("#card").append(noidung);
-
-			// reset về rỗng sau khi thêm xong
-			$("#ten").val("");
- 			$("#tuoi").val("");
- 			$("#sdt").val("");
- 			$("#facebook").val("");
- 		});
- 		});	
- 	</script>
+    $(document).ready(function(){
+        function add() {
+            $.ajax({
+                url:'{{url()->current()}}',
+                type:'post',
+                dataType: 'json',
+                data: {
+                    require: $("#require").val(),
+                    descript: $("#descript").val(),
+                    deadline: $("#deadline").val(),
+                    penalty: $("#penalty").val(),
+                    _token: '{{csrf_token()}}'
+                },
+                success:function(data)
+                {   
+                    if(data.error) {
+                        if($('#message_update')) {
+                            $('#message_update').remove();
+                        }
+                        $('#message').children().remove();
+                        jQuery.each(data.error, function(key, value){
+                            $('#message').append("<p class='alert alert-danger'>"+value+"</p>");
+                  		});
+                    }
+                    else {
+                        noidung = "<tr><td>" + $("#require").val() + "<p></p></td>";
+                        noidung+= "<td><p>" + $("#descript").val() + "</p></td>";
+                        noidung+= "<td class='text-center'><p>"+ $("#deadline").val() + "</p></td>"
+                        noidung+= "<td class='text-center'><p>"+ $("#penalty").val() + "<p></td>"
+                        noidung+= "<td class='text-center'><a href='{{url()->current()}}/update/" + data.output + "' class='btn btn-default' id='update'>Sửa</a></td>";
+                        noidung+= "<td class='text-center'><button type='button' id='" + data.output + "' class='delete btn btn-default'>Xoá</button></td>";
+                        $('#result').append(noidung);
+                        message = "<div class='alert alert-success'>Bạn đã thêm thành công!</div>";
+                        $('#message').html(message);
+                        $("#require").val("");
+                        $("#descript").val("");
+                        $("#deadline").val("");
+                        $("#penalty").val("");
+                    }
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    console.log(errorThrown);
+                }
+            })
+        }
+        $("#add").click(function() {
+             add();
+        });
+    });	
+     </script>
+    <script>
+            $(document).on('click', 'button.delete', function() {
+                var id = $(this).attr('id');
+                bootbox.confirm("Bạn chắc chắn muốn xóa?", function(result) {
+                    if(result) {
+                        $.ajax({
+                            url: '{{url()->current()}}/delete',
+                            type: 'POST',
+                            dataType: 'json',
+                            data: {
+                                id: id,
+                                _token: '{{csrf_token()}}'
+                            },
+                            success:function(data)
+                            {
+                                if(data.message) {
+                                    $('#message').html(data.message);
+                                    $('#'+data.id).parent().parent().remove();
+                                }      
+                            },
+                            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                                console.log(errorThrown);
+                            }
+                        });
+                    }
+                });
+            });		
+    </script>
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    </script>
 @endsection

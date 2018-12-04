@@ -60,10 +60,9 @@
                                     },
                                     error: function(XMLHttpRequest, textStatus, errorThrown) {
                                      console.log(errorThrown);
-                                 }
+                                    }
                              })
                             }
-
                             $('#search').change(function () {
                               var query = $(this).find("option:selected").val();
                               fetch_customer_data(query);
@@ -76,5 +75,5 @@
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         }
                     });
-                </script>
+                  </script>
 @endsection

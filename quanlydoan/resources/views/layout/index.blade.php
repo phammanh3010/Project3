@@ -4,7 +4,7 @@
   <head>
     <title></title>
     <meta charset="utf-8">
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- đường dẫn cơ bản đến trang tài nguyên -->
     <base href="{{asset('')}}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,6 +13,7 @@
     <link href="bootstrap/css/bootstrap-theme.css" rel="stylesheet">
     <script src="bootstrap/js/jquery.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="js/bootbox.min.js"></script>
     <link href="css/style1.css" rel="stylesheet" type="text/css" />
   </head>
 

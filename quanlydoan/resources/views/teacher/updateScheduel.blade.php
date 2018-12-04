@@ -60,6 +60,19 @@
                                         <div>
                                             <h3><i class="glyphicon glyphicon-forward" style="padding:10px 0;"></i> Chỉnh sửa nội dung kế hoạch</h3>
                                         </div>
+                                        @if(count($errors) > 0)
+                                        <div class="alert alert-danger">
+                                            @foreach($errors->all() as $err)
+                                            {{$err}}<br>
+                                            @endforeach
+                                        </div>
+                                        @endif
+
+                                        @if(session('thongbao'))
+                                        <div class="alert alert-success">
+                                            {{session('thongbao')}}
+                                        </div>
+                                        @endif
                                         <div class="form">
                                             <form class="form-validate form-horizontal" id="feedback_form" method="POST" action="">
                                                 <div class="col-sm-2"></div>
@@ -68,29 +81,29 @@
                                                     <label class="control-label col-sm-2">Yêu
                                                         cầu</label>
                                                     <div class="col-sm-8">
-                                                        <textarea class="form-control"></textarea>
+                                                        <textarea class="form-control" value="{{$content->require}}">{{$content->require}}</textarea>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="control-label col-sm-2">Mô tả</label>
                                                     <div class="col-sm-8">
-                                                        <textarea class="form-control"></textarea>
+                                                        <textarea class="form-control" value="{{$content->require}}">{{$content->require}}</textarea>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="control-label col-sm-2">Thời
                                                         hạn</label>
                                                     <div class="col-sm-3">
-                                                        <input class="form-control" type="date" />
+                                                        <input class="form-control" type="date" value="{{$content->time_deadline}}"/>
                                                     </div>
                                                     <label class="control-label col-sm-4">Trừ</label>
                                                     <div class="col-sm-1">
-                                                        <input class="form-control" />
+                                                        <input class="form-control" value="{{$content->penalty}}"/>
                                                     </div>
                                                 </div>
                                                 <div class="control-label col-sm-6
                                                                               text-center">
-                                                    <button class="btn btn-default" name="add" onclick="">Cập nhật</button>
+                                                    <button class="btn btn-default" type="submit">Cập nhật</button>
                                                 </div>
                                             </form>
                                         </div>
