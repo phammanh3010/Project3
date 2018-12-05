@@ -12,14 +12,19 @@ class UserTableSeeder extends Seeder
     public function run()
     {
         //
+
+    
+
         DB::table('user')->insert([
-            array('username'=>'20152023','password'=>'20152023','position'=>'1','full_name'=>'Ha Dinh Khoe','email'=>'hadinhkhoe@gmail.com','phone'=>'0388446430'),
-            array('username'=>'20152408','password'=>'20152408','position'=>'1','full_name'=>'Pham Cong Manh','email'=>'hadinhkhoe@gmail.com','phone'=>'0388446430'),
-            array('username'=>'GV000001','password'=>'GV000001','position'=>'2','full_name'=>'Tran Dinh Khang','email'=>'khangtd@gmail.com','phone'=>'0388446430'),
-            array('username'=>'admin','password'=>'admin','position'=>'3','full_name'=>'Admin','email'=>'admin@gmail.com','phone'=>'0388446430'),
-            array('username'=>'20151566','password'=>'20151566','position'=>'1','full_name'=>'Pham Huy Hoang','email'=>'hadinhkhoe@gmail.com','phone'=>'0388446430'),
-            array('username'=>'20152128','password'=>'20152128','position'=>'1','full_name'=>'Nguyen Quoc Lam','email'=>'hadinhkhoe@gmail.com','phone'=>'0388446430')
+            array('username'=>'20152023','password'=>bcrypt('20152023'),'position'=>'1','full_name'=>'Ha Dinh Khoe','email'=>'hadinhkhoe@gmail.com','phone'=>'0388446430'),
+            array('username'=>'20152408','password'=>bcrypt('20152408'),'position'=>'1','full_name'=>'Pham Cong Manh','email'=>'hadinhkhoe@gmail.com','phone'=>'0388446430'),
+            array('username'=>'GV000001','password'=>bcrypt('GV000001'),'position'=>'2','full_name'=>'Tran Dinh Khang','email'=>'khangtd@gmail.com','phone'=>'0388446430'),
+            array('username'=>'admin','password'=>bcrypt('admin'),'position'=>'3','full_name'=>'Admin','email'=>'admin@gmail.com','phone'=>'0388446430'),
+            array('username'=>'20151566','password'=>bcrypt('20151566'),'position'=>'1','full_name'=>'Pham Huy Hoang','email'=>'hadinhkhoe@gmail.com','phone'=>'0388446430'),
+            array('username'=>'20152128','password'=>bcrypt('20152128'),'position'=>'1','full_name'=>'Nguyen Quoc Lam','email'=>'hadinhkhoe@gmail.com','phone'=>'0388446430')
         ]);
+              
+
 
         DB::table('student')->insert([
             array('username'=>'20152023','class'=>'CNTT2.01'),

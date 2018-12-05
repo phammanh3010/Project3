@@ -26,7 +26,12 @@
                                 <a href="../personal/update_pass.html"><i class="icon_profile"></i>Đổi mật khẩu</a>
                             </li>
                             <li>
-                                <a href="../home.html"><i class="icon_key_alt"></i>Đăng xuất</a>
+                                <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('frm-logout').submit();">
+                            
+                            <i class="glyphicon glyphicon-off"></i> ĐĂNG XUẤT   </a>    
+                             <form id="frm-logout" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                 {{ csrf_field() }}
+                             </form>
                             </li>
                         </ul>
                     </li>
