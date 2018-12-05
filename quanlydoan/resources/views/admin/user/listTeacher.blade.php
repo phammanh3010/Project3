@@ -79,62 +79,59 @@
                 <div class="form">
                     <form class="form-inline">
                         <input type="hidden" name="_token" value="{{csrf_token()}}" />
+                        <i class="glyphicon glyphicon-search"></i><label>Tìm Kiếm</label>
                         <div class="form-group mx-sm-3 mb-2">
                             <input type="" class="form-control" id="search" name="search">
                         </div>
-                        <button type="submit" class="btn btn-primary mb-2">Tìm kiếm</button>
                     </form>
                 </div>
                 <section class="panel">
                     <header class="panel-heading">
                         Danh sách người dùng Giảng Viên
                     </header>
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th class ="col-lg-1">ID</th>
-                                    <th class ="col-lg-2">Username</th>
-                                    <th class ="col-lg-2">Họ tên</th>
-                                    <th class ="col-lg-2">Email</th>
-                                    <th class ="col-lg-2">Số điện thoại</th>
-                                    <th class ="col-lg-2">Phòng làm việc</th>
-                                    <th>Sửa</th>
-                                    <th>Xóa</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-
-                            </tbody>
-                        </table>
+                    
+                    <div class="result">
+                        
                     </div>
-                    <script>
-                        $(document).ready(function(){
 
-                            fetch_customer_data('');
+                    <script type="text/javascript">
+                        fetch_customer_data('');
 
-                            function fetch_customer_data(query)
-                            {
+                        function fetch_customer_data(query){
+                                var url = "admin/user/listTeacher/search";
+                                var data = {};
+                                data['search'] = query;
+                                var get = $(this).attr('method');
                                 $.ajax({
-                                    url:"admin/user/listTeacher/search",
-                                    method:'post',
-                                    data:{query:query, _token: '{{csrf_token()}}'},
-                                    dataType:'json',
-                                    success:function(data)
-                                    {
-                                        $('tbody').html(data.table_data);
-                                    },
-                                    error: function(XMLHttpRequest, textStatus, errorThrown) {
-                                       console.log(errorThrown);
-                                   }
-                               })
-                            }
+                                    type : get,
+                                    url : url,
+                                    data: data
+                                }).done(function(data){
+                                    $('.result').html(data);
+                                })
+                        }
 
-                            $(document).on('keyup','#search',function(){
-                             var query = $(this).val();
-                             fetch_customer_data(query);
-                         });
-                        });
+                        $(document).on('keyup','#search',function(){
+                               var query = $(this).val();
+                               fetch_customer_data(query);
+                           });
+
+                        $(document).on('click', '.pagination a', function(e){
+                            e.preventDefault();
+                            var page=$(this).attr('href').split('page=')[1];
+                            getTeacher(page, $('#search').val());
+                        })
+
+                        function getTeacher(page, search){
+                            $.ajax({
+                                type : 'get',
+                                url : 'admin/user/listTeacher/searchPagination' +'?page='+page,
+                                data : {'search': search} 
+                            }).done(function(data){
+                                $('.result').html(data);
+                            })
+                        }
+
                     </script>
                     <script>
                         $.ajaxSetup({
