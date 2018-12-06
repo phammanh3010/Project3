@@ -22,14 +22,24 @@ class ProjectController extends Controller
         if($request->ajax()){
             $output = '';
             $semester = $request->get('query');
-            $user_id = Auth::id();
-            $listProject  = DB::table('student')->join('group_student', 'student.id_student', '=', 'group_student.id_student')
+            $user = Auth::user();
+            if(Auth::user()->position == 2) {
+                $listProject  = DB::table('teacher')
+                ->join('group', 'group.id_teacher', '=', 'teacher.id_teacher')
+                ->join('user', 'user.username', '=', 'teacher.username')
+                ->select('user.full_name', 'group.*')
+                ->where('teacher.username', '=',  $user->username)
+                ->where('group.semester', '=', $semester)->get();
+            }
+            if(Auth::user()->position == 1) {
+                $listProject  = DB::table('student')->join('group_student', 'student.id_student', '=', 'group_student.id_student')
                 ->join('group', 'group.id_group', '=', 'group_student.id_group')
                 ->join('teacher', 'group.id_teacher', '=', 'teacher.id_teacher')
-                ->join('user', 'user.username', '=', 'teacher.username')
-                ->select('user.full_name', 'group.group_name', 'group.project_name', 'group.finish_project', 'group.id_group')
-                ->where('student.id_student', '=',  $user_id)
+                ->join('user', 'user.username', '=', 'student.username')
+                ->select('user.full_name', 'group.*')
+                ->where('student.username', '=',  $user->username)
                 ->where('group.semester', '=', $semester)->get();
+            }
 
             $total_row = $listProject->count();
             if($total_row > 0){
@@ -64,8 +74,14 @@ class ProjectController extends Controller
         
         $project = DB::table('group')->join('teacher', 'group.id_teacher', '=', 'teacher.id_teacher')
             ->join('user', 'user.username', '=', 'teacher.username')
-            ->select('group.group_name', 'group.project_name', 'user.full_name', 'group.semester')
+            ->select('group.*', 'user.full_name')
             ->where('group.id_group', '=', $id_group)->get();
-        return view('pages.projectDetail', ['projects'=> $project]);
+        if(Auth::user()->position == 2) {
+            return view('teacher.projectDetail', ['projects'=> $project]);
+        }
+        if(Auth::user()->position == 1) {
+            return view('student.projectDetail', ['projects'=> $project]);
+        }
+
     }
 }

@@ -35,9 +35,6 @@
 
       </tbody>
     </table>
-    <div class="text-center">
-      <a href="create_project.html" class="btn btn-primary text-center">Tạo Đồ Án</a>
-    </div>
   </section>
                       
                       
@@ -50,7 +47,7 @@
                             function fetch_customer_data(query)
                             {
                                 $.ajax({
-                                    url:"student",
+                                    url:"{{url()->current()}}",
                                     method:'post',
                                     data:{query:query, _token: '{{csrf_token()}}'},
                                     dataType:'json',

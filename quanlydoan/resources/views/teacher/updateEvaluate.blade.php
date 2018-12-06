@@ -70,7 +70,7 @@
                                                             </div>
                                                             <label class="control-label col-sm-4">Điểm cộng/trừ</label>
                                                             <div class="col-sm-1">
-                                                                <input type="text" class="form-control" name="bonus" value ="{{$content->bonus}}"/>
+                                                                <input type="number" class="form-control" name="bonus" step="0.25" min="0" max="10" value ="{{$content->bonus}}"/>
                                                             </div>
                                                         </div>
                                                         <div class="control-label col-sm-6 text-center">

@@ -16,6 +16,6 @@ class ContentGroupScheduel extends Model
     public $timestamps = false;
 
     public function groupScheduel(){
-        return $this->belongsTo('App\GroupScheduel', 'id_subject');
+        return $this->belongsTo('App\GroupScheduel', 'id_scheduel');
     }
 }

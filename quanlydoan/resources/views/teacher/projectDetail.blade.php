@@ -40,16 +40,16 @@
                 <section class="panel">
                     <header class="panel-heading text-center">
                         <div class="col-sm-3">
-                            <a class="list-group-item-success btn btn-default" href="document.html">Tài liệu đồ án</a>
+                            <a class="list-group-item-success btn btn-default" href="teacher/project/{{$project->id_group}}/document">Tài liệu đồ án</a>
                         </div>
                         <div class="col-sm-3">
-                            <a class="list-group-item-success btn btn-default" href="scheduel.html">Quản lí lịch trình</a>
+                            <a class="list-group-item-success btn btn-default" href="teacher/project/{{$project->id_group}}/scheduel">Quản lí lịch trình</a>
                         </div>
                         <div class="col-sm-3">
-                            <a class="list-group-item-success btn btn-default" href="evaluate.html">Đánh giá nhóm</a>
+                            <a class="list-group-item-success btn btn-default" href="teacher/project/{{$project->id_group}}/evaluation">Đánh giá nhóm</a>
                         </div>
                         <div class="col-sm-3">
-                            <a class="list-group-item-success btn btn-default" href="list_student.html">Danh sách
+                            <a class="list-group-item-success btn btn-default" href="teacher/project/{{$project->id_group}}/listStudent">Danh sách
                                 sinh viên</a>
                         </div>
                     </header>

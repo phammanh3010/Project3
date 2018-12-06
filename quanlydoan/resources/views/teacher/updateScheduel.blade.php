@@ -74,31 +74,32 @@
                                         </div>
                                         @endif
                                         <div class="form">
-                                            <form class="form-validate form-horizontal" id="feedback_form" method="POST" action="">
+                                            <form class="form-validate form-horizontal" id="feedback_form" method="POST" action="{{url()->current()}}">
+                                                <input type="hidden" name="_token" value="{{csrf_token()}}" />
                                                 <div class="col-sm-2"></div>
                                                 <div class="col-sm-10"></div>
                                                 <div class="form-group">
                                                     <label class="control-label col-sm-2">Yêu
                                                         cầu</label>
                                                     <div class="col-sm-8">
-                                                        <textarea class="form-control" value="{{$content->require}}">{{$content->require}}</textarea>
+                                                        <textarea class="form-control" name="require">{{$content->require}}</textarea>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="control-label col-sm-2">Mô tả</label>
                                                     <div class="col-sm-8">
-                                                        <textarea class="form-control" value="{{$content->require}}">{{$content->require}}</textarea>
+                                                        <textarea class="form-control" name="descript">{{$content->descript}}</textarea>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="control-label col-sm-2">Thời
                                                         hạn</label>
                                                     <div class="col-sm-3">
-                                                        <input class="form-control" type="date" value="{{$content->time_deadline}}"/>
+                                                        <input class="form-control" type="date" value="{{$content->time_deadline}}" name="time_deadline"/>
                                                     </div>
                                                     <label class="control-label col-sm-4">Trừ</label>
                                                     <div class="col-sm-1">
-                                                        <input class="form-control" value="{{$content->penalty}}"/>
+                                                        <input class="form-control" value="{{$content->penalty}}" name="penalty" type="number" step="0.25" min="0" max="10"/>
                                                     </div>
                                                 </div>
                                                 <div class="control-label col-sm-6

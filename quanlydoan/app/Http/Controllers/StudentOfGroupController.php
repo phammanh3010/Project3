@@ -23,7 +23,17 @@ class StudentOfGroupController extends Controller
                             ->select('student.class', 'user.*', 'group_student.id_group_student')
                             ->where('group.id_group', '=', $id_group)->get();
 
-        return view('teacher.listStudentOfGroup', ['listStudents' => $listStudents]);
+        $project = DB::table('group')->join('teacher', 'group.id_teacher', '=', 'teacher.id_teacher')
+            ->join('user', 'user.username', '=', 'teacher.username')
+            ->select('group.*', 'user.full_name')
+            ->where('group.id_group', '=', $id_group)->get(); 
+            
+        if(Auth::user()->position == 2) {
+            return view('teacher.listStudentOfGroup', ['listStudents' => $listStudents, 'projects' => $project]);
+        }
+        if(Auth::user()->position == 1) {
+            return view('student.listStudentOfGroup', ['listStudents' => $listStudents, 'projects' => $project]);
+        }
     }
 
     public function addStudentOfGroup(Request $request, $id_group) {
@@ -84,13 +94,6 @@ class StudentOfGroupController extends Controller
             echo json_encode($data);
         }
     }       
-
-    // public function delStudentOfGroup($id_group, $id_group_student) {
-    //     $content = GroupStudent::find($id_group_student);
-    //     $content->delete();    
-    //     return redirect('teacher/project/'.$id_group.'/listStudent')->with('thongbao','Bạn đã xóa thành công!');
-
-    // }
 
     public function delStudentOfGroup(Request $request, $id_group) {
         $content = GroupStudent::find($request->id);

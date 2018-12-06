@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\View;
 use App\User;
 use App\EvalutionCriteria;
 use App\Group;
@@ -20,9 +21,17 @@ class EvaluationController extends Controller
                 ->select('evalution_criteria.*')
                 ->where('group.id_group', '=', $id_group)
                 ->get();
-
-
-        return view('teacher.evaluate', ['evaluations' => $evaluations]);
+        $project = DB::table('group')->join('teacher', 'group.id_teacher', '=', 'teacher.id_teacher')
+                ->join('user', 'user.username', '=', 'teacher.username')
+                ->select('group.*', 'user.full_name')
+                ->where('group.id_group', '=', $id_group)->get(); 
+                
+        if(Auth::user()->position == 2) {
+            return view('teacher.evaluate', ['evaluations' => $evaluations, 'projects' => $project]);
+        }
+        if(Auth::user()->position == 1) {
+            return view('student.evaluate', ['evaluations' => $evaluations, 'projects' => $project]);
+        }
     }
 
     public function addEvaluation(Request $request, $id_group) {
@@ -60,13 +69,6 @@ class EvaluationController extends Controller
             echo json_encode($data);
         }
     }       
-
-    // public function delEvaluation($id_group, $id_evalution_criteria) {
-    //     $content = EvalutionCriteria::find($id_evalution_criteria);
-    //     $content->delete();    
-    //     return redirect('teacher/project/'.$id_group.'/evaluation')->with('thongbao','Bạn đã xóa thành công!');
-
-    // }
 
     public function delEvaluation(Request $request, $id_group) {
         $content = EvalutionCriteria::find($request->id);

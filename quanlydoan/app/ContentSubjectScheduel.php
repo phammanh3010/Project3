@@ -4,18 +4,18 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ContentGroupScheduel extends Model
+class ContentSubjectScheduel extends Model
 {
     //
-    protected $table = 'content_subject_scheduel';
+    protected $table = 'content_sub_scheduel';
 
-    protected $fillable = ['id_content_subject', 'id_subject_scheduel', 'time_deadline', 'require', 'penalty'];
+    protected $fillable = ['id_content_scheduel', 'id_subject_scheduel', 'time_deadline', 'require', 'penalty'];
 
-    protected $primaryKey = 'id_content_subject';
+    protected $primaryKey = 'id_content_scheduel';
 
     public $timestamps = false;
 
-    public function groupScheduel(){
+    public function subjectScheduel(){
         return $this->belongsTo('App\SubjectScheduel', 'id_subject_scheduel');
     }
 }

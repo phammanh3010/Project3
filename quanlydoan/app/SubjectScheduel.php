@@ -22,4 +22,4 @@ class SubjectScheduel extends Model
     public function content(){
         return $this->hasMany('App\ContentSubjectScheduel', 'id_subject_scheduel', 'id_subject_scheduel');
     }
-}
+} 
