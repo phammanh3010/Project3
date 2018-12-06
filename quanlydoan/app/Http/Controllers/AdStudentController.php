@@ -12,6 +12,7 @@ class AdStudentController extends Controller
 {
     //
 	public function getListStudent(){
+
 		return view('admin.user.listStudent');
 	}
 
@@ -124,10 +125,24 @@ class AdStudentController extends Controller
 
 	public function postSearch(Request $request){
 		if($request->ajax()){
-			$output = '';
-			$query = $request->get('query');
-			if($query != ''){
-				$data = DB::table('user')
+			$query = $request['search'];
+			$data = $this->search($query);
+			$view = view('admin.user.getListStudent', compact('data'))->render();
+			return response($view);
+		}
+	}
+
+	public function getSearchPagination(Request $request){
+		if($request->ajax()){
+			$query = $request['search'];
+			$data = $this->search($query);
+			return view('admin.user.getListStudent', compact('data'))->render();
+		}
+	}
+
+	public function search($query){
+		if($query != ''){
+				return $data = DB::table('user')
 				->join('student', 'student.username', '=', 'user.username')
 				->where(function($q) use ($query){
 					$q->where('user.username', 'like', '%'.$query.'%')
@@ -136,45 +151,14 @@ class AdStudentController extends Controller
 					->orwhere('user.phone', 'like', '%'.$query.'%')
 					->orwhere('student.class', 'like', '%'.$query.'%');
 				})
-				->get();  
+				->paginate(2);  
 
 			}
 			else{
-				$data = DB::table('user')
+				return $data = DB::table('user')
 				->join('student', 'student.username', '=', 'user.username')
-				->get();
+				->paginate(2);
 			}
-
-			$total_row = $data->count();
-			if($total_row > 0){
-				foreach($data as $row){
-					$output .= '
-					<tr>
-					<td>'.$row->id_student.'</td>
-					<td>'.$row->username.'</td>
-					<td>'.$row->full_name.'</td>
-					<td>'.$row->email.'</td>
-					<td>'.$row->phone.'</td>
-					<td>'.$row->class.'</td>
-					<td><button class="btn btn-default" name="add" onclick="location.href=\'admin/user/updateStudent/'.$row->id_student.'\'">Sửa</button></td>
-					<td><button class="btn btn-default" name="delete" onclick="location.href=\'admin/user/deleteStudent/'.$row->id_student.'\'">Xóa</button></td>
-					</tr>
-					';
-				}
-			}
-			else{
-				$output = '
-				<tr>
-				<td align="center" colspan="5">No Data Found</td>
-				</tr>
-				';
-			}
-			$data = array(
-				'table_data'  => $output
-			);
-
-			echo json_encode($data);
-		}
 	}
 
 }

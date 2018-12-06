@@ -121,11 +121,14 @@ Route::group(['prefix'=>'admin'], function(){
 	Route::group(['prefix'=>'user'], function(){
 		// danh sach user
 		Route::get('listAdmin', 'AdUserController@getListAdmin');
-		Route::post('listAdmin/search', 'AdUserController@postSearch');
+		Route::get('listAdmin/search', 'AdUserController@postSearch');
+		Route::get('listAdmin/searchPagination', 'AdUserController@getSearchPagination');
 		Route::get('listTeacher', 'AdTeacherController@getListTeacher');
-		Route::post('listTeacher/search', 'AdTeacherController@postSearch');
+		Route::get('listTeacher/search', 'AdTeacherController@postSearch');
+		Route::get('listTeacher/searchPagination', 'AdTeacherController@getSearchPagination');
 		Route::get('listStudent', 'AdStudentController@getListStudent');
-		Route::post('listStudent/search', 'AdStudentController@postSearch');
+		Route::get('listStudent/search', 'AdStudentController@postSearch');
+		Route::get('listStudent/searchPagination', 'AdStudentController@getSearchPagination');
 
 		//sua thong tin user
 		Route::get('updateAdmin/{username}', 'AdUserController@getUpdateAdmin');

@@ -123,10 +123,24 @@ class AdTeacherController extends Controller
 
 	public function postSearch(Request $request){
 		if($request->ajax()){
-			$output = '';
-			$query = $request->get('query');
-			if($query != ''){
-				$data = DB::table('user')
+			$query = $request['search'];
+			$data = $this->search($query);
+			$view = view('admin.user.getListTeacher', compact('data'))->render();
+			return response($view);
+		}
+	}
+
+	public function getSearchPagination(Request $request){
+		if($request->ajax()){
+			$query = $request['search'];
+			$data = $this->search($query);
+			return view('admin.user.getListTeacher', compact('data'))->render();
+		}
+	}
+
+	public function search($query){
+		if($query != ''){
+				return $data = DB::table('user')
 				->join('teacher', 'teacher.username', '=', 'user.username')
 				->where(function($q) use ($query){
 					$q->where('user.username', 'like', '%'.$query.'%')
@@ -135,45 +149,13 @@ class AdTeacherController extends Controller
 					->orwhere('user.phone', 'like', '%'.$query.'%')
 					->orwhere('teacher.workplace', 'like', '%'.$query.'%');
 				})
-				->get();  
+				->paginate(2);  
 
 			}
 			else{
-				$data = DB::table('user')
+				return $data = DB::table('user')
 				->join('teacher', 'teacher.username', '=', 'user.username')
-				->get();
+				->paginate(2);
 			}
-
-			$total_row = $data->count();
-			if($total_row > 0){
-				foreach($data as $row){
-					$output .= '
-					<tr>
-					<td>'.$row->id_teacher.'</td>
-					<td>'.$row->username.'</td>
-					<td>'.$row->full_name.'</td>
-					<td>'.$row->email.'</td>
-					<td>'.$row->phone.'</td>
-					<td>'.$row->workplace.'</td>
-					<td><button class="btn btn-default" name="add" onclick="location.href=\'admin/user/updateTeacher/'.$row->id_teacher.'\'">Sửa</button></td>
-					<td><button class="btn btn-default" name="delete" onclick="location.href=\'admin/user/deleteTeacher/'.$row->id_teacher.'\'">Xóa</button></td>
-					</tr>
-					';
-				}
-			}
-			else{
-				$output = '
-				<tr>
-				<td align="center" colspan="5">No Data Found</td>
-				</tr>
-				';
-			}
-			$data = array(
-				'table_data'  => $output
-			);
-
-			echo json_encode($data);
-		}
 	}
-
 }
