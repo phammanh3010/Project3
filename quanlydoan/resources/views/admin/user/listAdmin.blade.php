@@ -9,7 +9,7 @@
                 <ol class="breadcrumb">
                     <li><i class="fa fa-home"></i><a href="teacher.html">Trang chủ/Danh sách admin</a></li>
                 </ol>
-            </div>
+            </div>  
         </div>
         <div class="row">
             <div class="col-lg-12">
@@ -29,8 +29,6 @@
                                 {{session('thongbao')}}
                             </div>
                             @endif
-
-
                             <form class="form-validate form-horizontal" id="feedback_form" method="POST" action="admin/user/addAdmin">
                                 <input type="hidden" name="_token" value="{{csrf_token()}}" />
                                 <div class="form-group ">

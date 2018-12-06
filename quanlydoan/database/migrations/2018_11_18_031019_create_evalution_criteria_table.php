@@ -17,7 +17,7 @@ class CreateEvalutionCriteriaTable extends Migration
             $table->increments('id_evalution_criteria');
             $table->integer('id_group')->unsigned();
             $table->foreign('id_group')->references('id_group')->on('group')->onDelete('cascade');
-            $table->string('content', 100);
+            $table->text('content');
             $table->float('bonus');
             $table->timestamps();
         });

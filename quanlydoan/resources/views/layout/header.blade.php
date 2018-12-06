@@ -20,17 +20,17 @@
                             <span class="glyphicon glyphicon-earphone"></span> (84-4) 3
                             8696124</p>
                     </div>
-                    <div class="col-lg-5">
+                    <!-- <div class="col-lg-5">
                         <form class="navbar-form navbar-right">
                             <div class="form-group">
                                 <input type="text" class="form-control" placeholder="Search">
                             </div>
                             <button type="submit" class="btn btn-outline-primary"><span class="glyphicon glyphicon-search"></button>
                         </form>
-                    </div>
+                    </div> -->
                     <div class="col-lg-4 navbar-right">
                         <ul class="nav navbar-nav">
-                            <li><a href="list_project.html">ĐỒ ÁN</a></li>
+                            <li><a href="teacher/">ĐỒ ÁN</a></li>
                             <li class="dropdown nav-item">
                                 <a href="#note" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
                                     aria-haspopup="true" aria-expanded="false">
@@ -60,13 +60,24 @@
                             <li><a href="profile_student.html"></a></li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                                    aria-expanded="false"> <span><i class="icon_profile"></i> Lâm Nguyễn</span></a>
+                                    aria-expanded="false"> <span><i class="icon_profile"></i>
+                                    @if(Auth::user())
+                                        {{Auth::user()->full_name}}
+                                    @else
+                                        {{route('/')}}
+                                    @endif
+                                    </span></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="profile_student.html"><i class="glyphicon glyphicon-user"></i> THÔNG
                                             TIN CÁ NHÂN</a></li>
                                     <li><a href="update_password.html"><i class="glyphicon glyphicon-lock"></i> ĐỔI MẬT
                                             KHẨU</a></li>
-                                    <li><a href="homepage.html"><i class="glyphicon glyphicon-off"></i> ĐĂNG XUẤT</a></li>
+                                    <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('frm-logout').submit();">
+                            
+                                       <i class="glyphicon glyphicon-off"></i> ĐĂNG XUẤT     </a>    
+                                        <form id="frm-logout" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            {{ csrf_field() }}
+                                        </form></li>
                                 </ul>
                             </li>
                         </ul>

@@ -19,8 +19,8 @@ class CreateGroupTable extends Migration
             $table->foreign('id_subject')->references('id_subject')->on('subject')->onDelete('cascade');
             $table->integer('id_teacher')->unsigned();
             $table->foreign('id_teacher')->references('id_teacher')->on('teacher')->onDelete('cascade');
-            $table->string('group_name',100);
-            $table->string('project_name', 200);
+            $table->text('group_name');
+            $table->text('project_name');
             $table->string('semester', 45);
             $table->integer('finish_project');
             $table->timestamps();

@@ -1,5 +1,18 @@
 <?php
-
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
+use App\User;
+use App\GroupScheduel;
+use App\ContentGroupScheduel;
+use App\ContentSubjectScheduel;
+use App\SubjectScheduel;
+use App\Group;
+use App\Student;
+use App\GroupStudent;
+use App\EvalutionCriteria;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,39 +26,84 @@
 
 Route::get('/', function () {
 	return view('welcome');
+})->name('/');
+
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
+	Route::get('/', function() {
+		return view('admin.home');
+	});
 });
 
-Route::get('/home', function () {
-	return view('pages.home');
+// Route for teacher
+Route::group(['prefix' => 'teacher'], function() {
+
+	Route::get('/', function() {
+		return view('teacher.listProject');
+	});
+	
+	Route::post('/', 'ProjectController@getListProject');
+	Route::group(['prefix' => 'project'], function() {
+		Route::get('/{id_group}', 'ProjectController@getProjectDetail');
+
+		// Route for scheduel
+		Route::get('/{id_group}/scheduel', 'ScheduelController@getScheduel');
+		Route::post('/{id_group}/scheduel', 'ScheduelController@addScheduelContent');
+		Route::post('/{id_group}/scheduel/delete', 'ScheduelController@delScheduelContent');
+		Route::get('/{id_group}/scheduel/update/{id_content}', 'ScheduelController@getUpdateScheduelContent');
+		Route::post('/{id_group}/scheduel/update/{id_content}', 'ScheduelController@postUpdateScheduelContent');
+	
+		// Route for evaluation
+		Route::get('/{id_group}/evaluation', 'EvaluationController@getEvaluation');
+		Route::post('/{id_group}/evaluation', 'EvaluationController@addEvaluation');
+		Route::post('/{id_group}/evaluation/delete', 'EvaluationController@delEvaluation');
+		Route::get('/{id_group}/evaluation/update/{id}', 'EvaluationController@getUpdateEvaluation');
+		Route::post('/{id_group}/evaluation/update/{id}', 'EvaluationController@postUpdateEvaluation');
+
+		// Route for listStudent
+		Route::get('/{id_group}/listStudent', 'StudentOfGroupController@getListStudent');
+		Route::post('/{id_group}/listStudent', 'StudentOfGroupController@addStudentOfGroup');
+		Route::post('/{id_group}/listStudent/delete', 'StudentOfGroupController@delStudentOfGroup');
+
+	});
 });
 
-Route::get('/listTeacher', function () {
-	return view('pages.listTeacher');
+// /Route for student
+Route::group(['prefix' => 'student'], function() {
+
+	Route::get('/', function() {
+		return view('student.listProject');
+	});
+	
+	Route::post('/', 'ProjectController@getListProject');
+	Route::group(['prefix' => 'project'], function() {
+		Route::get('/{id_group}', 'ProjectController@getProjectDetail');
+
+		// Route for scheduel
+		Route::get('/{id_group}/scheduel', 'ScheduelController@getScheduel');
+	
+		// Route for evaluation
+		Route::get('/{id_group}/evaluation', 'EvaluationController@getEvaluation');
+
+		// Route for listStudent
+		Route::get('/{id_group}/listStudent', 'StudentOfGroupController@getListStudent');
+		Route::post('/{id_group}/listStudent', 'StudentOfGroupController@addStudentOfGroup');
+
+	});
 });
 
-Route::get('/listProject', function () {
-	return view('pages.listProject');
-});
 
-Route::get('/createProject', function () {
-	return view('pages.createProject');
-});
+// Authentication Routes...
+Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::post('login', 'Auth\LoginController@login');
+Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
-Route::get('/projectDetail', function () {
-	return view('pages.projectDetail');
-});
+// Password Reset Routes...
+Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
 
-Route::get('/profileStudent', function () {
-	return view('pages.profileStudent');
-});
 
-Route::get('/profileTeacher', function () {
-	return view('pages.profileTeacher');
-});
-
-Route::get('/teacherDetail', function () {
-	return view('pages.teacherDetail');
-});
 
 Route::group(['prefix'=>'admin'], function(){
 	Route::group(['prefix'=>'project'], function(){

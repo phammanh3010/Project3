@@ -43,17 +43,40 @@
                       <div class="container-fluid" id="login_container">
                         <div class="card card-container">
                           <img id="profile-img" class="profile-img-card"
-                            src="../profile.png" />
-                          <form class="form-signin">
+                            src="img/profile.png" />
+                          <form class="form-signin" method="POST" action="{{ route('login') }}">
+                            {{ csrf_field() }}
+                          <div class="form-group{{ $errors->has('email')||$errors->has('username') ? ' has-error' : '' }}">
+                           
+
+                           
+                           
                             <span id="reauth-email" class="reauth-email"></span>
-                            <input type="email" id="inputEmail"
-                              class="form-control" placeholder="Email address"
-                              required autofocus>
+                            
+                            
+                            <input type="text" id="username"
+                              class="form-control" placeholder="Username" name="username" value="{{ old('username') }}" required autofocus
+                              >
+                              @if ($errors->has('username'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('username') }}</strong>
+                                    </span>
+                                @endif
+
                             <input type="password" id="inputPassword"
-                              class="form-control" placeholder="Password"
+                              class="form-control" placeholder="Password" name="password"
                               required>
+
+                              @if ($errors->has('password'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
+                                @endif
                             <button class="btn btn-lg btn-primary btn-block
                               btn-signin" type="submit">Đăng nhập</button>
+                          <a class="btn btn-link" href="{{ route('password.request') }}">
+                                    Forgot Your Password?
+                          </a>
                           </form><!-- /form -->
                         </div><!-- /card-container -->
                       </div><!-- /container -->
