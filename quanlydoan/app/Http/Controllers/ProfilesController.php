@@ -47,7 +47,9 @@ class ProfilesController extends Controller
         if($user->position==1)
             return User::with('student')->whereusername($username)->firstOrFail();
         if($user->position==2)
-            return User::with('teacher')->whereusername($username)->firstOrFail();    
+            return User::with('teacher')->whereusername($username)->firstOrFail();
+        if($user->position==3)
+            return User::whereusername($username)->firstOrFail();    
     }
 
     /**
@@ -104,10 +106,15 @@ class ProfilesController extends Controller
   
         return view('profiles.show')->with($data);
         */
+    
         if($user->position==1)
          return view('student.profile.updatePassword',['user' => $user]);
-         if($user->position==2)
+         elseif($user->position==2)
          return view('teacher.profile.updatePassword',['user' => $user]);
+         else{
+
+            return view('admin.profile.updatePassword',['user' => $user]);
+         }
     }
 
 
@@ -265,7 +272,7 @@ class ProfilesController extends Controller
             if($user->position==2)
                 return redirect('/teacher/profile/'.$user->username.'/');
             if($user->position==3)
-                return redirect('/admin/profile/'.$user->username.'/');
+                return redirect('/admin/');
         }else{
             Session::flash('thongbao','Password nhập vào sai ');
             if($user->position==1)
