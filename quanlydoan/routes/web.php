@@ -28,7 +28,10 @@ Route::get('/', function () {
 	return view('welcome');
 })->name('/');
 
-Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
+Route::group(['prefix' => 'admin'], function() {
+  
+	Route::get('password/{username}','ProfilesController@showpassword');
+	Route::post('password/{username}/edit','ProfilesController@updateUserPassword');
 	Route::get('/', function() {
 		return view('admin.home');
 	});
@@ -42,6 +45,12 @@ Route::group(['prefix' => 'teacher'], function() {
 	});
 	
 	Route::post('/', 'ProjectController@getListProject');
+    
+    Route::get('profile/{username}','ProfilesController@showProfile');
+	Route::post('profile/{username}/edit','ProfilesController@updateUserAccount');
+	Route::get('password/{username}','ProfilesController@showpassword');
+	Route::post('password/{username}/edit','ProfilesController@updateUserPassword');
+    
 	Route::group(['prefix' => 'project'], function() {
 		Route::get('/{id_group}', 'ProjectController@getProjectDetail');
 
@@ -63,6 +72,12 @@ Route::group(['prefix' => 'teacher'], function() {
 		Route::get('/{id_group}/listStudent', 'StudentOfGroupController@getListStudent');
 		Route::post('/{id_group}/listStudent', 'StudentOfGroupController@addStudentOfGroup');
 		Route::post('/{id_group}/listStudent/delete', 'StudentOfGroupController@delStudentOfGroup');
+        
+        // Router for file
+         Route::get('/{id_group}/document', 'DocumentController@getDocument');
+        Route::post( '/{id_group}/document','DocumentController@uploadFile');
+        Route::get( '/{id_group}/document/{id_document}/download/','DocumentController@downloadFile');
+        Route::get( '/{id_group}/document/{id_document}/delete/','DocumentController@deleteFile');
 
 	});
 });
@@ -73,6 +88,11 @@ Route::group(['prefix' => 'student'], function() {
 	Route::get('/', function() {
 		return view('student.listProject');
 	});
+    Route::get('profile/{username}','ProfilesController@showProfile');
+    Route::post('profile/{username}/edit','ProfilesController@updateUserAccount');
+	Route::get('password/{username}','ProfilesController@showpassword');
+	Route::post('password/{username}/edit','ProfilesController@updateUserPassword');
+
 	
 	Route::post('/', 'ProjectController@getListProject');
 	Route::group(['prefix' => 'project'], function() {
@@ -87,6 +107,16 @@ Route::group(['prefix' => 'student'], function() {
 		// Route for listStudent
 		Route::get('/{id_group}/listStudent', 'StudentOfGroupController@getListStudent');
 		Route::post('/{id_group}/listStudent', 'StudentOfGroupController@addStudentOfGroup');
+       
+	
+    
+   
+        Route::get('/{id_group}/document', 'DocumentController@getDocument');
+        Route::post( '/{id_group}/document','DocumentController@uploadFile');
+        Route::get( '/{id_group}/document/{id_document}/download/','DocumentController@downloadFile');
+        Route::get( '/{id_group}/document/{id_document}/delete/','DocumentController@deleteFile');
+
+
 
 	});
 });
