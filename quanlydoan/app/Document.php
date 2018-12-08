@@ -9,7 +9,7 @@ class Document extends Model
     //
     protected $table = 'document';
 
-    protected $fillable = ['id_document', 'id_group', 'path', 'evaluate', 'user_upload', 'create_at'];
+    protected $fillable = ['id_document', 'id_group', 'path', 'evaluate', 'user_upload', 'created_at'];
 
     protected $primaryKey = 'id_document';
 
