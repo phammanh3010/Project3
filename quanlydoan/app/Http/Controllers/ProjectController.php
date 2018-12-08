@@ -21,7 +21,7 @@ class ProjectController extends Controller
     {   
         if($request->ajax()){
             $output = '';
-            $semester = $request->get('query');
+            $semester = $request['search'];
             $user = Auth::user();
             if(Auth::user()->position == 2) {
                 $listProject  = DB::table('teacher')
@@ -43,30 +43,16 @@ class ProjectController extends Controller
 
             $total_row = $listProject->count();
             if($total_row > 0){
-              foreach($listProject as $row){
-                $output .= '
-                <tr>
-                    <td>'.$row->full_name.'</td>
-                    <td>'.$row->group_name.'</td>
-                    <td>'.$row->project_name.'</td>
-                    <td>'.$row->finish_project.'</td>
-                    <td><a href="'.url()->current().'/project/'.$row->id_group.'"'.'class="btn btn-primary text-center">Chi tiết</a></td>
-                </tr>
-                ';
-              }
+                $view = view('pages.getListProject', compact('listProject'));
+                return response($view);
             }
             else{
-              $output = '
-              <tr>
-              <td align="center" colspan="5">No Data Found</td>
-              </tr>
-              ';
+                $output = 'output';
+                $data = array(
+                'table_data'  => $output
+                );
+                return response($data);
             }
-            $data = array(
-             'table_data'  => $output
-            );
-        
-            echo json_encode($data);
         }
     }
 

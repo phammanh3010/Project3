@@ -54,7 +54,7 @@ class EvaluationController extends Controller
             $data = array(
                 "error" => $validator->errors()->all()
             );
-            echo json_encode($data);
+            return response($data);
         }
         else {
             $evaluations = new EvalutionCriteria();
@@ -66,21 +66,15 @@ class EvaluationController extends Controller
             $data = array(
                 "output" => $evaluations->id_evalution_criteria
             );
-            echo json_encode($data);
+            return response($data);
         }
     }       
 
     public function delEvaluation(Request $request, $id_group) {
         $content = EvalutionCriteria::find($request->id);
         $content->delete(); 
-        $id = $request->id;   
-        $message = "<div class='alert alert-success'>Bạn đã xoá thành công!</div>";
-        $data = array(
-            "message" => $message,
-            "id"    => $id
-        );
-        echo json_encode($data);
-
+        $id = $request->id;  
+        return response($id); 
     }
 
     public function getUpdateEvaluation($id_group, $id_evalution_criteria) {

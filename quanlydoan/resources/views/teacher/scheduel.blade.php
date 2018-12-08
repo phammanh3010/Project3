@@ -216,7 +216,8 @@
                             $('#message_update').remove();
                         }
                         $('#message').children().remove();
-                        $('#message').append(data.error_message);
+                        var error_message ="<p class='alert alert-danger'>Nội dung lịch trình vi phạm nội dung lịch trình do bộ môn đưa ra</p>"
+                        $('#message').append(error_message);
                     }
                     // thêm thành công
                     else {
@@ -263,13 +264,12 @@
                             },
                             success:function(data)
                             {   
-                                if(data.message) {
-                                    if($('#message_update')) {
-                                        $('#message_update').remove();
-                                    }
-                                    $('#message').html(data.message);
-                                    $('#'+data.id).parent().parent().remove();
-                                }      
+                                if($('#message_update')) {
+                                    $('#message_update').remove();
+                                }
+                                var message = "<div class='alert alert-success'>Bạn đã xoá thành công!</div>";
+                                $('#message').html(message);
+                                $('#'+id).parent().parent().remove();   
                             },
                             error: function(XMLHttpRequest, textStatus, errorThrown) {
                                 console.log(errorThrown);

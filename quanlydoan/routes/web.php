@@ -41,7 +41,7 @@ Route::group(['prefix' => 'teacher'], function() {
 		return view('teacher.listProject');
 	});
 	
-	Route::post('/', 'ProjectController@getListProject');
+	Route::get('/search', 'ProjectController@getListProject');
 	Route::group(['prefix' => 'project'], function() {
 		Route::get('/{id_group}', 'ProjectController@getProjectDetail');
 

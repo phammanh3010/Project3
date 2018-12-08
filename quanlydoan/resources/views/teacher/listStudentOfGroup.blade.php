@@ -136,9 +136,15 @@
                         _token: '{{csrf_token()}}'
                     },
                     success:function(data)
-                    {
-                        if(data.error) {
-                            $('#message').html(data.error);
+                    {   
+                        if(data.error_student_not_exist) {
+                            var error = "<div class='alert alert-danger'>Sinh viên không tồn tại!</div>";
+                            $('#message').html(error);
+                        }
+
+                        else if(data.error_student_in_group) {
+                            var error = "<div class='alert alert-danger'>Sinh viên đã ở trong nhóm!</div>"
+                            $('#message').html(error);
                         } else {
                             noidung = "<tr><td class='text-center'>" + data.username + "<p></p></td>";
                             noidung+= "<td><p class='text-center'>" + data.full_name + "</p></td>";
@@ -178,10 +184,9 @@
                             },
                             success:function(data)
                             {
-                                if(data.error) {
-                                    $('#message').html(data.error);
-                                    $('#'+data.id).parent().parent().remove();
-                                }      
+                                var message = "<div class='alert alert-success'>Bạn đã xoá thành công!</div>";
+                                $('#message').html(data.error);
+                                $('#'+id).parent().parent().remove();    
                             },
                             error: function(XMLHttpRequest, textStatus, errorThrown) {
                                 console.log(errorThrown);

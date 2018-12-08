@@ -53,11 +53,11 @@ class StudentOfGroupController extends Controller
                             ->where('group.id_group', '=', $id_group)
                             ->where('student.username', '=', $request->username)->get();
             if($listStudents->count() > 0) {
-                $error = "<div class='alert alert-danger'>Sinh viên đã ở trong nhóm!</div>";
+                $error = "error";
                 $data = array(
-                    "error" => $error
+                    "error_student_in_group" => $error
                 );
-                echo json_encode($data);
+                return response($data);
             }
             else {
                 //đọc dữ liệu từ $student_infor
@@ -83,15 +83,15 @@ class StudentOfGroupController extends Controller
                     //đọc id của bản ghi mới được thêm vào bảng grop_student
                     "id_group_student"  => $student_group->id_group_student
                 );
-                echo json_encode($data);
+                return response($data);
             }
         }
         else {
-            $error = "<div class='alert alert-danger'>Sinh viên không tồn tại!</div>";
+            $error = "error";
             $data = array(
-                "error" => $error
+                "error_student_not_exist" => $error
             );
-            echo json_encode($data);
+            return response($data);
         }
     }       
 
@@ -99,12 +99,7 @@ class StudentOfGroupController extends Controller
         $content = GroupStudent::find($request->id);
         $content->delete();    
         $id = $request->id;
-        $error = "<div class='alert alert-success'>Xoá thành công!</div>";
-        $data = array(
-            "error" => $error,
-            "id"    => $id
-        );
-        echo json_encode($data);
+        return response($id);
     }
 
 }
