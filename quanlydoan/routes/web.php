@@ -43,6 +43,9 @@ Route::group(['prefix' => 'teacher'], function() {
 	
 	Route::post('/', 'ProjectController@getListProject');
 	Route::group(['prefix' => 'project'], function() {
+		Route::get('createGroup', 'AdGroupController@getCreateGroup');
+		Route::post('createGroup', 'AdGroupController@createGroup');
+		
 		Route::get('/{id_group}', 'ProjectController@getProjectDetail');
 
 		// Route for scheduel

@@ -8,6 +8,11 @@
     <div id="hr">
     </div>
     <form>
+    @if(session('thongbao'))
+      <div class="alert alert-success">
+        {{session('thongbao')}}
+      </div>
+    @endif
       <label>Học kỳ</label>
       <select name="semester" id="search">
         <option value="20182">20182</option>
@@ -36,7 +41,7 @@
       </tbody>
     </table>
     <div class="text-center">
-      <a href="student/project/" class="btn btn-primary text-center">Tạo Đồ Án</a>
+      <a href="teacher/project/createGroup" class="btn btn-primary text-center">Tạo Đồ Án</a>
     </div>
   </section>
                       
