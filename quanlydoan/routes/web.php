@@ -52,6 +52,9 @@ Route::group(['prefix' => 'teacher'], function() {
 	Route::post('password/{username}/edit','ProfilesController@updateUserPassword');
     
 	Route::group(['prefix' => 'project'], function() {
+		Route::get('createGroup', 'AdGroupController@getCreateGroup');
+		Route::post('createGroup', 'AdGroupController@createGroup');
+		
 		Route::get('/{id_group}', 'ProjectController@getProjectDetail');
 
 		// Route for scheduel
@@ -74,10 +77,12 @@ Route::group(['prefix' => 'teacher'], function() {
 		Route::post('/{id_group}/listStudent/delete', 'StudentOfGroupController@delStudentOfGroup');
         
         // Router for file
-         Route::get('/{id_group}/document', 'DocumentController@getDocument');
-        Route::post( '/{id_group}/document','DocumentController@uploadFile');
-        Route::get( '/{id_group}/document/{id_document}/download/','DocumentController@downloadFile');
-        Route::get( '/{id_group}/document/{id_document}/delete/','DocumentController@deleteFile');
+        Route::get('/{id_group}/document', 'DocumentController@getDocument');
+		Route::post( '/{id_group}/document','DocumentController@uploadFile');
+		Route::get( '/{id_group}/document/{id_document}/download/','DocumentController@downloadFile');
+		Route::get( '/{id_group}/document/{id_document}/delete/','DocumentController@deleteFile');
+		Route::get( '/{id_group}/document/{id_document}/evaluate/{point}/','DocumentController@evaluateFile');
+		
 
 	});
 });

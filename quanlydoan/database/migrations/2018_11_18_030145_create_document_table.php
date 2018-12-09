@@ -17,6 +17,7 @@ class CreateDocumentTable extends Migration
             $table->increments('id_document');
             $table->integer('id_group')->unsigned();
             $table->foreign('id_group')->references('id_group')->on('group')->onDelete('cascade');
+            $table->string('type',45);
             $table->string('path',200);
             $table->float('evaluate')->nullable();
             $table->string('user_upload', 45);

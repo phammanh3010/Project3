@@ -8,8 +8,8 @@ class Document extends Model
 {
     //
     protected $table = 'document';
-
-    protected $fillable = ['id_document', 'id_group', 'path', 'evaluate', 'user_upload', 'created_at'];
+    public $timestamps = false;
+    protected $fillable = ['id_document', 'id_group', 'path', 'evaluate', 'user_upload','type', 'created_at'];
 
     protected $primaryKey = 'id_document';
 
