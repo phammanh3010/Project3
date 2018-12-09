@@ -15,7 +15,7 @@
             <td>{{$row->group_name}}</td>
             <td>{{$row->project_name}}</td>
             <td>{{$row->finish_project}}</td>
-            <td><a href="{{url()->current()}}/project/{{$row->id_group}}" class="btn btn-primary text-center">Chi tiết</a></td>
+            <td><a href="{{url()->current()}}/{{$row->id_group}}" class="btn btn-primary text-center">Chi tiết</a></td>
         </tr>
     @endforeach
     </tbody>

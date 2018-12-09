@@ -1,4 +1,4 @@
-@extends("teacher.layout.index")
+@extends("layout.index")
 
 @section("content")
 <section class="container bg_container" style="margin-top: 80px;">

@@ -27,7 +27,7 @@ use Carbon\Carbon;
 
 Route::get('/a', function () {
 	$curdate = new DateTime();
-	$curdate->sub(new DateInterval('P4Y3D'));
+	$curdate->sub(new DateInterval('P3D'));
 	$curdate = $curdate->format('Y-m-d H:i:s');
 	// Carbon::now()->toDateString()
 	$noticfication = DB::table('student')
@@ -41,8 +41,20 @@ Route::get('/a', function () {
 						->select('group.*', 'content_sub_scheduel.*')
 						->where('content_sub_scheduel.time_deadline', '<', $curdate)
 						->where('student.username', '=', '20152128')->get();
+	// foreach ($noticfication as $value) {
+	// 	echo($value->require);
+	// 	echo($value->id_group);
+	// }	
+	$noticfications = [];			
 	foreach ($noticfication as $value) {
-		echo("a");
+		$require = DB::table('group')->join('document', 'group.id_group', '=', 'document.id_group')
+						->select('document.*')
+						->where('group.id_group','=', $value->id_group)
+						->where('document.type', '=', $value->require)->get();
+		// add notification to array
+		if($require->count() == 0) {
+			array_push($noticfications, $value);
+		}
 	}
 });
 
@@ -68,8 +80,14 @@ Route::group(['prefix' => 'teacher'], function() {
 		return view('teacher.listProject');
 	});
 	
-	Route::get('/search', 'ProjectController@getListProject');
+	Route::get('profile/{username}','ProfilesController@showProfile');
+    Route::post('profile/{username}/edit','ProfilesController@updateUserAccount');
+	Route::get('password/{username}','ProfilesController@showpassword');
+	Route::post('password/{username}/edit','ProfilesController@updateUserPassword');
+	
+	// Route::get('/search', 'ProjectController@getListProject');
 	Route::group(['prefix' => 'project'], function() {
+		Route::get('/', 'ProjectController@getListProject');
 		Route::get('createGroup', 'AdGroupController@getCreateGroup');
 		Route::post('createGroup', 'AdGroupController@createGroup');
 		
@@ -95,12 +113,10 @@ Route::group(['prefix' => 'teacher'], function() {
 		Route::post('/{id_group}/listStudent/delete', 'StudentOfGroupController@delStudentOfGroup');
         
         // Router for file
-        Route::get('/{id_group}/document', 'DocumentController@getDocument');
-		Route::post( '/{id_group}/document','DocumentController@uploadFile');
-		Route::get( '/{id_group}/document/{id_document}/download/','DocumentController@downloadFile');
-		Route::get( '/{id_group}/document/{id_document}/delete/','DocumentController@deleteFile');
-		Route::get( '/{id_group}/document/{id_document}/evaluate/{point}/','DocumentController@evaluateFile');
-		
+         Route::get('/{id_group}/document', 'DocumentController@getDocument');
+        Route::post( '/{id_group}/document','DocumentController@uploadFile');
+        Route::get( '/{id_group}/document/{id_document}/download/','DocumentController@downloadFile');
+        Route::get( '/{id_group}/document/{id_document}/delete/','DocumentController@deleteFile');
 
 	});
 });
@@ -118,8 +134,9 @@ Route::group(['prefix' => 'student'], function() {
 	Route::post('password/{username}/edit','ProfilesController@updateUserPassword');
 
 	
-	Route::get('/search', 'ProjectController@getListProject');
+	// Route::get('/search', 'ProjectController@getListProject');
 	Route::group(['prefix' => 'project'], function() {
+		Route::get('/', 'ProjectController@getListProject');
 		Route::get('/{id_group}', 'ProjectController@getProjectDetail');
 
 		// Route for scheduel
@@ -132,9 +149,6 @@ Route::group(['prefix' => 'student'], function() {
 		Route::get('/{id_group}/listStudent', 'StudentOfGroupController@getListStudent');
 		Route::post('/{id_group}/listStudent', 'StudentOfGroupController@addStudentOfGroup');
        
-	
-    
-   
         Route::get('/{id_group}/document', 'DocumentController@getDocument');
         Route::post( '/{id_group}/document','DocumentController@uploadFile');
         Route::get( '/{id_group}/document/{id_document}/download/','DocumentController@downloadFile');

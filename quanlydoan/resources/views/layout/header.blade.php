@@ -30,12 +30,20 @@
                     </div> -->
                     <div class="col-lg-4 navbar-right">
                         <ul class="nav navbar-nav">
-                            <li><a href="teacher/">ĐỒ ÁN</a></li>
+                                @if(count($noticfications) != 0)
+                                    <li><a href="teacher/">ĐỒ ÁN</a></li>
+                                @else
+                                <li><a href="student/">ĐỒ ÁN</a></li> 
+                                @endif
                             <li class="dropdown nav-item">
                                 <a href="#note" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
                                     aria-haspopup="true" aria-expanded="false">
                                     <i class="fa fa-bell">
-                                        <span class="badge badge-danger">1</span>
+                                    @if(count($noticfications) != 0)
+                                        <span id = "" class="badge badge-danger">{{count($noticfications)}}</span>
+                                    @else
+                                        <span id = "" class="badge badge-danger"></span>
+                                    @endif
                                     </i>
                                 </a>
                                 <ul class="dropdown-menu notifications">
@@ -44,16 +52,20 @@
                                     </div>
                                     <li class="divider"></li>
                                     <div class="notifications-wrapper">
+                                        @foreach($noticfications as $noticfication)
                                         <a class="content" href="#">
                                             <div class="notification-item">
-                                                <p class="item-infor">Deadline:21/10/2018: Nộp tài liệu SRS</p>
+                                            @if(Auth::user()->position == 1)
+                                                <a href="student/project/{{$noticfication->id_group}}/document" class="item-infor">
+                                                Nhóm {{$noticfication->group_name}} Deadline:{{$noticfication->time_deadline}}: Nộp tài liệu {{$noticfication->require}}</p>
+                                            
+                                            @elseif(Auth::user()->position == 2)
+                                                <a href="student/project/{{$noticfication->id_group}}/document" class="item-infor">
+                                                Deadline:{{$noticfication->time_deadline}}: Nộp tài liệu {{$noticfication->require}}</p>
+                                            @endif
                                             </div>
                                         </a>
-                                        <a class="content" href="#">
-                                            <div class="notification-item">
-                                                <p class="item-infor">Deadline:21/10/2018: Nộp tài liệu SRS</p>
-                                            </div>
-                                        </a>
+                                        @endforeach
                                     </div>
                                 </ul>
                             </li>
@@ -68,9 +80,10 @@
                                     @endif
                                     </span></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="profile_student.html"><i class="glyphicon glyphicon-user"></i> THÔNG
+                                    @if(Auth::user()->position == 2) 
+                                    <li><a href="teacher/profile/{{Auth::user()->username}}"><i class="glyphicon glyphicon-user"></i> THÔNG
                                             TIN CÁ NHÂN</a></li>
-                                    <li><a href="update_password.html"><i class="glyphicon glyphicon-lock"></i> ĐỔI MẬT
+                                    <li><a href="teacher/password/{{Auth::user()->username}}"><i class="glyphicon glyphicon-lock"></i> ĐỔI MẬT
                                             KHẨU</a></li>
                                     <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('frm-logout').submit();">
                             
@@ -78,6 +91,18 @@
                                         <form id="frm-logout" action="{{ route('logout') }}" method="POST" style="display: none;">
                                             {{ csrf_field() }}
                                         </form></li>
+                                    @else
+                                    <li><a href="student/profile/{{Auth::user()->username}}"><i class="glyphicon glyphicon-user"></i> THÔNG
+                                            TIN CÁ NHÂN</a></li>
+                                    <li><a href="student/password/{{Auth::user()->username}}"><i class="glyphicon glyphicon-lock"></i> ĐỔI MẬT
+                                            KHẨU</a></li>
+                                    <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('frm-logout').submit();">
+                            
+                                       <i class="glyphicon glyphicon-off"></i> ĐĂNG XUẤT     </a>    
+                                        <form id="frm-logout" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            {{ csrf_field() }}
+                                        </form></li>
+                                    @endif
                                 </ul>
                             </li>
                         </ul>

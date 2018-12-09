@@ -45,7 +45,7 @@
                               var data = {};
                               data['search'] = query;
                                 $.ajax({
-                                    url:"{{url()->current()}}/search",
+                                    url:"{{url()->current()}}/project",
                                     method:'get',
                                     data: data,
                                     // data:{query:query, _token: '{{csrf_token()}}'},
