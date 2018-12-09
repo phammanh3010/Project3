@@ -30,9 +30,9 @@
                     </div> -->
                     <div class="col-lg-4 navbar-right">
                         <ul class="nav navbar-nav">
-                                @if(count($noticfications) != 0)
+                                @if(Auth::user()->position == 2)
                                     <li><a href="teacher/">ĐỒ ÁN</a></li>
-                                @else
+                                @elseif(Auth::user()->position == 1)
                                 <li><a href="student/">ĐỒ ÁN</a></li> 
                                 @endif
                             <li class="dropdown nav-item">

@@ -78,8 +78,12 @@ class EvaluationController extends Controller
     }
 
     public function getUpdateEvaluation($id_group, $id_evalution_criteria) {
+        $project = DB::table('group')->join('teacher', 'group.id_teacher', '=', 'teacher.id_teacher')
+                ->join('user', 'user.username', '=', 'teacher.username')
+                ->select('group.*', 'user.full_name')
+                ->where('group.id_group', '=', $id_group)->get();
         $content = EvalutionCriteria::find($id_evalution_criteria); 
-        return view('teacher/updateEvaluate', ['content' => $content]);
+        return view('teacher/updateEvaluate', ['content' => $content, 'projects' => $project]);
     }
 
     public function postUpdateEvaluation(Request $request, $id_group, $id_evalution_criteria) {

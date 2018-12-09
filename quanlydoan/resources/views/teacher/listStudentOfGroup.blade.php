@@ -39,16 +39,16 @@
                 <section class="panel">
                     <header class="panel-heading text-center">
                         <div class="col-sm-3">
-                            <a class="list-group-item-success btn btn-default" href="student/project/{{$project->id_group}}/document">Tài liệu đồ án</a>
+                            <a class="list-group-item-success btn btn-default" href="teacher/project/{{$project->id_group}}/document">Tài liệu đồ án</a>
                         </div>
                         <div class="col-sm-3">
-                            <a class="list-group-item-success btn btn-default" href="student/project/{{$project->id_group}}/scheduel">Quản lí lịch trình</a>
+                            <a class="list-group-item-success btn btn-default" href="teacher/project/{{$project->id_group}}/scheduel">Quản lí lịch trình</a>
                         </div>
                         <div class="col-sm-3">
-                            <a class="list-group-item-success btn btn-default" href="student/project/{{$project->id_group}}/evaluation">Đánh giá nhóm</a>
+                            <a class="list-group-item-success btn btn-default" href="teacher/project/{{$project->id_group}}/evaluation">Đánh giá nhóm</a>
                         </div>
                         <div class="col-sm-3">
-                            <a class="list-group-item-success btn btn-default" href="student/project/{{$project->id_group}}/listStudent">Danh sách
+                            <a class="btn btn-primary" href="teacher/project/{{$project->id_group}}/listStudent">Danh sách
                                 sinh viên</a>
                         </div>
                     </header>
@@ -185,7 +185,7 @@
                             success:function(data)
                             {
                                 var message = "<div class='alert alert-success'>Bạn đã xoá thành công!</div>";
-                                $('#message').html(data.error);
+                                $('#message').html(message);
                                 $('#'+id).parent().parent().remove();    
                             },
                             error: function(XMLHttpRequest, textStatus, errorThrown) {

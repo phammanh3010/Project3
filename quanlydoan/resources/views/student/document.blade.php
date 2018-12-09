@@ -44,7 +44,7 @@
               <a class="list-group-item-success btn btn-default" href="student/project/{{$project->id_group}}/scheduel">Quản lí lịch trình</a>
             </div>
             <div class="col-sm-3">
-              <a class="list-group-item-success btn btn-default" href="student/eacher/project/{{$project->id_group}}/evaluation">Đánh giá nhóm</a>
+              <a class="list-group-item-success btn btn-default" href="student/project/{{$project->id_group}}/evaluation">Đánh giá nhóm</a>
             </div>
             <div class="col-sm-3">
               <a class="list-group-item-success btn btn-default" href="student/project/{{$project->id_group}}/listStudent">Danh sách

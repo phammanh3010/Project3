@@ -2,8 +2,9 @@
 
 @section("content")
 <section class="container bg_container" style="margin-top: 80px;">
+@foreach($projects as $project)
         <div id="main_text">
-            <img src="img/register48x48.png" />&nbsp; Nhóm project 3
+            <img src="img/register48x48.png" />&nbsp; {{$project->group_name}}
         </div>
         <div id="hr"></div>
         <div class="row">
@@ -12,42 +13,43 @@
                 <div>
                     <div class="col-sm-3"><b>Học kỳ</b></div>
                     <div class="col-sm-9">
-                        <p>20181</p>
+                        <p>{{$project->semester}}</p>
                     </div>
                 </div>
                 <form>
                     <div>
                         <div class="col-sm-3"><b>Tên đề tài</b></div>
                         <div class="col-sm-8">
-                            <p>Web quản lí đồ án</p>
+                            <p>{{$project->project_name}}</p>
                         </div>
                     </div>
                 </form>
                 <div>
                     <div class="col-sm-3"><b>Giảng viên hướng dẫn</b></div>
                     <div class="col-sm-9">
-                        <p>PGS.TS Trần Đình Khang</p>
+                        <p>{{$project->full_name}}</p>
                     </div>
                 </div>
                 <div id="hr1"></div>
             </div>
         </div>
+        @endforeach
         <div class="row">
             <div class="col-lg-12">
                 <section class="panel">
                     <header class="panel-heading text-center">
                         <div class="col-sm-3">
-                            <a class="list-group-item-success btn btn-default" href="document.html">Tài liệu đồ án</a>
+                            <a class="list-group-item-success btn btn-default" href="teacher/project/{{$project->id_group}}/document">Tài liệu đồ án</a>
                         </div>
                         <div class="col-sm-3">
-                            <a class="btn btn-primary" href="scheduel.html">Quản lí lịch trình
+                            <a class="btn btn-primary" href="teacher/project/{{$project->id_group}}/scheduel">Quản lí lịch trình
                             </a>
                         </div>
                         <div class="col-sm-3">
-                            <a class="list-group-item-success btn btn-default" href="evaluate.html">Đánh giá nhóm</a>
+                            <a class="list-group-item-success btn btn-default" href="teacher/project/{{$project->id_group}}/evaluation">Đánh giá nhóm</a>
                         </div>
                         <div class="col-sm-3">
-                            <a class="list-group-item-success btn btn-default" href="list_student.html">Danh sách
+                            <a class="list-group-item-success btn btn-default" href="teacher/project/{{$project->id_group}}/listStudent">Danh sách
                                 sinh viên</a>
                         </div>
                     </header>
@@ -79,14 +81,13 @@
                                                 <div class="col-sm-2"></div>
                                                 <div class="col-sm-10"></div>
                                                 <div class="form-group">
-                                                    <label class="control-label col-sm-2">Yêu
-                                                        cầu</label>
+                                                    <label class="control-label col-sm-2">Mã tài liệu</label>
                                                     <div class="col-sm-8">
                                                         <textarea class="form-control" name="require">{{$content->require}}</textarea>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label class="control-label col-sm-2">Mô tả</label>
+                                                    <label class="control-label col-sm-2">Mô tả yêu cầu</label>
                                                     <div class="col-sm-8">
                                                         <textarea class="form-control" name="descript">{{$content->descript}}</textarea>
                                                     </div>

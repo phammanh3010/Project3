@@ -25,40 +25,6 @@ use Carbon\Carbon;
 |
 */
 
-Route::get('/a', function () {
-	$curdate = new DateTime();
-	$curdate->sub(new DateInterval('P3D'));
-	$curdate = $curdate->format('Y-m-d H:i:s');
-	// Carbon::now()->toDateString()
-	$noticfication = DB::table('student')
-                        ->join('group_student', 'student.id_student', '=', 'group_student.id_student')
-						->join('group', 'group.id_group', '=', 'group_student.id_group')
-                        // ->join('group_scheduel', 'group.id_group', '=', 'group_scheduel.id_group')
-                        // ->join('content_sub_scheduel', 'group_scheduel.id_scheduel', '=', 'content_group_scheduel.id_scheduel')
-						->join('subject', 'group.id_subject','=','subject.id_subject')
-						->join('subject_scheduel', 'subject.id_subject', '=', 'subject_scheduel.id_subject')
-                		->join('content_sub_scheduel', 'subject_scheduel.id_subject_scheduel', '=', 'content_sub_scheduel.id_subject_scheduel')
-						->select('group.*', 'content_sub_scheduel.*')
-						->where('content_sub_scheduel.time_deadline', '<', $curdate)
-						->where('student.username', '=', '20152128')->get();
-	// foreach ($noticfication as $value) {
-	// 	echo($value->require);
-	// 	echo($value->id_group);
-	// }	
-	$noticfications = [];			
-	foreach ($noticfication as $value) {
-		$require = DB::table('group')->join('document', 'group.id_group', '=', 'document.id_group')
-						->select('document.*')
-						->where('group.id_group','=', $value->id_group)
-						->where('document.type', '=', $value->require)->get();
-		// add notification to array
-		if($require->count() == 0) {
-			array_push($noticfications, $value);
-		}
-	}
-});
-
-
 
 Route::get('/', function () {
 	return view('welcome');

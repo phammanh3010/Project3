@@ -48,7 +48,7 @@
                             <a class="list-group-item-success btn btn-default" href="student/project/{{$project->id_group}}/evaluation">Đánh giá nhóm</a>
                         </div>
                         <div class="col-sm-3">
-                            <a class="list-group-item-success btn btn-default" href="student/project/{{$project->id_group}}/listStudent">Danh sách
+                            <a class="btn btn-primary" href="student/project/{{$project->id_group}}/listStudent">Danh sách
                                 sinh viên</a>
                         </div>
                     </header>

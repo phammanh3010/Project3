@@ -223,8 +223,12 @@ class ScheduelController extends Controller
     }
 
     public function getUpdateScheduelContent($id_group, $id_content) {
+        $project = DB::table('group')->join('teacher', 'group.id_teacher', '=', 'teacher.id_teacher')
+                ->join('user', 'user.username', '=', 'teacher.username')
+                ->select('group.*', 'user.full_name')
+                ->where('group.id_group', '=', $id_group)->get();
         $content = ContentGroupScheduel::find($id_content); 
-        return view('teacher/updateScheduel', ['content' => $content]);
+        return view('teacher/updateScheduel', ['content' => $content, 'projects' => $project]);
     }
 
     public function postUpdateScheduelContent(Request $request, $id_group, $id_content) {

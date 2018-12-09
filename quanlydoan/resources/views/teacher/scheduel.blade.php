@@ -42,7 +42,7 @@
                             <a class="list-group-item-success btn btn-default" href="teacher/project/{{$project->id_group}}/document">Tài liệu đồ án</a>
                         </div>
                         <div class="col-sm-3">
-                            <a class="list-group-item-success btn btn-default" href="teacher/project/{{$project->id_group}}/scheduel">Quản lí lịch trình</a>
+                            <a class="btn btn-primary" href="teacher/project/{{$project->id_group}}/scheduel">Quản lí lịch trình</a>
                         </div>
                         <div class="col-sm-3">
                             <a class="list-group-item-success btn btn-default" href="teacher/project/{{$project->id_group}}/evaluation">Đánh giá nhóm</a>
@@ -70,7 +70,7 @@
                                     <div class="row">
                                         <table class="table" id="result">
                                             <tr>
-                                                <td class="col-sm-1 text-center"><b>Yêu cầu</b></td>
+                                                <td class="col-sm-1 text-center"><b>Mã tài liệu</b></td>
                                                 <td class="col-sm-7 text-center"><b>Mô tả yêu cầu</b></td>
                                                 <td class="col-sm-2 text-center"><b>Deadline</b></td>
                                                 <td class="col-sm-1 text-center"><b>Điểm trừ</b></td>
@@ -115,14 +115,13 @@
                                                 <div class="col-sm-2"></div>
                                                 <div class="col-sm-10"></div>
                                                 <div class="form-group">
-                                                    <label class="control-label col-sm-2">Yêu
-                                                        cầu</label>
+                                                    <label class="control-label col-sm-2">Mã tài liệu</label>
                                                     <div class="col-sm-8">
                                                         <textarea class="form-control" id="require"></textarea>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label class="control-label col-sm-2">Mô tả</label>
+                                                    <label class="control-label col-sm-2">Mô tả yêu cầu</label>
                                                     <div class="col-sm-8">
                                                         <textarea class="form-control" id="descript"></textarea>
                                                     </div>
@@ -153,7 +152,7 @@
                                 <div class="row">
                                     <table class="table">
                                         <tr>
-                                            <td class="col-sm-2 text-center"><b>Yêu cầu</b></td>
+                                            <td class="col-sm-2 text-center"><b>Mã tài liệu</b></td>
                                             <td class="col-sm-7 text-center"><b>Mô tả yêu cầu</b></td>
                                             <td class="col-sm-2 text-center"><b>Deadline</b></td>
                                             <td class="col-sm-1 text-center"><b>Điểm trừ</b></td>
