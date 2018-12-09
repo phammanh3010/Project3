@@ -48,15 +48,18 @@ class DocumentController extends Controller
     } 
 
     public function uploadFile(Request $request,$id_group) {
-        $id_group = $id_group;
+        $group=DB::table('group')->join('subject','group.id_subject', '=','subject.id_subject')->select('group.*','subject.subject_name')->where('group.id_group', '=', $id_group)->first();
+        #$group=Group::find($id_group)->first();
+       
         if(Auth::user()->position==1){
-           $path = 'filemanager/'.$id_group.'/student/';
-           $destination_path = storage_path().'/'.'app/'.'filemanager/'.$id_group.'/student';
+           $path = $group->semester.'/'.$group->subject_name.'/'.$id_group.'/student/';
+           $destination_path = storage_path().'/'.'app/'.$group->semester.'/'.$group->subject_name.'/'.$id_group.'/student';
         }
         elseif(Auth::user()->position==2){
-           $path = 'filemanager/'.$id_group.'/teacher/';
-           $destination_path = storage_path().'/'.'app/'.'filemanager/'.$id_group.'/teacher';
+           $path = $group->semester.'/'.$group->subject_name.'/'.$id_group.'/teacher/';
+           $destination_path = storage_path().'/'.'app/'.$group->semester.'/'.$group->subject_name.'/'.$id_group.'/teacher';
         }
+      
       
         $file = $request->file('file');
        if( $file == null )
