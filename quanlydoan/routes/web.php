@@ -13,6 +13,7 @@ use App\Group;
 use App\Student;
 use App\GroupStudent;
 use App\EvalutionCriteria;
+use Carbon\Carbon;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,6 +24,29 @@ use App\EvalutionCriteria;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('/a', function () {
+	$curdate = new DateTime();
+	$curdate->sub(new DateInterval('P4Y3D'));
+	$curdate = $curdate->format('Y-m-d H:i:s');
+	// Carbon::now()->toDateString()
+	$noticfication = DB::table('student')
+                        ->join('group_student', 'student.id_student', '=', 'group_student.id_student')
+						->join('group', 'group.id_group', '=', 'group_student.id_group')
+                        // ->join('group_scheduel', 'group.id_group', '=', 'group_scheduel.id_group')
+                        // ->join('content_sub_scheduel', 'group_scheduel.id_scheduel', '=', 'content_group_scheduel.id_scheduel')
+						->join('subject', 'group.id_subject','=','subject.id_subject')
+						->join('subject_scheduel', 'subject.id_subject', '=', 'subject_scheduel.id_subject')
+                		->join('content_sub_scheduel', 'subject_scheduel.id_subject_scheduel', '=', 'content_sub_scheduel.id_subject_scheduel')
+						->select('group.*', 'content_sub_scheduel.*')
+						->where('content_sub_scheduel.time_deadline', '<', $curdate)
+						->where('student.username', '=', '20152128')->get();
+	foreach ($noticfication as $value) {
+		echo("a");
+	}
+});
+
+
 
 Route::get('/', function () {
 	return view('welcome');
@@ -85,13 +109,14 @@ Route::group(['prefix' => 'student'], function() {
 	Route::get('/', function() {
 		return view('student.listProject');
 	});
+
     Route::get('profile/{username}','ProfilesController@showProfile');
     Route::post('profile/{username}/edit','ProfilesController@updateUserAccount');
 	Route::get('password/{username}','ProfilesController@showpassword');
 	Route::post('password/{username}/edit','ProfilesController@updateUserPassword');
 
 	
-	Route::post('/', 'ProjectController@getListProject');
+	Route::get('/search', 'ProjectController@getListProject');
 	Route::group(['prefix' => 'project'], function() {
 		Route::get('/{id_group}', 'ProjectController@getProjectDetail');
 

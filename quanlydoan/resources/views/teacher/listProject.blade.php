@@ -47,7 +47,7 @@
                                 $.ajax({
                                     url:"{{url()->current()}}/search",
                                     method:'get',
-                                    data : data,
+                                    data: data,
                                     // data:{query:query, _token: '{{csrf_token()}}'},
                                     // dataType:'json',
                                     success:function(data)

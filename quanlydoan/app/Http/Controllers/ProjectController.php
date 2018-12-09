@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
@@ -69,5 +68,21 @@ class ProjectController extends Controller
             return view('student.projectDetail', ['projects'=> $project]);
         }
 
+    }
+
+    public function notification() {
+        $user = Auth::user();
+        // f(Auth::user()->position == 2) {
+            
+        // }
+        if(Auth::user()->position == 1) {
+            $noticfication = DB::table('student')
+                ->join('group_student', 'student.id_student', '=', 'group_student.id_student')
+                ->join('group', 'group.id_group', '=', 'group_student.id_group')
+                ->join('group_scheduel', 'group.id_group', '=', 'group_scheduel.id_group')
+                ->join('content_group_scheduel', 'group_scheduel.id_scheduel', '=', 'content_group_scheduel.id_scheduel')
+                ->select('group.*')
+                ->where('student.username', '=', '20152128')->get();
+        }
     }
 }
