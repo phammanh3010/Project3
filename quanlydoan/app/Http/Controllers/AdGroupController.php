@@ -40,7 +40,7 @@ class AdGroupController extends Controller{
 
         $group->save();
 
-        Storage::makeDirectory('public/'.$request->semester."/".$request->subjectname."/".$group->id_group);
+        Storage::makeDirectory($request->semester."/".$request->subjectname."/".$group->id_group);
 
         return redirect(url('teacher/'))->with('thongbao','Bạn đã thêm thành công');
     }
