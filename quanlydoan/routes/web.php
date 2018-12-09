@@ -77,10 +77,12 @@ Route::group(['prefix' => 'teacher'], function() {
 		Route::post('/{id_group}/listStudent/delete', 'StudentOfGroupController@delStudentOfGroup');
         
         // Router for file
-         Route::get('/{id_group}/document', 'DocumentController@getDocument');
-        Route::post( '/{id_group}/document','DocumentController@uploadFile');
-        Route::get( '/{id_group}/document/{id_document}/download/','DocumentController@downloadFile');
-        Route::get( '/{id_group}/document/{id_document}/delete/','DocumentController@deleteFile');
+        Route::get('/{id_group}/document', 'DocumentController@getDocument');
+		Route::post( '/{id_group}/document','DocumentController@uploadFile');
+		Route::get( '/{id_group}/document/{id_document}/download/','DocumentController@downloadFile');
+		Route::get( '/{id_group}/document/{id_document}/delete/','DocumentController@deleteFile');
+		Route::get( '/{id_group}/document/{id_document}/evaluate/{point}/','DocumentController@evaluateFile');
+		
 
 	});
 });
