@@ -34,7 +34,7 @@ class ProjectController extends Controller
                 $listProject  = DB::table('student')->join('group_student', 'student.id_student', '=', 'group_student.id_student')
                 ->join('group', 'group.id_group', '=', 'group_student.id_group')
                 ->join('teacher', 'group.id_teacher', '=', 'teacher.id_teacher')
-                ->join('user', 'user.username', '=', 'student.username')
+                ->join('user', 'user.username', '=', 'teacher.username')
                 ->select('user.full_name', 'group.*')
                 ->where('student.username', '=',  $user->username)
                 ->where('group.semester', '=', $semester)->get();
