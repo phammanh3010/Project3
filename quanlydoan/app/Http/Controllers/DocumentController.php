@@ -15,6 +15,7 @@ use App\Group;
 use App\Document;
 use DateTime;
 use Validator;
+use Illuminate\Support\Facades\Session;
 
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
@@ -28,11 +29,11 @@ class DocumentController extends Controller
         #$id_group = $request->get('id_group');
 
         $studentDocuments = DB::table('group')->join('document', 'group.id_group', '=', 'document.id_group')->join('user','document.user_upload','=','user.username')
-                        ->select('document.id_document','document.path', 'document.evaluate', 'user.full_name', 'document.created_at')
+                        ->select('document.id_document','document.type','document.path', 'document.evaluate', 'user.full_name', 'document.created_at')
                         ->where('group.id_group', '=', $id_group)->where('user.position','=',1)->get();
 
         $teacherDocuments = DB::table('group')->join('document', 'group.id_group', '=', 'document.id_group')->join('user','document.user_upload','=','user.username')
-                        ->select('document.id_document','document.path', 'document.evaluate', 'user.full_name', 'document.created_at')
+                        ->select('document.id_document','document.type','document.path', 'document.evaluate', 'user.full_name', 'document.created_at')
                         ->where('group.id_group', '=', $id_group)->where('user.position','=',2)->get();  
                         
         $project = DB::table('group')->join('teacher', 'group.id_teacher', '=', 'teacher.id_teacher')
@@ -49,17 +50,25 @@ class DocumentController extends Controller
     public function uploadFile(Request $request,$id_group) {
         $id_group = $id_group;
         if(Auth::user()->position==1){
-           $path = '../app/public/filemanager/'.$id_group.'/student/';
-           $destination_path = storage_path('../app/public/filemanager/'.$id_group.'/student');
+           $path = 'filemanager/'.$id_group.'/student/';
+           $destination_path = storage_path().'/'.'app/'.'filemanager/'.$id_group.'/student';
         }
         elseif(Auth::user()->position==2){
-           $path = '../app/public/filemanager/'.$id_group.'/teacher/';
-           $destination_path = storage_path('../app/public/filemanager/'.$id_group.'/teacher');
+           $path = 'filemanager/'.$id_group.'/teacher/';
+           $destination_path = storage_path().'/'.'app/'.'filemanager/'.$id_group.'/teacher';
         }
-
-
+      
         $file = $request->file('file');
-       
+       if( $file == null )
+       {
+
+        Session::flash('thongbao','Chưa thực hiện chọn vào file' );
+        if(Auth::user()->position==1)
+            return redirect('/student/project/'.$id_group.'/document');
+        elseif(Auth::user()->position==2)
+            return redirect('/teacher/project/'.$id_group.'/document');
+        
+       }
         $validator = Validator::make(
             #private $document_ext = ['doc', 'docx', 'pdf', 'odt'];
                         [
@@ -67,8 +76,14 @@ class DocumentController extends Controller
                             'extension' => Str::lower($file->getClientOriginalExtension()),
                         ],
                         [
-                            'file' => 'required|max:100000',
-                            'extension' => 'required|in:doc,docx,zip,rar,pdf,rtf,xlsx,xls,txt, csv'
+                            'file' => 'required|max:10240',
+                            'extension' => 'required|in: doc,docx,odt,pdf,pptx,xlsx,xls,csv,zip,rar'
+                        ],
+                        [
+                                                      
+                            'file.max'      => 'File upload kích thước nhỏ hơn 10 MB',
+                            'extension.in' => 'Không phải định dạng cho phép upload',
+                            
                         ]
                     );
 
@@ -87,48 +102,39 @@ class DocumentController extends Controller
                 }
                 $upload_success = $file->move($destination_path, $filename);
                 if ($upload_success) {
-                        #if needed, save to your table
-                        #['id_group', 'path', 'evaluate', 'user_upload', 'create_at']
                         
                         $document = new Document();
                         $document->id_group = $id_group;
                         $document->path = $path.$filename;
+                  
                         $document->user_upload =Auth::user()->username;
-                        $document->evaluate =0;
+                        if(Auth::user()->position==1)
+                            $document->type = $request->Input('type');
+                        elseif(Auth::user()->position==2)
+                            $document->type = 'TLHD';
+                        $document->evaluate =0.0;
                         $document->created_at = new DateTime();
                         $document->save();
-                        print($document);
-                        return;
-                        $data = array(
-                            "id_document" => $document->id_document,
-                            "path"=>$document->path,
-                            "user_upload"=> $document->user_upload,
-                            "created_at"=> $document->created_at,
-                        );
-                        echo json_encode($data);
                         
+                        if(Auth::user()->position==1)
+                            return redirect('/student/project/'.$id_group.'/document');
+                        elseif(Auth::user()->position==2)
+                            return redirect('/teacher/project/'.$id_group.'/document');
+                                        
                 }
             }else{
                
-            $data = array(
-                "error" => $validator->errors()->all()
-            );
+                return back()->withErrors($validator)->withInput();
             
-            echo json_encode($data);
         }
             }
-        
-      
-           
-
-
-
+    
 
     public function downloadFile($id_group,$id_document)
     {  
         $document = Document::where('id_document',$id_document)->first();
         #$file_path = storage_path('') . "/" . $filename;
-        return Response::download($document->path);
+        return Response::download(storage_path('/app/'.$document->path));
     }
 
     
@@ -136,12 +142,43 @@ class DocumentController extends Controller
         $document = Document::where('id_document',$id_document)->first();
         $result = Storage::delete($document->path);
         Document::where('id_document',$id_document)->delete();
-        print $result;
-        return;
+        if(Auth::user()->position==1)
+            return redirect('/student/project/'.$id_group.'/document');
+        elseif(Auth::user()->position==2)
+            return redirect('/teacher/project/'.$id_group.'/document');
 
-        
+        }
+    public function evaluateFile($id_group,$id_document,$point){
+        #if($point>10)  {print("Error"); return;}
+        $validator = Validator::make(
+            #private $document_ext = ['doc', 'docx', 'pdf', 'odt'];
+                        [
+                            'evaluate' => $point,
+                            
+                        ],
+                        [
+                            'evaluate' =>'required|numeric|between:0,10',
+                        ],
+                        [
+                                                      
+                            
+                            'evaluate.between' => 'Điểm đánh giá cần trong khoảng 0 đến 10',
+                            
+                        ]
+                    );
+        print( " Thực hiện update");
+        if($validator->passes()){
+            $document = Document::where('id_document',$id_document)->first();
+            $document->evaluate =$point;
+            $document->save();
+            return redirect('/teacher/project/'.$id_group.'/document');
+
+        }else{
+            Session::flash('messenger','Điểm đánh giá cần trong khoảng 0 đến 10' );
+            return redirect('/teacher/project/'.$id_group.'/document');
+          
+        }
+
 
     }
-
-
 }
