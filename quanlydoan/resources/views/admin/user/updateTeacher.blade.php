@@ -68,7 +68,6 @@
                                 <div class="control-label col-lg-6">
                                     <div>
                                         <button class="btn btn-default" type="submit">Sửa</button>
-                                        <button class="btn btn-default" type="reset">Làm Mới</button>
                                     </div>
                                 </div>
                             </form>    
