@@ -12,8 +12,10 @@ class AdStudentController extends Controller
 {
     //
 	public function getListStudent(){
-
-		return view('admin.user.listStudent');
+		$data = DB::table('user')
+				->join('student', 'student.username', '=', 'user.username')->get();
+		echo $data;
+		// return view('admin.user.listStudent');
 	}
 
 	public function getUpdateStudent($id){

@@ -175,7 +175,8 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('passw
 
 Route::group(['prefix'=>'admin'], function(){
 	Route::group(['prefix'=>'project'], function(){
-		Route::get('listProject', 'ProjectController@getListProject');
+		Route::get('listProject/{id_subject}', 'ProjectController@getAdListProject');
+		Route::get('listProject/{id_subject}/search', 'ProjectController@getAdSearchListProject');
 
 	});
 

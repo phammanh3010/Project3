@@ -27,8 +27,8 @@
                             <span class="menu-arrow arrow_carrot-right"></span>
                         </a>
                         <ul class="sub">
-                            <li><a class="" href="../project/list_project.html">IT4421</a></li>
-                            <li><a class="" href="../project/list_project.html">Khác</a></li>
+                            <li><a class="" href="admin/project/listProject/1">IT4421</a></li>
+                            <li><a class="" href="admin/project/listProject/2">Khác</a></li>
                         </ul>
                     </li>
                     <li class="sub-menu">
