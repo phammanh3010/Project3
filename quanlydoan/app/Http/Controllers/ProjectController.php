@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
@@ -21,7 +20,7 @@ class ProjectController extends Controller
     {   
         if($request->ajax()){
             $output = '';
-            $semester = $request->get('query');
+            $semester = $request['search'];
             $user = Auth::user();
             if(Auth::user()->position == 2) {
                 $listProject  = DB::table('teacher')
@@ -43,30 +42,16 @@ class ProjectController extends Controller
 
             $total_row = $listProject->count();
             if($total_row > 0){
-              foreach($listProject as $row){
-                $output .= '
-                <tr>
-                    <td>'.$row->full_name.'</td>
-                    <td>'.$row->group_name.'</td>
-                    <td>'.$row->project_name.'</td>
-                    <td>'.$row->finish_project.'</td>
-                    <td><a href="'.url()->current().'/project/'.$row->id_group.'"'.'class="btn btn-primary text-center">Chi tiết</a></td>
-                </tr>
-                ';
-              }
+                $view = view('pages.getListProject', compact('listProject'));
+                return response($view);
             }
             else{
-              $output = '
-              <tr>
-              <td align="center" colspan="5">No Data Found</td>
-              </tr>
-              ';
+                $output = 'output';
+                $data = array(
+                'table_data'  => $output
+                );
+                return response($data);
             }
-            $data = array(
-             'table_data'  => $output
-            );
-        
-            echo json_encode($data);
         }
     }
 
@@ -83,5 +68,21 @@ class ProjectController extends Controller
             return view('student.projectDetail', ['projects'=> $project]);
         }
 
+    }
+
+    public function notification() {
+        $user = Auth::user();
+        // f(Auth::user()->position == 2) {
+            
+        // }
+        if(Auth::user()->position == 1) {
+            $noticfication = DB::table('student')
+                ->join('group_student', 'student.id_student', '=', 'group_student.id_student')
+                ->join('group', 'group.id_group', '=', 'group_student.id_group')
+                ->join('group_scheduel', 'group.id_group', '=', 'group_scheduel.id_group')
+                ->join('content_group_scheduel', 'group_scheduel.id_scheduel', '=', 'content_group_scheduel.id_scheduel')
+                ->select('group.*')
+                ->where('student.username', '=', '20152128')->get();
+        }
     }
 }

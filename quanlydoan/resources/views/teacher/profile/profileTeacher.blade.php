@@ -1,4 +1,4 @@
-@extends("teacher.layout.index")
+@extends("layout.index")
 
 @section("content")
 

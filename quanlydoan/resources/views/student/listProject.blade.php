@@ -21,20 +21,8 @@
     <div class="title_project">
       <h3 class="text-center">Danh sách đồ án</h3>
     </div>
-    <table class="table" id="table_project">
-      <thead id="thead">
-        <tr>
-          <th scope="col" class="col-sm-2">Giảng viên</th>
-          <th scope="col" class="col-sm-3">Tên nhóm</th>
-          <th scope="col" class="col-sm-4">Đề tài</th>
-          <th scope="col" class="col-sm-2">Đã hoàn thành</th>
-          <th scope="col" class="col-sm-1">Thao tác</th>
-        </tr>
-      </thead>
-      <tbody>
-
-      </tbody>
-    </table>
+    <div id="result">
+    </div>
   </section>
                       
                       
@@ -45,15 +33,18 @@
                             fetch_customer_data($query);
 
                             function fetch_customer_data(query)
-                            {
+                            { 
+                              var data = {};
+                              data['search'] = query;
                                 $.ajax({
-                                    url:"{{url()->current()}}",
-                                    method:'post',
-                                    data:{query:query, _token: '{{csrf_token()}}'},
-                                    dataType:'json',
+                                    url:"{{url()->current()}}/project",
+                                    method:'get',
+                                    data: data,
+                                    // data:{query:query, _token: '{{csrf_token()}}'},
+                                    // dataType:'json',
                                     success:function(data)
                                     {
-                                        $('tbody').html(data.table_data);
+                                        $('#result').html(data);
                                     },
                                     error: function(XMLHttpRequest, textStatus, errorThrown) {
                                      console.log(errorThrown);

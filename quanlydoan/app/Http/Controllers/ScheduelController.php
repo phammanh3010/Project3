@@ -20,11 +20,6 @@ USE App\ContentSubjectScheduel;
 
 class ScheduelController extends Controller
 {   
-    // public function __construct() {
-    //     if(!Auth::user()) {
-    //         return redirect('/');
-    //     }
-    // }
 
     public function getScheduel($id_group) {
         $semester = Group::find($id_group)->value('semester');
@@ -80,7 +75,7 @@ class ScheduelController extends Controller
             $data = array(
                 "error" => $validator->errors()->all()
             );
-            echo json_encode($data);
+            return response($data);
         }
         else {
             //lấy ra kì học và môn học tương ứng với nhóm
@@ -128,7 +123,7 @@ class ScheduelController extends Controller
                         $data = array(
                             "output" => $scheduelContent->id_content
                         );
-                        echo json_encode($data);
+                        return response($data);
                         
                     }
                     //chưa tạo nội dung nào tạo thêm bản ghi ở bảng group_scheduel
@@ -154,16 +149,15 @@ class ScheduelController extends Controller
                         $data = array(
                             "output" => $scheduelContent->id_content
                         );
-                        echo json_encode($data);
+                        return response($data);
                     }
                 } 
                 else {
-                    $error = "<p class='alert alert-danger'>Nội dung lịch trình vi phạm nội dung 
-                    lịch trình do bộ môn đưa ra</p>";
+                    $error = "error";
                     $data = array(
                         "error_message" => $error
                     );
-                    echo json_encode($data);
+                    return response($data);
                 }
 
             }
@@ -189,7 +183,7 @@ class ScheduelController extends Controller
                     $data = array(
                         "output" => $scheduelContent->id_content
                     );
-                    echo json_encode($data);
+                    return response($data);
                     
                 }
                 //chưa tạo nội dung nào tạo thêm bản ghi ở bảng group_scheduel
@@ -215,7 +209,7 @@ class ScheduelController extends Controller
                     $data = array(
                         "output" => $scheduelContent->id_content
                     );
-                    echo json_encode($data);
+                    return response($data);
                 }
             }
         }
@@ -224,15 +218,8 @@ class ScheduelController extends Controller
     public function delScheduelContent(Request $request, $id_group) {
         $content = ContentGroupScheduel::find($request->id);
         $content->delete();  
-
         $id = $request->id;   
-        $message = "<div class='alert alert-success'>Bạn đã xoá thành công!</div>";
-        $data = array(
-            "message" => $message,
-            "id"    => $id
-        );
-        echo json_encode($data); 
-
+        return response($id);
     }
 
     public function getUpdateScheduelContent($id_group, $id_content) {
