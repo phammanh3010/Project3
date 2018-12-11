@@ -182,9 +182,12 @@ Route::group(['prefix'=>'admin'], function(){
 
 	Route::group(['prefix'=>'scheduel'], function(){
 		// chua co
-		Route::get('show', 'AdScheduelController@getScheduel');
-
-		Route::get('update', 'SubjectScheduelController@getUpdate');
+		Route::get('show/{id_subject}', 'AdScheduelController@getAdScheduel');
+		Route::post('addScheduel/{id_subject}', 'AdScheduelController@postAdAddScheduel');
+		Route::get('show/{id_subject}/search', 'AdScheduelController@postSearch');
+		Route::get('updateScheduel/{id_subject}/{id_subject_scheduel}/{id_content_sub_scheduel}', 'AdScheduelController@getUpdateScheduelContent');
+		Route::post('updateScheduel/{id_subject}/{id_subject_scheduel}/{id_content_sub_scheduel}', 'AdScheduelController@postUpdateScheduelContent');
+		Route::get('deleteScheduel/{id_subject}/{id_subject_scheduel}/{id_content_sub_scheduel}', 'AdScheduelController@getDeleteScheduel');
 	});
 
 	Route::group(['prefix'=>'user'], function(){

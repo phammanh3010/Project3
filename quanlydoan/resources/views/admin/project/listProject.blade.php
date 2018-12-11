@@ -30,12 +30,9 @@
                                         <option value="20161">20161</option>
                                     </select>
                                 </div>
-                                
+                            </div>    
 
-                            </form>
-                        </div>
-                    </div>
-                    <div class="form">
+                        </form>
                         <form class="form-inline">
                             <input type="hidden" name="_token" value="{{csrf_token()}}" />
                             <i class="glyphicon glyphicon-search"></i><label>Giảng Viên</label>
@@ -45,60 +42,62 @@
                         </form>
                     </div>
                 </div>
-            </section>
-        </div>
+                
+            </div>
+        </section>
     </div>
-    <div class="row">
-        <div class="col-lg-12">
-            <section class="panel">
-                <header class="panel-heading">
-                    <a href="">Danh sách các nhóm đồ án</a>
-                </header>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <section class="panel">
+            <header class="panel-heading">
+                <a href="">Danh sách các nhóm đồ án</a>
+            </header>
 
-                <div class="result">
+            <div class="result">
 
-                </div>
+            </div>
 
-                <script type="text/javascript">
+            <script type="text/javascript">
 
-                    
-                    fetch_customer_data('', '20181');
+                
+                fetch_customer_data('', '20181');
 
-                    function fetch_customer_data(query, semester){
-                        var url = "{{url()->current()}}" + "/search";
-                        var data = {};
-                        data['search'] = query;
-                        data['semester'] = semester;
-                        var get = $(this).attr('method');
-                        $.ajax({
-                            type : get,
-                            url : url,
-                            data: data
-                        }).done(function(teacher, student, doc){
-                            $('.result').html(teacher, student, doc);
-                        })
-                    }
-
-                    $(document).on('keyup','#search',function(){
-                     var query = $('#search').val();
-                     var semester = $('#semester').find("option:selected").val();
-                     fetch_customer_data(query, semester);
-                    });
-                    $('#semester').change(function () {
-                      var query = $('#search').val();
-                      var semester = $('#semester').find("option:selected").val();
-                      fetch_customer_data(query, semester);
-                  });
-
-              </script>
-              <script>
-                $.ajaxSetup({
-                  headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                function fetch_customer_data(query, semester){
+                    var url = "{{url()->current()}}" + "/search";
+                    var data = {};
+                    data['search'] = query;
+                    data['semester'] = semester;
+                    var get = $(this).attr('method');
+                    $.ajax({
+                        type : get,
+                        url : url,
+                        data: data
+                    }).done(function(teacher, student, doc){
+                        $('.result').html(teacher, student, doc);
+                    })
                 }
-            });
-        </script>
-    </section>
+
+                $(document).on('keyup','#search',function(){
+                   var query = $('#search').val();
+                   var semester = $('#semester').find("option:selected").val();
+                   fetch_customer_data(query, semester);
+               });
+                $('#semester').change(function () {
+                  var query = $('#search').val();
+                  var semester = $('#semester').find("option:selected").val();
+                  fetch_customer_data(query, semester);
+              });
+
+          </script>
+          <script>
+            $.ajaxSetup({
+              headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    </script>
+</section>
 </div>
 </div>
 </section>

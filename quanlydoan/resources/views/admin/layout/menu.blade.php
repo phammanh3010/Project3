@@ -38,7 +38,7 @@
                             <span class="menu-arrow arrow_carrot-right"></span>
                         </a>
                         <ul class="sub">
-                            <li><a class="" href="admin/scheduel/show">IT4421</a></li>
+                            <li><a class="" href="admin/scheduel/show/1">IT4421</a></li>
                     </li>
                 </ul>
                 <!-- sidebar menu end-->
