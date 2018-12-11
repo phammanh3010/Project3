@@ -144,7 +144,7 @@ class ProfilesController extends Controller
                 'email' => 'required|email',
                 'phone' => 'regex:/(0)[0-9]/|min:10|max:11'
             ], 
-            [   
+            [   'password_confirmation.same'=> 'Mật khẩu xác nhận cần giống với mật khẩu mới',
                 'full_name.required' => 'Bạn chưa nhập Họ Tên',
                 'full_name.min' => 'Họ Tên cần có độ dài từ 3 đến 45 kí tự',
                 'full_name.max' => 'Họ Tên cần có độ dài từ 3 đến 45 kí tự',
