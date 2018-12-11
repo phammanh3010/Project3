@@ -23,7 +23,7 @@
               {{session('thongbao')}}
           </div>
       @endif
-      <form action="/teacher/profile/{{Auth::user()->username}}/edit" method='POST'>
+      <form action="teacher/profile/{{Auth::user()->username}}/edit" method='POST'>
       <input type="hidden" name="_token" value="{{csrf_token()}}" />
         <div class="row">
           <div class="col-sm-2"></div>
@@ -77,18 +77,6 @@
                 </td>
                 <td class="col-sm-8">
                   <input class="form-control" type="text" name="phone" value="{{ $user->phone }}" />
-                </td>
-              </tr>
-              <tr>
-                <td class="col-sm-2">
-                  <p>Danh sách đồ án đang hướng dẫn</p>
-                </td>
-                <td class="col-sm-8">
-                  <p><a href="#">Nhóm 1: Web quản lí đồ án</a></p>
-                  <p><a href="#">Nhóm 1: Web quản lí đồ án</a></p>
-                  <p><a href="#">Nhóm 1: Web quản lí đồ án</a></p>
-                  <p><a href="#">Nhóm 1: Web quản lí đồ án</a></p>
-                  <p><a href="#">Nhóm 1: Web quản lí đồ án</a></p>
                 </td>
               </tr>
             </table>

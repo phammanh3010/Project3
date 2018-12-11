@@ -59,7 +59,7 @@ class AppServiceProvider extends ServiceProvider
                                     ->join('content_sub_scheduel', 'subject_scheduel.id_subject_scheduel', '=', 'content_sub_scheduel.id_subject_scheduel')
                                     ->select('group.*', 'content_sub_scheduel.*')
                                     ->where('content_sub_scheduel.time_deadline', '<', $date_remind)
-                                    // ->where('content_sub_scheduel.time_deadline', '>=', $curent_date)
+                                    ->where('content_sub_scheduel.time_deadline', '>=', $curent_date)
                                     ->where('student.username', '=', Auth::user()->username)->get();
                     
                 foreach ($sub_notice as $value) {

@@ -41,9 +41,9 @@ class DocumentController extends Controller
                         ->select('group.*', 'user.full_name')
                         ->where('group.id_group', '=', $id_group)->first();
                         #print($project);
-        if(Auth::user()->position==1)                
+        if(Auth::user()->position== 1)                
            return view('student.document', ['project'=>$project,'studentDocuments'=> $studentDocuments,'teacherDocuments'=> $teacherDocuments]);
-        elseif(Auth::user()->position==2)                
+        elseif(Auth::user()->position== 2)                
          return view('teacher.document', ['project'=>$project,'studentDocuments'=> $studentDocuments,'teacherDocuments'=> $teacherDocuments]);
     } 
 
@@ -143,6 +143,7 @@ class DocumentController extends Controller
     
     public function deleteFile($id_group,$id_document){
         $document = Document::where('id_document',$id_document)->first();
+        
         $result = Storage::delete($document->path);
         Document::where('id_document',$id_document)->delete();
         if(Auth::user()->position==1)

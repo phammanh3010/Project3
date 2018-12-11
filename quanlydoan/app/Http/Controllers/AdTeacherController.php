@@ -52,7 +52,7 @@ class AdTeacherController extends Controller
 		$teacher = Teacher::find($id_teacher);
 		$user = User::find($teacher->username);
 		$user->username = $request->username;
-		$user->password = $request->password;
+		$user->password = bcrypt($request->password);
 		$user->full_name = $request->full_name;
 		$user->email = $request->email;
 		$user->phone = $request->phone;
@@ -105,7 +105,7 @@ class AdTeacherController extends Controller
 		
 		$user = new User;
 		$user->username = $request->username;
-		$user->password = $request->password;
+		$user->password = bcrypt($request->password);
 		$user->position = 2;
 		$user->full_name = $request->full_name;
 		$user->email = $request->email;

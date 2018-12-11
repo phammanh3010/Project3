@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\View;
 use App\User;
 use App\EvalutionCriteria;
 use App\Group;
+use \DateTime;
 
 class EvaluationController extends Controller
 {   
@@ -25,12 +26,14 @@ class EvaluationController extends Controller
                 ->join('user', 'user.username', '=', 'teacher.username')
                 ->select('group.*', 'user.full_name')
                 ->where('group.id_group', '=', $id_group)->get(); 
+        
+        $point = $this->evalue($id_group);
                 
         if(Auth::user()->position == 2) {
-            return view('teacher.evaluate', ['evaluations' => $evaluations, 'projects' => $project]);
+            return view('teacher.evaluate', ['evaluations' => $evaluations, 'projects' => $project, 'point' => $point]);
         }
         if(Auth::user()->position == 1) {
-            return view('student.evaluate', ['evaluations' => $evaluations, 'projects' => $project]);
+            return view('student.evaluate', ['evaluations' => $evaluations, 'projects' => $project, 'point' => $point]);
         }
     }
 
@@ -94,5 +97,72 @@ class EvaluationController extends Controller
         return redirect('teacher/project/'.$id_group.'/evaluation')->with('thongbao','Bạn đã sửa thành công!');
     }
 
-    
+    public function evalue($id_group) {
+        $semester = Group::find($id_group)->value('semester');
+        $subject_id = Group::find($id_group)->value('id_subject');
+        if($subject_id > 1) {
+            $scheduel_contents = DB::table('group')->join('group_scheduel', 'group.id_group', '=', 'group_scheduel.id_group')
+                ->join('content_group_scheduel', 'group_scheduel.id_scheduel', '=', 'content_group_scheduel.id_scheduel')
+                ->select('content_group_scheduel.require', 'content_group_scheduel.time_deadline', 'content_group_scheduel.penalty', 'content_group_scheduel.require')
+                ->where('group.id_group', '=', $id_group)
+                ->get();
+            }
+        else {
+            $scheduel_contents = DB::table('subject')->join('subject_scheduel', 'subject.id_subject', '=', 'subject_scheduel.id_subject')
+                ->join('content_sub_scheduel', 'subject_scheduel.id_subject_scheduel', '=', 'content_sub_scheduel.id_subject_scheduel')
+                ->select('content_sub_scheduel.require', 'content_sub_scheduel.time_deadline', 'content_sub_scheduel.penalty', 'content_sub_scheduel.require')
+                ->where('subject_scheduel.semester', '=', $semester)
+                ->where('subject.id_subject', '=', $subject_id)
+                ->get();
+        }
+		$total_require = $scheduel_contents->count();
+        $studentDocuments = DB::table('group')
+                        ->join('document', 'group.id_group', '=', 'document.id_group')
+                        ->join('user','document.user_upload','=','user.username')
+                        ->select('document.*')
+                        ->where('group.id_group', '=', $id_group)
+                        ->where('user.position','=',1)
+                        ->get();
+		$total_document = $studentDocuments->count();
+        $bonus = DB::table('group')->join('evalution_criteria', 'group.id_group', '=', 'evalution_criteria.id_group')->get();
+        $point = 0;
+        $bonus_point = 0;
+        foreach ($studentDocuments as $value) {
+            foreach ($scheduel_contents as $value1) {
+                $match_require = DB::table('group')
+                        ->join('document', 'group.id_group', '=', 'document.id_group')
+                        ->join('user','document.user_upload','=','user.username')
+                        ->select('document.*')
+                        ->where('group.id_group', '=', $id_group)
+                        ->where('user.position','=',1)
+                        ->where('document.type','=',$value1->require)
+						->get();
+						
+				$total_require_match = $match_require->count();
+				echo($total_require_match);
+                if($value->type == $value1->require) {
+                    $date_up = new DateTime($value->created_at);
+                    $date_deadline = new DateTime($value1->time_deadline);
+                    if($date_up > $date_deadline) {
+                        $value->evaluate = ($value->evaluate - $value1->penalty) / $total_require_match;
+                    }
+                }
+            }
+            $point += $value->evaluate;
+        }
+
+        foreach ($bonus as  $value) {
+            $bonus_point += $value->bonus;
+        }
+
+        if($total_require != 0) {
+            $point_avg = $point / $total_require;
+            $point_avg += $bonus_point;
+            return $point_avg;
+        } else if($total_document != 0 ){
+            return $point / $total_document + $bonus_point;
+        } else {
+            return 0;
+        }
+    }  
 }

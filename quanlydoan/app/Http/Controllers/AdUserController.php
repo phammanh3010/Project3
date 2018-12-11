@@ -51,7 +51,7 @@ class AdUserController extends Controller
 
    $admin = User::find($username);
    $admin->username = $request->username;
-   $admin->password = $request->password;
+   $admin->password = bcrypt($request->password);
    $admin->position = 3;
    $admin->full_name = $request->full_name;
    $admin->email = $request->email;
@@ -98,7 +98,7 @@ class AdUserController extends Controller
 
    $admin = new User;
    $admin->username = $request->username;
-   $admin->password = $request->password;
+   $admin->password = bcrypt($request->password);
    $admin->position = 3;
    $admin->full_name = $request->full_name;
    $admin->email = $request->email;

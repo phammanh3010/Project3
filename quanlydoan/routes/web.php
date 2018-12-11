@@ -14,6 +14,7 @@ use App\Student;
 use App\GroupStudent;
 use App\EvalutionCriteria;
 use Carbon\Carbon;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,6 +26,78 @@ use Carbon\Carbon;
 |
 */
 
+
+Route::get('/a', function () {
+		$semester = Group::find(5)->value('semester');
+        $subject = Group::find(5)->value('id_subject');
+        if($subject < 4) {
+            $scheduel_contents = DB::table('group')->join('group_scheduel', 'group.id_group', '=', 'group_scheduel.id_group')
+                ->join('content_group_scheduel', 'group_scheduel.id_scheduel', '=', 'content_group_scheduel.id_scheduel')
+                ->select('content_group_scheduel.require', 'content_group_scheduel.time_deadline', 'content_group_scheduel.penalty', 'content_group_scheduel.require')
+                ->where('group.id_group', '=', 5)
+                ->get();
+            }
+        else {
+            $scheduel_contents = DB::table('subject')->join('subject_scheduel', 'subject.id_subject', '=', 'subject_scheduel.id_subject')
+                ->join('content_sub_scheduel', 'subject_scheduel.id_subject_scheduel', '=', 'content_sub_scheduel.id_subject_scheduel')
+                ->select('content_sub_scheduel.require', 'content_sub_scheduel.time_deadline', 'content_sub_scheduel.penalty', 'content_sub_scheduel.require')
+                ->where('subject_scheduel.semester', '=', '20181')
+                ->where('subject.id_subject', '=', 4)
+                ->get();
+        }
+		$total_require = $scheduel_contents->count();
+        $studentDocuments = DB::table('group')
+                        ->join('document', 'group.id_group', '=', 'document.id_group')
+                        ->join('user','document.user_upload','=','user.username')
+                        ->select('document.*')
+                        ->where('group.id_group', '=', 5)
+                        ->where('user.position','=',1)
+                        ->get();
+		$total_document = $studentDocuments->count();
+        $bonus = DB::table('group')->join('evalution_criteria', 'group.id_group', '=', 'evalution_criteria.id_group')->get();
+        $point = 0;
+        $bonus_point = 0;
+        foreach ($studentDocuments as $value) {
+            foreach ($scheduel_contents as $value1) {
+                $match_require = DB::table('group')
+                        ->join('document', 'group.id_group', '=', 'document.id_group')
+                        ->join('user','document.user_upload','=','user.username')
+                        ->select('document.*')
+                        ->where('group.id_group', '=', 5)
+                        ->where('user.position','=',1)
+                        ->where('document.type','=',$value1->require)
+						->get();
+						
+				// foreach ($match_require as $value3) {
+				// 	echo($value3->type);
+				// }
+
+                // echo($value1->time_deadline);
+				$total_require_match = $match_require->count();
+				echo($total_require_match);
+                if($value->type == $value1->require) {
+                    $date_up = new DateTime($value->created_at);
+                    $date_deadline = new DateTime($value1->time_deadline);
+                    if($date_up > $date_deadline) {
+                        $value->evaluate = ($value->evaluate - $value1->penalty) / $total_require_match;
+                    }
+                }
+            }
+            $point += $value->evaluate;
+        }
+
+        foreach ($bonus as  $value) {
+            $bonus_point += $value->bonus;
+        }
+
+        if($total_require != 0) {
+            $point_avg = $point / $total_require;
+            $point_avg += $bonus_point;
+            return $point_avg;
+        } else {
+            return $point / $total_document;
+        }
+});
 
 Route::get('/', function () {
 	return view('welcome');
@@ -83,7 +156,7 @@ Route::group(['prefix' => 'teacher'], function() {
         Route::post( '/{id_group}/document','DocumentController@uploadFile');
         Route::get( '/{id_group}/document/{id_document}/download/','DocumentController@downloadFile');
         Route::get( '/{id_group}/document/{id_document}/delete/','DocumentController@deleteFile');
-
+		Route::get('/{id_group}/document/{id_document}/evaluate/{point}', 'DocumentController@evaluateFile');
 	});
 });
 

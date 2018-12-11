@@ -102,13 +102,13 @@
                             <tr>
                                
                               <td scope="row">{{$i++}}</td>
-                              <td><a href='/teacher/project/{{$project->id_group}}/document/{{$studentDocument->id_document}}/download'>{{basename($studentDocument->path)}}</a></td>
+                              <td><a href='teacher/project/{{$project->id_group}}/document/{{$studentDocument->id_document}}/download'>{{basename($studentDocument->path)}}</a></td>
                               <td>{{$studentDocument->full_name}}</td>
                               <td>{{$studentDocument->created_at}}</td>
                               <td>{{$studentDocument->type}}</td>
                              
                               <td scope="col" class="col-sm-1"><input id ='evaluate_{{$studentDocument->id_document}}' type="text"  class="form-control" value="{{$studentDocument->evaluate}}"></td>
-                              <td scope="col" class="col-sm-"><a id='confirm_{{$studentDocument->id_document}}' type="button" class="btn btn-default" onclick="this.href='/teacher/project/{{$project->id_group}}/document/{{$studentDocument->id_document}}/evaluate/'+document.getElementById('evaluate_{{$studentDocument->id_document}}').value">Xác nhận</a></td>
+                              <td scope="col" class="col-sm-"><a id='confirm_{{$studentDocument->id_document}}' type="button" class="btn btn-default" onclick="this.href='teacher/project/{{$project->id_group}}/document/{{$studentDocument->id_document}}/evaluate/'+document.getElementById('evaluate_{{$studentDocument->id_document}}').value">Xác nhận</a></td>
                              
                             </tr>
  

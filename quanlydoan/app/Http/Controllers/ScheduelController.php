@@ -23,20 +23,20 @@ class ScheduelController extends Controller
 
     public function getScheduel($id_group) {
         $semester = Group::find($id_group)->value('semester');
-        $subject = Group::find($id_group)->subject->value('id_subject');
+        $subject = Group::find($id_group)->value('id_subject');
 
         // $scheduel_contents = Group::find(1)->subject->subjectScheduel->content->;
         $scheduel_contents = DB::table('group')->join('group_scheduel', 'group.id_group', '=', 'group_scheduel.id_group')
                 ->join('content_group_scheduel', 'group_scheduel.id_scheduel', '=', 'content_group_scheduel.id_scheduel')
                 ->select('content_group_scheduel.*')
-                ->where('group.id_group', '=', $id_group)
+                ->where('group.id_group', '=', $id_group)->orderBy('content_group_scheduel.time_deadline', 'asc')
                 ->get();
 
         $scheduel_subject_contents = DB::table('subject')->join('subject_scheduel', 'subject.id_subject', '=', 'subject_scheduel.id_subject')
                 ->join('content_sub_scheduel', 'subject_scheduel.id_subject_scheduel', '=', 'content_sub_scheduel.id_subject_scheduel')
                 ->select('content_sub_scheduel.*')
                 ->where('subject_scheduel.semester', '=', $semester)
-                ->where('subject.id_subject', '=', $subject)
+                ->where('subject.id_subject', '=', $subject)->orderBy('content_sub_scheduel.time_deadline', 'asc')
                 ->get();
 
         $project = DB::table('group')->join('teacher', 'group.id_teacher', '=', 'teacher.id_teacher')
@@ -61,11 +61,11 @@ class ScheduelController extends Controller
             'deadline' => 'required'
             ], 
             [
-            'require.required' => 'Bạn chưa nhập Nội dung yêu cầu',
-            'require.min' => 'Nội dung yêu cầu cần có độ dài từ 3 kí tự trở nên',
+            'require.required' => 'Bạn chưa nhập Mã tài liệu',
+            'require.min' => 'Mã tài liệu có độ dài từ 3 kí tự trở nên',
 
             'descript.required' => 'Bạn chưa nhập Nội dung mô tả yêu cầu',
-            'descript.min' => 'Nội dung tiêu chí cần có độ dài từ 3 kí tự trở nên',
+            'descript.min' => 'Nội dung mô tả yêu cầu cần có độ dài từ 3 kí tự trở nên',
 
             'deadline.required' => 'Bạn chưa nhập thời hạn nộp '
             ]

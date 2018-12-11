@@ -53,7 +53,7 @@ class AdStudentController extends Controller
 		$student = Student::find($id_student);
 		$user = User::find($student->username);
 		$user->username = $request->username;
-		$user->password = $request->password;
+		$user->password = bcrypt($request->password);
 		$user->full_name = $request->full_name;
 		$user->email = $request->email;
 		$user->phone = $request->phone;
@@ -107,8 +107,8 @@ class AdStudentController extends Controller
 		
 		$user = new User;
 		$user->username = $request->username;
-		$user->password = $request->password;
-		$user->position = 2;
+		$user->password = bcrypt($request->password);
+		$user->position = 1;
 		$user->full_name = $request->full_name;
 		$user->email = $request->email;
 		$user->phone = $request->phone;

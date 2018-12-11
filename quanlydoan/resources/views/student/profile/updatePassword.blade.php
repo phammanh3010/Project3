@@ -22,7 +22,7 @@
                     {{session('thongbao')}}
                 </div>
             @endif
-                <form class="form-validate form-horizontal" id="feedback_form" method="POST" action="/student/password/{{Auth::user()->username}}/edit">
+                <form class="form-validate form-horizontal" id="feedback_form" method="POST" action="student/password/{{Auth::user()->username}}/edit">
                 <input type="hidden" name="_token" value="{{csrf_token()}}" />
                     <div class="form-group">
                         <label class="control-label col-sm-3">Mật khẩu cũ</label>
