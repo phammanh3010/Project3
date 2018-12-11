@@ -86,8 +86,15 @@
                         <td width="30%" align="left"> doc,docx,odt,pdf,pptx,xlsx,xls,csv,zip,rar</td>
                         </tr>
                         <tr>
-                        <td width="40%" align="left">Chọn loại tài liệu: <font color="red">** Yêu cầu nhập đúng loại tài liệu</font></td>
-                        <td width="30"><input id ='type' name ='type' type="text"  class="form-control" value=""></td>
+                        <td width="40%" align="left">Chọn loại tài liệu: <font color="red">** Yêu cầu chọn đúng loại tài liệu</font></td>
+                        <td width="30">
+                        <select name="type" id="type">
+                        @foreach($requires as $require)
+                                          <option value="{{$require->require}}">{{$require->require}}</option>
+                        @endforeach
+                                          
+                                        </select>
+                        </td>
                         <td width="30%" align="left">
                        <input class="btn btn-default" type="submit" name="upload" id="upload" class="btn btn-primary" value="Tải tài liệu lên">
                         </td>
