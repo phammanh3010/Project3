@@ -25,8 +25,8 @@ class AdStudentController extends Controller
 			[
 				'username' => 'required|unique:user,username,'.$request->username.',username|min:3|max:45',
 				'full_name' => 'required|min:3|max:45',
-				'email' => 'email',
-				'phone' => 'regex:/(0)[0-9]/|min:10|max:11'
+				'email' => 'nullable|email',
+				'phone' => 'nullable|regex:/(0)[0-9]/|min:10|max:11'
 			], 
 			[
 				'username.required' => 'Bạn chưa nhập Username',
@@ -77,8 +77,8 @@ class AdStudentController extends Controller
 				'username' => 'required|unique:user,username|unique:student,username|min:3|max:45',
 				'password' => 'required',
 				'full_name' => 'required|min:3|max:45',
-				'email' => 'email',
-				'phone' => 'regex:/(0)[0-9]/|min:10|max:11'
+				'email' => 'nullable|email',
+				'phone' => 'nullable|regex:/(0)[0-9]/|min:10|max:11'
 			], 
 			[
 				'username.required' => 'Bạn chưa nhập Username',
