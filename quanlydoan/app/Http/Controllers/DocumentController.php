@@ -26,8 +26,8 @@ class DocumentController extends Controller
 {   
 
     public function getDocument($id_group) {
-        $semester = Group::find($id_group)->value('semester');
-        $subject = Group::find($id_group)->value('id_subject');
+        $semester = Group::find($id_group)->semester;
+        $subject = Group::find($id_group)->id_subject;
 
         $studentDocuments = DB::table('group')->join('document', 'group.id_group', '=', 'document.id_group')->join('user','document.user_upload','=','user.username')
                         ->select('document.id_document','document.type','document.path', 'document.evaluate', 'user.full_name', 'document.created_at')
@@ -130,7 +130,7 @@ class DocumentController extends Controller
                         $document->evaluate =0.0;
                         $document->created_at = new DateTime();
                         $document->save();
-                        
+                        Session::flash('thanhcong','Upload file thành công' );
                         if(Auth::user()->position==1)
                             return redirect('/student/project/'.$id_group.'/document');
                         elseif(Auth::user()->position==2)

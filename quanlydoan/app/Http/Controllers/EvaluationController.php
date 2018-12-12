@@ -98,8 +98,8 @@ class EvaluationController extends Controller
     }
 
     public function evalue($id_group) {
-        $semester = Group::find($id_group)->value('semester');
-        $subject_id = Group::find($id_group)->value('id_subject');
+        $semester = Group::find($id_group)->semester;
+        $subject_id = Group::find($id_group)->id_subject;
         if($subject_id > 1) {
             $scheduel_contents = DB::table('group')->join('group_scheduel', 'group.id_group', '=', 'group_scheduel.id_group')
                 ->join('content_group_scheduel', 'group_scheduel.id_scheduel', '=', 'content_group_scheduel.id_scheduel')

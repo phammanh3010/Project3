@@ -71,8 +71,13 @@
                   @endif
                     
                   @if(session('thongbao'))
-                  <div id="message_update" class="alert alert-success">
+                  <div id="message_update" class="alert alert-danger">
                       {{session('thongbao')}}
+                  </div>
+                  @endif
+                  @if(session('thanhcong'))
+                  <div id="message_update" class="alert alert-success">
+                      {{session('thanhcong')}}
                   </div>
                   @endif
 
