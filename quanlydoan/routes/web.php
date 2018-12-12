@@ -24,18 +24,7 @@ use Carbon\Carbon;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
-Route::get('/a', function () {
-	$semester = Group::find(4)->semester;
-	$subject = Group::find(5)->id_subject;
-	echo($semester.$subject);
-	$scheduel_contents = DB::table('group')->join('group_scheduel', 'group.id_group', '=', 'group_scheduel.id_group')
-                ->join('content_group_scheduel', 'group_scheduel.id_scheduel', '=', 'content_group_scheduel.id_scheduel')
-                ->select('content_group_scheduel.*')
-                ->where('group.id_group', '=', 5)->orderBy('content_group_scheduel.time_deadline', 'desc')
-				->first();
-	echo($scheduel_contents->require);
-});			
+*/			
 Route::get('/', function () {
 	return view('welcome');
 })->name('/');
