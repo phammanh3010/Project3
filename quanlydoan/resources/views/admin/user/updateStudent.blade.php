@@ -39,9 +39,9 @@
                                     <div class="col-lg-3">
                                         <input class="form-control" type="text" name="username" value="{{$student->username}}" />
                                     </div>
-                                    <label class="control-label col-lg-2">Password</label>
+                                    <label class="control-label col-lg-2">Số điện thoại</label>
                                     <div class="col-lg-3">
-                                        <input class="form-control" type="text" name="password" value="{{$student->password}}" />
+                                        <input class="form-control" type="text" name="phone" value="{{$student->phone}}" />
                                     </div>
                                 </div>
                                 <div class="form-group ">
@@ -58,10 +58,6 @@
                                     <label class="control-label col-lg-2">Lớp</label>
                                     <div class="col-lg-3">
                                         <input class="form-control" type="text" name="class" value="{{$student->class}}" />
-                                    </div>
-                                    <label class="control-label col-lg-2">Số điện thoại</label>
-                                    <div class="col-lg-3">
-                                        <input class="form-control" type="text" name="phone" value="{{$student->phone}}" />
                                     </div>
                                 </div>
                                 <div class="control-label col-lg-6">

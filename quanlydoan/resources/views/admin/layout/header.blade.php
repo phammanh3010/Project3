@@ -4,7 +4,7 @@
             </div>
 
             <!--logo start-->
-            <a href="../home.html" class="logo">Admin<span class="lite"></span></a>
+            <a href="admin" class="logo">Admin<span class="lite"></span></a>
             <!--logo end-->
             <div class="top-nav notification-row">
                 <!-- notificatoin dropdown start-->
@@ -23,7 +23,7 @@
                         <ul class="dropdown-menu extended logout">
                             <div class="log-arrow-up"></div>
                             <li class="eborder-top">
-                                <a href="../personal/update_pass.html"><i class="icon_profile"></i>Đổi mật khẩu</a>
+                                <a href="admin/password/{{Auth::user()->username}}"><i class="icon_profile"></i>Đổi mật khẩu</a>
                             </li>
                             <li>
                                 <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('frm-logout').submit();">

@@ -40,9 +40,9 @@
                                     <div class="col-lg-3">
                                         <input class="form-control" type="text" name="username" value="{{$teacher->username}}" />
                                     </div>
-                                    <label class="control-label col-lg-2">Password</label>
+                                    <label class="control-label col-lg-2">Số điện thoại</label>
                                     <div class="col-lg-3">
-                                        <input class="form-control" type="text" name="password" value="{{$teacher->password}}" />
+                                        <input class="form-control" type="text" name="phone" value="{{$teacher->phone}}" />
                                     </div>
                                 </div>
                                 <div class="form-group ">
@@ -59,10 +59,6 @@
                                     <label class="control-label col-lg-2">Phòng Làm Việc</label>
                                     <div class="col-lg-3">
                                         <input class="form-control" type="text" name="workplace" value="{{$teacher->workplace}}" />
-                                    </div>
-                                    <label class="control-label col-lg-2">Số điện thoại</label>
-                                    <div class="col-lg-3">
-                                        <input class="form-control" type="text" name="phone" value="{{$teacher->phone}}" />
                                     </div>
                                 </div>
                                 <div class="control-label col-lg-6">

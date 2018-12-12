@@ -162,13 +162,13 @@ class ProfilesController extends Controller
         
         
             $user->full_name = $request->input('full_name');
-            $user->student->class =$request->input('class');
+            $user->student->class = $request->input('class');
             $user->email = $request->input('email');
             $user->phone = $request->input('phone');
             $user->save();
             Session::flash('thongbao','Cập nhập thành công ');
        
-        return redirect('/student/profile/'.$user->username.'/');
+        return redirect('student/profile/'.$user->username.'/');
             
         }elseif($user->position ==2){
             $this->validate($request, 
@@ -202,19 +202,13 @@ class ProfilesController extends Controller
                 $user->save();
                 Session::flash('thongbao','Cập nhập thành công ');
            
-            return redirect('/teacher/profile/'.$user->username.'/');
+            return redirect('teacher/profile/'.$user->username.'/');
                 
             }
 
 
 
         }
-
-            
-      
-                 
-        
-    
 
     /**
      * Update the specified resource in storage.
@@ -248,11 +242,11 @@ class ProfilesController extends Controller
             if($request->input('old_password') == $request->input('password')){
                 Session::flash('thongbao','Password mới trùng với Password cũ ');
                 if($user->position==1)
-                  return redirect('/student/password/'.$user->username.'/');
+                  return redirect('student/password/'.$user->username.'/');
                 if($user->position==2)
-                  return redirect('/teacher/password/'.$user->username.'/');
+                  return redirect('teacher/password/'.$user->username.'/');
                 if($user->position==3)
-                  return redirect('/admin/password/'.$user->username.'/');
+                  return redirect('admin/password/'.$user->username.'/');
 
 
             }
@@ -268,19 +262,19 @@ class ProfilesController extends Controller
             $user->save();
             Session::flash('thongbao','Thay đổi password thành công');
             if($user->position==1)
-                return redirect('/student/profile/'.$user->username.'/');
+                return redirect('student/profile/'.$user->username.'/');
             if($user->position==2)
-                return redirect('/teacher/profile/'.$user->username.'/');
+                return redirect('teacher/profile/'.$user->username.'/');
             if($user->position==3)
-                return redirect('/admin/');
+                return redirect('admin/');
         }else{
             Session::flash('thongbao','Password nhập vào sai ');
             if($user->position==1)
-                return redirect('/student/password/'.$user->username.'/');
+                return redirect('student/password/'.$user->username.'/');
             if($user->position==2)
-                return redirect('/teacher/password/'.$user->username.'/');
+                return redirect('teacher/password/'.$user->username.'/');
             if($user->position==3)
-                return redirect('/admin/password/'.$user->username.'/');
+                return redirect('admin/password/'.$user->username.'/');
         }
 
     }

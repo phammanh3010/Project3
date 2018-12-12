@@ -39,22 +39,16 @@
                                 <div class="col-lg-3">
                                     <input class="form-control" type="text" name="username" value="{{$admin->username}}" />
                                 </div>
-                                <label class="control-label col-lg-2">Password</label>
-                                <div class="col-lg-3">
-                                    <input class="form-control" type="text" name="password" value="{{$admin->password}}" />
-                                </div>
-                            </div>
-                            <div class="form-group ">
                                 <label class="control-label col-lg-2">Họ tên</label>
                                 <div class="col-lg-3">
                                     <input class="form-control" type="text" name="full_name" value="{{$admin->full_name}}" />
                                 </div>
+                            </div>
+                            <div class="form-group ">
                                 <label class="control-label col-lg-2">Email</label>
                                 <div class="col-lg-3">
                                     <input class="form-control" type="text" name="email" value="{{$admin->email}}" />
                                 </div>
-                            </div>
-                            <div class="form-group ">
                                 <label class="control-label col-lg-2">Số điện thoại</label>
                                 <div class="col-lg-3">
                                     <input class="form-control" type="text" name="phone" value="{{$admin->phone}}" />

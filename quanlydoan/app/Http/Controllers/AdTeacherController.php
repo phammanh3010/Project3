@@ -24,7 +24,6 @@ class AdTeacherController extends Controller
 		$this->validate($request, 
 			[
 				'username' => 'required|unique:user,username,'.$request->username.',username|min:3|max:45',
-				'password' => 'required',
 				'full_name' => 'required|min:3|max:45',
 				'email' => 'email',
 				'phone' => 'regex:/(0)[0-9]/|min:10|max:11'
@@ -34,8 +33,6 @@ class AdTeacherController extends Controller
 				'username.unique' => 'Tài Khoản này đã tồn tại',
 				'username.min' => 'Username cần có độ dài từ 3 đến 45 kí tự',
 				'username.max' => 'Username cần có độ dài từ 3 đến 45 kí tự',
-
-				'password.required' => 'Bạn chưa nhập password',
 
 				'full_name.required' => 'Bạn chưa nhập Họ Tên',
 				'full_name.min' => 'Họ Tên cần có độ dài từ 3 đến 45 kí tự',
@@ -52,7 +49,6 @@ class AdTeacherController extends Controller
 		$teacher = Teacher::find($id_teacher);
 		$user = User::find($teacher->username);
 		$user->username = $request->username;
-		$user->password = bcrypt($request->password);
 		$user->full_name = $request->full_name;
 		$user->email = $request->email;
 		$user->phone = $request->phone;

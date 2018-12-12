@@ -26,7 +26,8 @@ class DocumentController extends Controller
 {   
 
     public function getDocument($id_group) {
-        #$id_group = $request->get('id_group');
+        $semester = Group::find($id_group)->value('semester');
+        $subject = Group::find($id_group)->value('id_subject');
 
         $studentDocuments = DB::table('group')->join('document', 'group.id_group', '=', 'document.id_group')->join('user','document.user_upload','=','user.username')
                         ->select('document.id_document','document.type','document.path', 'document.evaluate', 'user.full_name', 'document.created_at')
@@ -35,11 +36,17 @@ class DocumentController extends Controller
         $teacherDocuments = DB::table('group')->join('document', 'group.id_group', '=', 'document.id_group')->join('user','document.user_upload','=','user.username')
                         ->select('document.id_document','document.type','document.path', 'document.evaluate', 'user.full_name', 'document.created_at')
                         ->where('group.id_group', '=', $id_group)->where('user.position','=',2)->get();  
+        $require_sub = DB::table('subject')->join('subject_scheduel', 'subject.id_subject', '=', 'subject_scheduel.id_subject')
+                ->join('content_sub_scheduel', 'subject_scheduel.id_subject_scheduel', '=', 'content_sub_scheduel.id_subject_scheduel')
+                ->select('content_sub_scheduel.require')
+                ->where('subject_scheduel.semester', '=', $semester)
+                ->where('subject.id_subject', '=', $subject);
+
         $requires = DB::table('group')->join('group_scheduel','group.id_group','=','group_scheduel.id_group')
                    ->join('content_group_scheduel','group_scheduel.id_scheduel','=','content_group_scheduel.id_scheduel')
                    ->select('content_group_scheduel.require')
                    ->where('group.id_group', '=', $id_group)
-                   ->union($requires)->get();
+                   ->union($require_sub)->get();
                         
         $project = DB::table('group')->join('teacher', 'group.id_teacher', '=', 'teacher.id_teacher')
                         ->join('user', 'user.username', '=', 'teacher.username')

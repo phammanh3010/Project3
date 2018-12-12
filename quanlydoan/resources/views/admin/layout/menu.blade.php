@@ -3,7 +3,7 @@
                 <!-- sidebar menu start-->
                 <ul class="sidebar-menu">
                     <li class="">
-                        <a class="" href="../home.html">
+                        <a class="" href="admin">
                             <i class="icon_house_alt"></i>
                             <span>Trang chủ</span>
                         </a>
