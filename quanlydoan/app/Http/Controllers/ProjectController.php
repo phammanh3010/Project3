@@ -12,6 +12,7 @@ use App\Student;
 use App\GroupStudent;
 use App\Group;
 use App\Document;
+use \DateTime;
 
 class ProjectController extends Controller
 {   
@@ -61,12 +62,42 @@ class ProjectController extends Controller
             ->join('user', 'user.username', '=', 'teacher.username')
             ->select('group.*', 'user.full_name')
             ->where('group.id_group', '=', $id_group)->get();
+        $semester = Group::find($id_group)->value('semester');
+        $subject = Group::find($id_group)->value('id_subject');
+        if($subject == 1) {
+            $scheduel_contents  = DB::table('subject')->join('subject_scheduel', 'subject.id_subject', '=', 'subject_scheduel.id_subject')
+                ->join('content_sub_scheduel', 'subject_scheduel.id_subject_scheduel', '=', 'content_sub_scheduel.id_subject_scheduel')
+                ->select('content_sub_scheduel.*')
+                ->where('subject_scheduel.semester', '=', $semester)
+                ->where('subject.id_subject', '=', $subject)->orderBy('content_sub_scheduel.time_deadline', 'desc')
+                ->first();
+        } else {
+            // $scheduel_contents = Group::find(1)->subject->subjectScheduel->content->;
+            $scheduel_contents = DB::table('group')->join('group_scheduel', 'group.id_group', '=', 'group_scheduel.id_group')
+                ->join('content_group_scheduel', 'group_scheduel.id_scheduel', '=', 'content_group_scheduel.id_scheduel')
+                ->select('content_group_scheduel.*')
+                ->where('group.id_group', '=', $id_group)->orderBy('content_group_scheduel.time_deadline', 'desc')
+                ->first();
+        }
+        $now = new DateTime();
+        $date = new DateTime($scheduel_contents->time_deadline);
+        if($now > $date) {
+            $group = Group::find($id_group); 
+            $group->finish_project = 1;
+            $group->save();
+        } else {
+            $group = Group::find($id_group); 
+            $group->finish_project = 0;
+            $group->save();
+        }
+
         if(Auth::user()->position == 2) {
             return view('teacher.projectDetail', ['projects'=> $project]);
         }
         if(Auth::user()->position == 1) {
             return view('student.projectDetail', ['projects'=> $project]);
         }
+
 
     }
 }
