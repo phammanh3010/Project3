@@ -152,9 +152,14 @@
                       </div>
                   @endif
                     
-                  @if(session('thongbao'))
-                  <div id="message_update" class="alert alert-success">
+                   @if(session('thongbao'))
+                  <div id="message_update" class="alert alert-danger">
                       {{session('thongbao')}}
+                  </div>
+                  @endif
+                  @if(session('thanhcong'))
+                  <div id="message_update" class="alert alert-success">
+                      {{session('thanhcong')}}
                   </div>
                   @endif
                       <table class="table" id="table_project">
