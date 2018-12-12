@@ -62,8 +62,8 @@ class ProjectController extends Controller
             ->join('user', 'user.username', '=', 'teacher.username')
             ->select('group.*', 'user.full_name')
             ->where('group.id_group', '=', $id_group)->get();
-        $semester = Group::find($id_group)->value('semester');
-        $subject = Group::find($id_group)->value('id_subject');
+        $semester = Group::find($id_group)->semester;
+        $subject = Group::find($id_group)->id_subject;
         if($subject == 1) {
             $scheduel_contents  = DB::table('subject')->join('subject_scheduel', 'subject.id_subject', '=', 'subject_scheduel.id_subject')
                 ->join('content_sub_scheduel', 'subject_scheduel.id_subject_scheduel', '=', 'content_sub_scheduel.id_subject_scheduel')
@@ -79,16 +79,23 @@ class ProjectController extends Controller
                 ->where('group.id_group', '=', $id_group)->orderBy('content_group_scheduel.time_deadline', 'desc')
                 ->first();
         }
-        $now = new DateTime();
-        $date = new DateTime($scheduel_contents->time_deadline);
-        if($now > $date) {
-            $group = Group::find($id_group); 
-            $group->finish_project = 1;
-            $group->save();
-        } else {
+        if($scheduel_contents == null) {
             $group = Group::find($id_group); 
             $group->finish_project = 0;
             $group->save();
+        }
+        else {
+            $now = new DateTime();
+            $date = new DateTime($scheduel_contents->time_deadline);
+            if($now > $date) {
+                $group = Group::find($id_group); 
+                $group->finish_project = 1;
+                $group->save();
+            } else {
+                $group = Group::find($id_group); 
+                $group->finish_project = 0;
+                $group->save();
+            }
         }
 
         if(Auth::user()->position == 2) {

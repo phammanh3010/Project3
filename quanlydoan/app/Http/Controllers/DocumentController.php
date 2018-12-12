@@ -26,8 +26,8 @@ class DocumentController extends Controller
 {   
 
     public function getDocument($id_group) {
-        $semester = Group::find($id_group)->value('semester');
-        $subject = Group::find($id_group)->value('id_subject');
+        $semester = Group::find($id_group)->semester;
+        $subject = Group::find($id_group)->id_subject;
 
         $studentDocuments = DB::table('group')->join('document', 'group.id_group', '=', 'document.id_group')->join('user','document.user_upload','=','user.username')
                         ->select('document.id_document','document.type','document.path', 'document.evaluate', 'user.full_name', 'document.created_at')

@@ -22,8 +22,8 @@ class ScheduelController extends Controller
 {   
 
     public function getScheduel($id_group) {
-        $semester = Group::find($id_group)->value('semester');
-        $subject = Group::find($id_group)->value('id_subject');
+        $semester = Group::find($id_group)->semester;
+        $subject = Group::find($id_group)->id_subject;
 
         // $scheduel_contents = Group::find(1)->subject->subjectScheduel->content->;
         $scheduel_contents = DB::table('group')->join('group_scheduel', 'group.id_group', '=', 'group_scheduel.id_group')
@@ -79,8 +79,8 @@ class ScheduelController extends Controller
         }
         else {
             //lấy ra kì học và môn học tương ứng với nhóm
-            $semester = Group::where('id_group', $id_group)->value('semester');
-            $subject = Group::find($id_group)->subject->value('id_subject');
+            $semester = Group::find($id_group)->semester;
+            $subject = Group::find($id_group)->id_subject;
 
             //lấy ra nội dung lịch trình của bộ môn theo kỳ học và môn
             $scheduel_subject_contents = DB::table('subject')->join('subject_scheduel', 'subject.id_subject', '=', 'subject_scheduel.id_subject')
