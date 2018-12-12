@@ -166,6 +166,7 @@ class ProfilesController extends Controller
             $user->email = $request->input('email');
             $user->phone = $request->input('phone');
             $user->save();
+            $user->student->save();
             Session::flash('thongbao','Cập nhập thành công ');
        
         return redirect('student/profile/'.$user->username.'/');
@@ -200,6 +201,7 @@ class ProfilesController extends Controller
                 $user->email = $request->input('email');
                 $user->phone = $request->input('phone');
                 $user->save();
+                $user->teacher->save();
                 Session::flash('thongbao','Cập nhập thành công ');
            
             return redirect('teacher/profile/'.$user->username.'/');
