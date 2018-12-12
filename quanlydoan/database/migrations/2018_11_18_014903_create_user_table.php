@@ -20,7 +20,7 @@ class CreateUserTable extends Migration
             $table->integer('position');
             $table->string('full_name', 100)->nullable();
             $table->string('email', 100)->nullable();
-            $table->string('phone', 10)->nullable();
+            $table->string('phone', 11)->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
