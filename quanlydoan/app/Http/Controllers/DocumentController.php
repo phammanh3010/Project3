@@ -130,7 +130,7 @@ class DocumentController extends Controller
                         $document->evaluate =0.0;
                         $document->created_at = new DateTime();
                         $document->save();
-                        
+                        Session::flash('thanhcong','Upload file thành công' );
                         if(Auth::user()->position==1)
                             return redirect('/student/project/'.$id_group.'/document');
                         elseif(Auth::user()->position==2)
