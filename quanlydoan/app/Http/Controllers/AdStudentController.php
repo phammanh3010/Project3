@@ -12,7 +12,6 @@ class AdStudentController extends Controller
 {
     //
 	public function getListStudent(){
-
 		return view('admin.user.listStudent');
 	}
 

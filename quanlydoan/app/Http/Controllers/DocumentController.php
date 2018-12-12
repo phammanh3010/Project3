@@ -35,15 +35,20 @@ class DocumentController extends Controller
         $teacherDocuments = DB::table('group')->join('document', 'group.id_group', '=', 'document.id_group')->join('user','document.user_upload','=','user.username')
                         ->select('document.id_document','document.type','document.path', 'document.evaluate', 'user.full_name', 'document.created_at')
                         ->where('group.id_group', '=', $id_group)->where('user.position','=',2)->get();  
+        $requires = DB::table('group')->join('group_scheduel','group.id_group','=','group_scheduel.id_group')
+                   ->join('content_group_scheduel','group_scheduel.id_scheduel','=','content_group_scheduel.id_scheduel')
+                   ->select('content_group_scheduel.require')
+                   ->where('group.id_group', '=', $id_group)
+                   ->union($requires)->get();
                         
         $project = DB::table('group')->join('teacher', 'group.id_teacher', '=', 'teacher.id_teacher')
                         ->join('user', 'user.username', '=', 'teacher.username')
                         ->select('group.*', 'user.full_name')
                         ->where('group.id_group', '=', $id_group)->first();
                         #print($project);
-        if(Auth::user()->position== 1)                
-           return view('student.document', ['project'=>$project,'studentDocuments'=> $studentDocuments,'teacherDocuments'=> $teacherDocuments]);
-        elseif(Auth::user()->position== 2)                
+        if(Auth::user()->position==1)                
+           return view('student.document', ['requires'=>$requires,'project'=>$project,'studentDocuments'=> $studentDocuments,'teacherDocuments'=> $teacherDocuments]);
+        elseif(Auth::user()->position==2)                
          return view('teacher.document', ['project'=>$project,'studentDocuments'=> $studentDocuments,'teacherDocuments'=> $teacherDocuments]);
     } 
 
