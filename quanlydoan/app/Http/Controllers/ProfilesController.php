@@ -142,7 +142,7 @@ class ProfilesController extends Controller
                 'full_name' => 'required|min:3|max:45',
                 'class' => 'required|min:3|max:45',
                 'email' => 'required|email',
-                'phone' => 'regex:/(0)[0-9]/|min:10|max:11'
+                'phone' => 'nullable|regex:/(0)[0-9]/|min:10|max:11'
             ], 
             [   'password_confirmation.same'=> 'Mật khẩu xác nhận cần giống với mật khẩu mới',
                 'full_name.required' => 'Bạn chưa nhập Họ Tên',
@@ -177,7 +177,7 @@ class ProfilesController extends Controller
                     'full_name' => 'required|min:3|max:45',
                     'workplace' => 'required|min:3|max:45',
                     'email' => 'required|email',
-                    'phone' => 'regex:/(0)[0-9]/|min:10|max:11'
+                    'phone' => 'nullable|regex:/(0)[0-9]/|min:10|max:11'
                 ], 
                 [   
                     'full_name.required' => 'Bạn chưa nhập Họ Tên',

@@ -34,7 +34,7 @@ Route::group(['prefix' => 'admin'], function() {
 	Route::get('password/{username}','ProfilesController@showpassword');
 	Route::post('password/{username}/edit','ProfilesController@updateUserPassword');
 	Route::get('/', function() {
-		return view('admin.home');
+		return Redirect::to('admin/project/listProject/1');
 	});
 });
 

@@ -124,7 +124,7 @@ class EvaluationController extends Controller
                         ->where('user.position','=',1)
                         ->get();
 		$total_document = $studentDocuments->count();
-        $bonus = DB::table('group')->join('evalution_criteria', 'group.id_group', '=', 'evalution_criteria.id_group')->get();
+        $bonus = DB::table('group')->join('evalution_criteria', 'group.id_group', '=', 'evalution_criteria.id_group')->where('evalution_criteria.id_group', '=', $id_group)->get();
         $point = 0;
         $bonus_point = 0;
         foreach ($studentDocuments as $value) {
@@ -158,7 +158,11 @@ class EvaluationController extends Controller
         if($total_require != 0) {
             $point_avg = $point / $total_require;
             $point_avg += $bonus_point;
-            return $point_avg;
+            if($point_avg > 0){
+                return $point_avg;
+            }else{
+                return 0;
+            }
         } else if($total_document != 0 ){
             return $point / $total_document + $bonus_point;
         } else {

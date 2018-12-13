@@ -39,7 +39,7 @@
                                             <div class="col-lg-3">
                                                 <select class="form-control" name="semester" id="semester">
                                                     <option value="20182">20182</option>
-                                                    <option value="20181">20181</option>
+                                                    <option value="20181" selected>20181</option>
                                                     <option value="20172">20172</option>
                                                     <option value="20171">20171</option>
                                                     <option value="20162">20162</option>

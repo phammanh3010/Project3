@@ -25,7 +25,7 @@ class AdTeacherController extends Controller
 			[
 				'username' => 'required|unique:user,username,'.$request->username.',username|min:3|max:45',
 				'full_name' => 'required|min:3|max:45',
-				'email' => 'nullable|email',
+				'email' => 'email',
 				'phone' => 'nullable|regex:/(0)[0-9]/|min:10|max:11'
 			], 
 			[
@@ -76,7 +76,7 @@ class AdTeacherController extends Controller
 				'username' => 'required|unique:user,username|unique:teacher,username|min:3|max:45',
 				'password' => 'required',
 				'full_name' => 'required|min:3|max:45',
-				'email' => 'nullable|email',
+				'email' => 'email',
 				'phone' => 'nullable|regex:/(0)[0-9]/|min:10|max:11'
 			], 
 			[

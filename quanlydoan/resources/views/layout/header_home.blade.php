@@ -21,18 +21,9 @@
                 <span class="glyphicon glyphicon-earphone"></span> (84-4) 3
                 8696124</p>
             </div>
-            <div class="col-lg-6">
-              <form class="navbar-form navbar-right">
-                <div class="form-group">
-                  <input type="text" class="form-control" placeholder="Search">
-                </div>
-                <button type="submit" class="btn btn-outline-primary"><span
-                    class="glyphicon glyphicon-search"></button>
-                </form>
-              </div>
               <div class="col-lg-3 navbar-right">
                 <ul class="nav navbar-nav">
-                  <li><a href="homepage.html">TRANG CHỦ</a></li>
+                  <li><a href="/Project3/quanlydoan/public">TRANG CHỦ</a></li>
                   <li class="dropdown nav-item">
                     <a href="#note" class="nav-link dropdown-toggle"
                       data-toggle="dropdown" role="button" aria-haspopup="true"

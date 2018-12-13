@@ -35,17 +35,17 @@
                         <form class="form-validate form-horizontal" method="POST" action="admin/user/updateAdmin/{{$admin->username}}">
                             <input type="hidden" name="_token" value="{{csrf_token()}}" />
                             <div class="form-group ">
-                                <label class="control-label col-lg-2">Username</label>
+                                <label class="control-label col-lg-2">Username<font color="red"> *</font></label>
                                 <div class="col-lg-3">
                                     <input class="form-control" type="text" name="username" value="{{$admin->username}}" />
                                 </div>
-                                <label class="control-label col-lg-2">Họ tên</label>
+                                <label class="control-label col-lg-2">Họ tên<font color="red"> *</font></label>
                                 <div class="col-lg-3">
                                     <input class="form-control" type="text" name="full_name" value="{{$admin->full_name}}" />
                                 </div>
                             </div>
                             <div class="form-group ">
-                                <label class="control-label col-lg-2">Email</label>
+                                <label class="control-label col-lg-2">Email<font color="red"> *</font></label>
                                 <div class="col-lg-3">
                                     <input class="form-control" type="text" name="email" value="{{$admin->email}}" />
                                 </div>

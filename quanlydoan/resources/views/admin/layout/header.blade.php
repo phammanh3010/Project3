@@ -4,7 +4,7 @@
             </div>
 
             <!--logo start-->
-            <a href="admin" class="logo">Admin<span class="lite"></span></a>
+            <a href="admin/project/listProject/1" class="logo">Admin<span class="lite"></span></a>
             <!--logo end-->
             <div class="top-nav notification-row">
                 <!-- notificatoin dropdown start-->

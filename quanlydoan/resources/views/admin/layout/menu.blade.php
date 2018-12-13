@@ -2,12 +2,6 @@
             <div id="sidebar" class="nav-collapse ">
                 <!-- sidebar menu start-->
                 <ul class="sidebar-menu">
-                    <li class="">
-                        <a class="" href="admin">
-                            <i class="icon_house_alt"></i>
-                            <span>Trang chủ</span>
-                        </a>
-                    </li>
                     <li class="sub-menu">
                         <a href="javascript:;" class="">
                             <i class="icon_document_alt"></i>
