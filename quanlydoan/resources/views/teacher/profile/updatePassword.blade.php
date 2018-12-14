@@ -27,19 +27,19 @@
                     <div class="form-group">
                         <label class="control-label col-sm-3">Mật khẩu cũ</label>
                         <div class="col-sm-9">
-                            <input class="form-control" name="old_password" type="password" />
+                            <input class="form-control" name="old_password" type="password" required/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-3">Mật khẩu mới</label>
                         <div class="col-sm-9">
-                            <input class="form-control" type="password" name="password" />
+                            <input class="form-control" type="password" name="password" required/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-3">Nhập lại </label>
                         <div class="col-sm-9">
-                            <input class="form-control" type="password" name="password_confirmation" />
+                            <input class="form-control" type="password" name="password_confirmation" required/>
                         </div>
                     </div>
                     <div class="control-label col-sm-7">
