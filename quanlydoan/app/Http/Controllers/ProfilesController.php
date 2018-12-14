@@ -144,7 +144,7 @@ class ProfilesController extends Controller
                 'email' => 'required|email',
                 'phone' => 'nullable|regex:/(0)[0-9]/|min:10|max:11'
             ], 
-            [   'password_confirmation.same'=> 'Mật khẩu xác nhận cần giống với mật khẩu mới',
+            [   
                 'full_name.required' => 'Bạn chưa nhập Họ Tên',
                 'full_name.min' => 'Họ Tên cần có độ dài từ 3 đến 45 kí tự',
                 'full_name.max' => 'Họ Tên cần có độ dài từ 3 đến 45 kí tự',
@@ -189,7 +189,7 @@ class ProfilesController extends Controller
                     'workplace.max' => 'Nơi làm việc cần có độ dài từ 3 đến 45 kí tự',
     
                     'email.email' => 'Bạn cần nhập đúng địa chỉ email',
-    
+                    'email.required' => 'Bạn chưa nhập địa chỉ email',
                     'phone.regex' => 'SĐT chỉ nên chứa chữ số và bắt đầu bằng 0',
                     'phone.min' => 'SĐT cần có độ dài 10 hoặc 11 số',
                     'phone.max' => 'SĐT cần có độ dài 10 hoặc 11 số'
@@ -235,7 +235,7 @@ class ProfilesController extends Controller
                     'password'              => 'required|min:6|max:20|confirmed',
                     'password_confirmation' => 'required|same:password',
                 ],
-                [
+                [   'password_confirmation.same'=> 'Mật khẩu xác nhận cần giống với mật khẩu mới',
                     'password.required' => 'Password là trường bắt buộc cần nhập',
                     'password.min'      => 'Password cần có độ dài từ 6 đến 20 kí tự',
                     'password.max'      =>'Password cần có độ dài từ 6 đến 20 kí tự',
