@@ -105,7 +105,7 @@
                                         <div class="form">
                                             <form class="form-validate form-horizontal">
                                                 <div class="form-group">
-                                                    <label class="control-label col-sm-4">Thanh viên</label>
+                                                    <label class="control-label col-sm-4">MSSV</label>
                                                     <div class="col-sm-4">
                                                         <input type="text" class="form-control" id="username"/>
                                                     </div>

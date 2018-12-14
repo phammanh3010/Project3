@@ -7,7 +7,7 @@
             <div class="col-lg-12">
                 <h3 class="page-header"><i class="fa fa fa-bars"></i>Website hỗ trợ quản lí đồ án </h3>
                 <ol class="breadcrumb">
-                    <li><i class="fa fa-home"></i><a href="">Trang chủ/Lịch trình đồ án/IT4421</a></li>
+                    <li><i class="fa fa-home"></i><a href="{{url()->current()}}">Trang chủ/Lịch trình đồ án/IT4421</a></li>
                 </ol>
             </div>
         </div>  
@@ -66,7 +66,7 @@
                                            </div>
                                            <label  class="control-label col-sm-1">Trừ</label>
                                            <div class="col-sm-1">
-                                            <input class="form-control" name="penalty" />
+                                            <input class="form-control" name="penalty" value="0" type="number" step="0.25" min="0" max="10"/>
                                         </div>
                                     </div>
                                     <div class="control-label col-sm-6 text-center">
@@ -84,7 +84,7 @@
         <div class="col-lg-12">
             <section class="panel">
                 <header class="panel-heading">
-                    <a href="">Danh sách các nội dung thực hiện</a>
+                    <p>Danh sách các nội dung thực hiện</p>
                 </header>
                 <div class="result">
 

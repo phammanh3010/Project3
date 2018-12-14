@@ -21,8 +21,6 @@ class UserTableSeeder extends Seeder
             array('username'=>'20152128','password'=>bcrypt('20152128'),'position'=>'1','full_name'=>'Nguyen Quoc Lam','email'=>'hadinhkhoe@gmail.com','phone'=>'0388446430')
         ]);
               
-
-
         DB::table('student')->insert([
             array('username'=>'20152023','class'=>'CNTT2.01'),
             array('username'=>'20152408','class'=>'CNTT2.04'),
@@ -35,12 +33,12 @@ class UserTableSeeder extends Seeder
         ]);
 
         DB::table('subject')->insert([
-            array('subject_name'=>'IT4421')
+            array('subject_name'=>'IT4421'),
+            array('subject_name'=>'Khac')
         ]);
 
         DB::table('group')->insert([
             array('id_subject'=>'1','id_teacher'=>'1','group_name'=>'Do an','project_name'=>'QLDA','semester'=>'20181','finish_project'=>'0'),
-            
         ]);
 
         DB::table('group_student')->insert([
