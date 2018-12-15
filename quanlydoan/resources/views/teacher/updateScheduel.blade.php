@@ -70,11 +70,6 @@
                                         </div>
                                         @endif
 
-                                        @if(session('thongbao'))
-                                        <div class="alert alert-success">
-                                            {{session('thongbao')}}
-                                        </div>
-                                        @endif
                                         <div class="form">
                                             <form class="form-validate form-horizontal" id="feedback_form" method="POST" action="{{url()->current()}}">
                                                 <input type="hidden" name="_token" value="{{csrf_token()}}" />
