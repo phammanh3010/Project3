@@ -47,7 +47,7 @@
               </tr>
               <tr>
                 <td class="col-sm-2">
-                  <p>Full name</p>
+                  <p>Full name <font color="red"> *</font></p>
                 </td>
                 <td class="col-sm-8">
                   <input class="form-control" type="text" name="full_name" value="{{ $user->full_name }}" />
@@ -63,7 +63,7 @@
               </tr>
               <tr>
                 <td class="col-sm-2">
-                  <p>Email</p>
+                  <p>Emai<font color="red"> *</font></p>
                 </td>
                 <td class="col-sm-8">
                   <input class="form-control" type="text" name="email" value="{{ $user->email }}" />

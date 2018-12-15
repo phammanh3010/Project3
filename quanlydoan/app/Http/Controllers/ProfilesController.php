@@ -140,7 +140,7 @@ class ProfilesController extends Controller
         {$this->validate($request, 
             [
                 'full_name' => 'required|min:3|max:45',
-                'class' => 'required|min:3|max:45',
+                'class' => 'nullable|min:3|max:45',
                 'email' => 'required|email',
                 'phone' => 'nullable|regex:/(0)[0-9]/|min:10|max:11'
             ], 
@@ -149,7 +149,7 @@ class ProfilesController extends Controller
                 'full_name.min' => 'Họ Tên cần có độ dài từ 3 đến 45 kí tự',
                 'full_name.max' => 'Họ Tên cần có độ dài từ 3 đến 45 kí tự',
 
-                'class.required' => 'Bạn chưa nhập Lớp',
+              
                 'class.min' => 'Lớp cần có độ dài từ 3 đến 45 kí tự',
                 'class.max' => 'Lớp cần có độ dài từ 3 đến 45 kí tự',
 
@@ -175,7 +175,7 @@ class ProfilesController extends Controller
             $this->validate($request, 
                 [
                     'full_name' => 'required|min:3|max:45',
-                    'workplace' => 'required|min:3|max:45',
+                    'workplace' => 'nullable|min:3|max:45',
                     'email' => 'required|email',
                     'phone' => 'nullable|regex:/(0)[0-9]/|min:10|max:11'
                 ], 
@@ -184,7 +184,7 @@ class ProfilesController extends Controller
                     'full_name.min' => 'Họ Tên cần có độ dài từ 3 đến 45 kí tự',
                     'full_name.max' => 'Họ Tên cần có độ dài từ 3 đến 45 kí tự',
     
-                    'workplace.required' => 'Bạn chưa nhập Nơi làm việc',
+                   
                     'workplace.min' => 'Nơi làm việc cần có độ dài từ 3 đến 45 kí tự',
                     'workplace.max' => 'Nơi làm việc cần có độ dài từ 3 đến 45 kí tự',
     
